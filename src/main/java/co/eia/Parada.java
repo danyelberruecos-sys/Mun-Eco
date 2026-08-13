@@ -17,6 +17,10 @@ public class Parada {
 		System.out.println("----------------------------");
 	}
 	
+	//getter numero
+	public int getnumero() {
+		return numero;
+	}
 	//Falta hacer el setter para elegir el punto ecologico relacionado
 	
 }

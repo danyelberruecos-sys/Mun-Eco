@@ -13,9 +13,14 @@ public class RutaRecoleccion {
 		this.estado = estado;
 	}
 	
-	public void agragarParada(ArrayList <Parada> listaParadas) {
+	
+	// antes de usar este metodo se debe hacer un bucle for donde se muestre la opciones de paradas 
+	//y se seleccione el buscador para este metodo
+	public void agragarParada(ArrayList <Parada> listaParadas, int buscador) {
 		for(int i = 0; i < listaParadas.size();i++) {
-			System.out.println("1.");
+			if(listaParadas.get(i).getnumero() == buscador) {
+				paradas.add(listaParadas.get(i));
+			}
 		}
 	}
 
