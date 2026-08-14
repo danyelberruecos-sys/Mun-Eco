@@ -20,6 +20,7 @@ public class RutaRecoleccion {
 		for(int i = 0; i < listaParadas.size();i++) {
 			if(listaParadas.get(i).getnumero() == buscador) {
 				paradas.add(listaParadas.get(i));
+				break;
 			}
 		}
 	}
