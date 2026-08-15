@@ -28,8 +28,6 @@ public class Persona {
 		scanner.nextLine();
 		System.out.println("Igrese correo: ");
 		correo = scanner.nextLine();
-		System.out.println("---------------------");
-		System.out.println("Se registro exitósamente...");
 	}
 
 }
