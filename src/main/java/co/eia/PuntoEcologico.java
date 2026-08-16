@@ -45,5 +45,20 @@ public class PuntoEcologico {
 		}else {lleno = false;}
 	}
 	
+	public void mostrar() {
+		System.out.println("------------------------");
+		System.out.println("Codigo: " + codigo);
+		System.out.println("Ubicacion" + ubicacion);
+		System.out.println("Capacidad: " + capacidad);
+		if(lleno) {
+			System.out.println("Esta lleno");
+		}else {System.out.println("Tiene espacio disponible");}
+		System.out.println("Materiales:");
+		for (int i = 0; i < categoriasMateriales.size();i++) {
+			System.out.println(categoriasMateriales.get(i));
+		}
+		System.out.println("------------------------");
+	}
+	
 
 }

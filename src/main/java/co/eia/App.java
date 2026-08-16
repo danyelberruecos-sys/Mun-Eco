@@ -11,6 +11,7 @@ public class App {
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
 		ArrayList <Responsable> responsables = new ArrayList();
+		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -20,10 +21,13 @@ public class App {
 		
 		do {
 			
+			boolean salir = false;
+			
 			System.out.println("-------MENU PRINCIPAL-------");
+			System.out.println("-Cargar datos de prueba");
 			System.out.println("-Registrar");
-			System.out.println("-Salir");
 			System.out.println("-Mostar Informacion");
+			System.out.println("-Salir");
 			System.out.println("----------------------------");
 			
 
@@ -34,9 +38,17 @@ public class App {
 			
 			switch(accion) {
 			
+			
+			
+			
+			
 			default: 
 				System.out.println("Error, valor invalido");
 				break;
+				
+				
+				
+				
 				
 			
 			case "salir": 
@@ -44,9 +56,13 @@ public class App {
 				salida = true;
 				break;
 				
+				
+				
+				
+				
 			case "registrar":
 				
-				boolean salir = false;
+				salir = false;
 				String objetoRegistrar = null;
 				
 				do {
@@ -103,21 +119,89 @@ public class App {
 					System.out.println("Se registro el responsable correctamente...\n");
 					break;
 					
+				case "punto ecologico":
+					PuntoEcologico newPuntoEcologico = new PuntoEcologico();
+					newPuntoEcologico.registrar();
+					puntosEcologicos.add(newPuntoEcologico);
+					break;	
 				}
 				
 				}while(!salir);
-				
-				
+
 				break;
+			
+			
+				
+				
 				
 			case "mostrar informacion":
-				break;
+			
+				salir = false;
+				String objetoMostrar;
 				
+				do {
+					System.out.println("------MENU DE INFORMACION------");
+					System.out.println("-Usuarios");
+					System.out.println("-Operadores");
+					System.out.println("-Responsables");
+					System.out.println("-Puntos Ecologicos");
+					System.out.println("-Reportes");
+					System.out.println("-Rutas de recoleccion");
+					System.out.println("-Recolecciones");
+					System.out.println("-Campañas ambientales");
+					System.out.println("-Participaciones");
+					System.out.println("-Volver\n");
+					System.out.println("-------------------------");
+					System.out.println("Ingrese el la opcion de objeto que desea investigar");
+					
+					objetoMostrar = scanner.nextLine();
+					objetoMostrar = objetoMostrar.toLowerCase();
+					
+					switch(objetoMostrar) {
+					
+					default: 
+						System.out.println("Error, valor incorrecto");
+						break;
+						
+						
+					case "volver":
+						System.out.println("Volviendo a menu principal");
+						salir = true;
+					
+						
+					case "usuarios":
+						for (int i = 0; i < usuarios.size(); i++) {
+							usuarios.get(i).mostrar();
+						}
+						break;
+						
+					case "operadores": 
+						for(int i = 0; i < operadores.size(); i++) {
+							operadores.get(i).mostrar();
+						}
+						break;
+						
+					case "responsables":
+						for (int i = 0; i< responsables.size(); i++) {
+							responsables.get(i).mostrar();
+						}
+						break;
+						
+					case "puntos ecologicos":
+						for(int i = 0; i < puntosEcologicos.size(); i++) {
+							puntosEcologicos.get(i).mostrar();
+						}
+						break;
 				
+					}
+					
+				}while(!salir);
+			
+			break;
+			
 			}
 			
-			
-			
+		
 		}while(!salida);
 		
 		scanner.close();

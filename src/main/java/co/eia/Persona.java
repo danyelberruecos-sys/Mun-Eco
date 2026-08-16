@@ -29,5 +29,17 @@ public class Persona {
 		System.out.println("Igrese correo: ");
 		correo = scanner.nextLine();
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getCorreo() {
+		return correo;
+	}
 
 }

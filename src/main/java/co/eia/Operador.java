@@ -30,5 +30,16 @@ public class Operador extends Persona {
 	public void setAcciones(String accionesPermitidas) {
 		this.accionesPermitidas = accionesPermitidas;
 	}
+	
+	public void mostrar() {
+		System.out.println("-----------------------");
+		System.out.println("Nombre: " + getNombre());
+		System.out.println("id: " + getId());
+		System.out.println("Correo: " + getCorreo());
+		if (disponible) {
+			System.out.println("Disponibilidad: disponible");
+		}else{System.out.println("Disponibilidad: Ocupado");}
+		System.out.println("Acciones: " + accionesPermitidas);
+	}
 }
 
