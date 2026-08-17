@@ -1,5 +1,6 @@
 package co.eia;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Operador extends Persona {
@@ -40,6 +41,41 @@ public class Operador extends Persona {
 			System.out.println("Disponibilidad: disponible");
 		}else{System.out.println("Disponibilidad: Ocupado");}
 		System.out.println("Acciones: " + accionesPermitidas);
+	}
+	
+	
+	public void registrar(ArrayList<Operador> operadores) {
+		System.out.println("------REGISTRO------");
+		System.out.println("Ingrese el nombre: ");
+		setNombre(scanner.nextLine());
+		autenticarCodigo(operadores);
+		scanner.nextLine();
+		System.out.println("Igrese correo: ");
+		setCorreo(scanner.nextLine());
+	}
+
+
+	public void autenticarCodigo(ArrayList<Operador> operadores) {
+		boolean unico = true;
+		
+		do {
+		System.out.println("Ingrese ID unico del operador: ");
+		setId(scanner.nextInt()); 
+		for (int i = 0; i < operadores.size(); i++) {
+			unico = verificar(operadores.get(i), i);
+			if(!unico) {
+				System.out.println("Error, el ID del Operador ya esta en uso...\n");
+				break;
+			}
+		}
+		}while(!unico);
+	}
+	
+	
+	public boolean verificar(Operador evaluado, int i) {
+		if(evaluado.getId() == getId()) {
+			return false;
+		}else {return true;}
 	}
 }
 

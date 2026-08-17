@@ -18,17 +18,7 @@ public class Persona {
 	// Constructor vacío para que las herencias no pongan problema
 	public Persona() {
 	}
-	
-	public void registrar() {
-		System.out.println("------REGISTRO------");
-		System.out.println("Ingrese el nombre: ");
-		nombre = scanner.nextLine();
-		System.out.println("Ingrese id: ");
-		id = scanner.nextInt();
-		scanner.nextLine();
-		System.out.println("Igrese correo: ");
-		correo = scanner.nextLine();
-	}
+
 	
 	public int getId() {
 		return id;
@@ -40,6 +30,18 @@ public class Persona {
 	
 	public String getCorreo() {
 		return correo;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 }

@@ -13,7 +13,7 @@ public class Parada {
 	public void mostrar() {
 		System.out.println("----------------------------");
 		System.out.println("Numero: " + numero);
-		System.out.println("Ubicación" + puntoRelacionado.ubicacion);
+		System.out.println("Ubicación" + puntoRelacionado.getUbicacion());
 		System.out.println("----------------------------");
 	}
 	

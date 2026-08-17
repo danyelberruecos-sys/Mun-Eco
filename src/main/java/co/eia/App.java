@@ -95,7 +95,7 @@ public class App {
 					
 				case "usuario":
 					Usuario newUsuario = new Usuario();
-					newUsuario.registrar();
+					newUsuario.registrar(usuarios);
 					newUsuario.setTipo();
 					usuarios.add(newUsuario);
 					System.out.println("Se registro el usuario exitosamente...\n");
@@ -103,7 +103,7 @@ public class App {
 					
 				case "operador":
 					Operador newOperador = new Operador();
-					newOperador.registrar();
+					newOperador.registrar(operadores);
 					newOperador.setAcciones();
 					newOperador.setDisponible();
 					operadores.add(newOperador);
@@ -112,7 +112,7 @@ public class App {
 				
 				case "responsable": 
 					Responsable newResponsable = new Responsable();
-					newResponsable.registrar();
+					newResponsable.registrar(responsables);
 					newResponsable.setAcciones();
 					newResponsable.setDisponible();
 					responsables.add(newResponsable);
@@ -121,7 +121,7 @@ public class App {
 					
 				case "punto ecologico":
 					PuntoEcologico newPuntoEcologico = new PuntoEcologico();
-					newPuntoEcologico.registrar();
+					newPuntoEcologico.registrar(puntosEcologicos);
 					puntosEcologicos.add(newPuntoEcologico);
 					break;	
 				}

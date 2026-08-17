@@ -1,19 +1,18 @@
 package co.eia;
 
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 public class PuntoEcologico {
 	private int codigo;
-	public String ubicacion;
+	private String ubicacion;
 	private int capacidad;
 	private boolean lleno;
 	private ArrayList <String> categoriasMateriales;
 
 	Scanner scanner = new Scanner(System.in);
 	
-	public PuntoEcologico(int codigo, String ubicacion, int capacidd, boolean etado) {
+	public PuntoEcologico(int codigo, String ubicacion, int capacidad, boolean lleno) {
 		this.codigo = codigo;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
@@ -28,10 +27,9 @@ public class PuntoEcologico {
 		this.categoriasMateriales.add(material);
 	}
 	
-	public void registrar() {
+	public void registrar(ArrayList<PuntoEcologico> puntos) {
 		System.out.println("------REGISTRO------");
-		System.out.println("Ingrese codigo: ");
-		codigo = scanner.nextInt();
+		autenticarCodigo(puntos);
 		scanner.nextLine();
 		System.out.println("Ingrese ubicación: ");
 		ubicacion = scanner.nextLine();
@@ -44,6 +42,33 @@ public class PuntoEcologico {
 			lleno = true;
 		}else {lleno = false;}
 	}
+	
+	
+	public void autenticarCodigo(ArrayList<PuntoEcologico> puntos) {
+		boolean unico = true;
+		
+		do {
+		System.out.println("Ingrese el codigo unico del punto ecologico: ");
+		codigo = scanner.nextInt(); 
+		for (int i = 0; i < puntos.size(); i++) {
+			unico = verificar(puntos.get(i), i);
+			if(!unico) {
+				System.out.println("Error, el codigo del punto ecologico ya esta en uso...'\n");
+				break;
+			}
+		}
+		}while(!unico);
+	}
+	
+	
+	public boolean verificar(PuntoEcologico evaluado, int i) {
+		if(evaluado.codigo == codigo) {
+			return false;
+		}else {return true;}
+	}
+	
+	
+	
 	
 	public void mostrar() {
 		System.out.println("------------------------");
@@ -60,5 +85,8 @@ public class PuntoEcologico {
 		System.out.println("------------------------");
 	}
 	
+	public String getUbicacion() {
+		return ubicacion;
+	}
 
 }
