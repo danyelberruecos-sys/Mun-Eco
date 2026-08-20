@@ -8,7 +8,7 @@ public class PuntoEcologico {
 	private String ubicacion;
 	private int capacidad;
 	private boolean lleno;
-	private ArrayList <String> categoriasMateriales;
+	private ArrayList <String> categoriasMateriales = new ArrayList();
 
 	Scanner scanner = new Scanner(System.in);
 	
@@ -73,7 +73,7 @@ public class PuntoEcologico {
 	public void mostrar() {
 		System.out.println("------------------------");
 		System.out.println("Codigo: " + codigo);
-		System.out.println("Ubicacion" + ubicacion);
+		System.out.println("Ubicacion: " + ubicacion);
 		System.out.println("Capacidad: " + capacidad);
 		if(lleno) {
 			System.out.println("Esta lleno");
@@ -87,6 +87,22 @@ public class PuntoEcologico {
 	
 	public String getUbicacion() {
 		return ubicacion;
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	
+	public void setMateriales() {
+		String material;
+		System.out.println("¿Cuanto tipos de materiales recolecta este punto ecologico?");
+		int cantidad = scanner.nextInt();
+		scanner.nextLine();
+		for (int i = 0;  i < cantidad; i++) {
+			System.out.println("Ingrese el tipo de matrial No. " + (i+1));
+			material = scanner.nextLine();
+			categoriasMateriales.add(material);
+		}
 	}
 
 }

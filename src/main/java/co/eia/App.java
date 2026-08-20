@@ -14,6 +14,7 @@ public class App {
 		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
 		ArrayList <Reporte> reportes = new ArrayList();
 		ArrayList <RutaRecoleccion> rutas = new ArrayList();
+		ArrayList <Parada> paradas = new ArrayList();
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -74,6 +75,7 @@ public class App {
 				System.out.println("-Operador");
 				System.out.println("-Responsable");
 				System.out.println("-Punto Ecologico");
+				System.out.println("-Parada");
 				System.out.println("-Reporte");
 				System.out.println("-Ruta de recoleccion");
 				System.out.println("-Recoleccion");
@@ -124,14 +126,22 @@ public class App {
 				case "punto ecologico":
 					PuntoEcologico newPuntoEcologico = new PuntoEcologico();
 					newPuntoEcologico.registrar(puntosEcologicos);
+					newPuntoEcologico.setMateriales();
 					puntosEcologicos.add(newPuntoEcologico);
 					break;	
 					
 				case "reporte":
 					Reporte newReporte = new Reporte();
-					newReporte.registrar(reportes,operadores,rutas);
+					newReporte.registrar(reportes);
+					newReporte.setPunto(puntosEcologicos);
 					reportes.add(newReporte);
 					break;
+					
+				case "parada": 
+					Parada newParada = new Parada();
+					newParada.registrar(paradas);
+					newParada.setPunto(puntosEcologicos);
+					paradas.add(newParada);
 				}
 				
 				}while(!salir);
@@ -153,6 +163,7 @@ public class App {
 					System.out.println("-Operadores");
 					System.out.println("-Responsables");
 					System.out.println("-Puntos Ecologicos");
+					System.out.println("-Paradas");
 					System.out.println("-Reportes");
 					System.out.println("-Rutas de recoleccion");
 					System.out.println("-Recolecciones");
@@ -205,6 +216,13 @@ public class App {
 						for (int i = 0; i < reportes.size(); i++) {
 							reportes.get(i).mostrar();
 						}
+						break;
+						
+					case "paradas":
+						for (int i = 0; i < paradas.size(); i++) {
+							paradas.get(i).mostrar();
+						}
+						break;
 				
 					}
 					
