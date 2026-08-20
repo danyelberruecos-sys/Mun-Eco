@@ -12,6 +12,8 @@ public class App {
 		ArrayList <Operador> operadores = new ArrayList();
 		ArrayList <Responsable> responsables = new ArrayList();
 		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
+		ArrayList <Reporte> reportes = new ArrayList();
+		ArrayList <RutaRecoleccion> rutas = new ArrayList();
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -124,6 +126,12 @@ public class App {
 					newPuntoEcologico.registrar(puntosEcologicos);
 					puntosEcologicos.add(newPuntoEcologico);
 					break;	
+					
+				case "reporte":
+					Reporte newReporte = new Reporte();
+					newReporte.registrar(reportes,operadores,rutas);
+					reportes.add(newReporte);
+					break;
 				}
 				
 				}while(!salir);
@@ -152,7 +160,7 @@ public class App {
 					System.out.println("-Participaciones");
 					System.out.println("-Volver\n");
 					System.out.println("-------------------------");
-					System.out.println("Ingrese el la opcion de objeto que desea investigar");
+					System.out.println("Ingrese del la opcion de objeto que desea investigar");
 					
 					objetoMostrar = scanner.nextLine();
 					objetoMostrar = objetoMostrar.toLowerCase();
@@ -192,6 +200,11 @@ public class App {
 							puntosEcologicos.get(i).mostrar();
 						}
 						break;
+						
+					case "reportes":
+						for (int i = 0; i < reportes.size(); i++) {
+							reportes.get(i).mostrar();
+						}
 				
 					}
 					

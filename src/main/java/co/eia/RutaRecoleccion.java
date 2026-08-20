@@ -24,5 +24,24 @@ public class RutaRecoleccion {
 			}
 		}
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public boolean getEstado() {
+		return estado;
+	}
+	
+	public void mostrar() {
+		System.out.println("------------------------------");
+		System.out.println("ID: " + id);
+		System.out.println("Estado: " + estado);
+		System.out.println("Paradas: ");
+		for (int i = 0; i < paradas.size(); i++) {
+			System.out.println(paradas.get(i).getnumero());
+		}
+		System.out.println("------------------------------");
+	}
 
 }

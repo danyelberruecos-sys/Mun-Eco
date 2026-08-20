@@ -12,8 +12,7 @@ public class Operador extends Persona {
 	public void setDisponible() {
 		System.out.println("Disponibilidad Si o No: ");
 		String n = scanner.nextLine();
-		n.toLowerCase();
-		if(n == "si") {
+		if(n.equalsIgnoreCase("si")) {
 			disponible = true;
 		}else {disponible = false;}
 		
@@ -30,6 +29,10 @@ public class Operador extends Persona {
 	
 	public void setAcciones(String accionesPermitidas) {
 		this.accionesPermitidas = accionesPermitidas;
+	}
+	
+	public boolean getDisponible() {
+		return disponible;
 	}
 	
 	public void mostrar() {
