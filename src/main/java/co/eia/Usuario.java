@@ -20,13 +20,11 @@ public class Usuario extends Persona{
 		this.tipo = tipo;
 	}
 	
+	@Override
 	public void mostrar() {
-		System.out.println("----------------------------");
-		System.out.println("Nombre: " + getNombre());
-		System.out.println("id: " + getId());
-		System.out.println("Correo: " + getCorreo());
+		super.mostrar();
 		System.out.println("Tipo: " + tipo);
-		System.out.println("----------------------------");
+		System.out.println("-----------------------");
 	}
 	
 	public void registrar(ArrayList<Usuario> usuarios) {
