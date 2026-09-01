@@ -141,7 +141,7 @@ public class App {
 					Parada newParada = new Parada();
 					newParada.registrar(paradas);
 					newParada.setPunto(puntosEcologicos);
-					paradas.add(newParada);
+					paradas.add(newParada);//kkskkksksks
 				}
 				
 				}while(!salir);
