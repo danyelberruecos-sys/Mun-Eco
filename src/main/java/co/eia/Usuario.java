@@ -1,64 +1,39 @@
 package co.eia;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
-public class Usuario extends Persona{
+public class Usuario extends Persona {
+	
 	private String tipo;
 	
-	Scanner scanner = new Scanner(System.in);
-	
-	//Setter con scanner
-	public void setTipo() {
-		System.out.println("Ingrese el tipo: ");
-		tipo = scanner.nextLine();
-		
-	}
-	
-	//Setter normal
-	public void setTipo(String tipo) {
+	public Usuario(int id, String correo, String nombre, String tipo) {
+		super(id,correo,nombre);
 		this.tipo = tipo;
 	}
 	
-	@Override
 	public void mostrar() {
-		super.mostrar();
+		System.out.println("===================================");
+		System.out.println("Nombre: " + nombre);
+		System.out.println("ID: " + id);
+		System.out.println("Correo: " + correo);
+		System.out.println("EcoPuntos: " + ecoPuntos);
 		System.out.println("Tipo: " + tipo);
-		System.out.println("-----------------------");
+		System.out.println("===================================");
 	}
 	
-	public void registrar(ArrayList<Usuario> usuarios) {
-		System.out.println("------REGISTRO------");
-		System.out.println("Ingrese el nombre: ");
-		setNombre(scanner.nextLine());
-		autenticarCodigo(usuarios);
-		scanner.nextLine();
-		System.out.println("Igrese correo: ");
-		setCorreo(scanner.nextLine());
-	}
-
-
-	public void autenticarCodigo(ArrayList<Usuario> usuarios) {
-		boolean unico = true;
-		
-		do {
-		System.out.println("Ingrese ID unico de la persona: ");
-		setId(scanner.nextInt()); 
-		for (int i = 0; i < usuarios.size(); i++) {
-			unico = verificar(usuarios.get(i), i);
-			if(!unico) {
-				System.out.println("Error, el ID del usuario ya esta en uso...'\n");
-				break;
-			}
-		}
-		}while(!unico);
+	public void setTipo(String tipo) {this.tipo = tipo;}
+	
+	public void setTipo() {
+		Scanner scanner = new Scanner(System.in);
+		tipo = scanner.nextLine();
 	}
 	
+	public String getTipo() {return tipo;}
 	
-	public boolean verificar(Usuario evaluado, int i) {
-		if(evaluado.getId() == getId()) {
-			return false;
-		}else {return true;}
+	public void registrar() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese nombre: ");
+		nombre = scanner.nextLine();
+		System.out.println("Ingrese el ID:");
 	}
-	
 }

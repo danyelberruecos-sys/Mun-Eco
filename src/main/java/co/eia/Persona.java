@@ -1,54 +1,33 @@
 package co.eia;
 
-import java.util.Scanner;
-
-public class Persona {
-	private int id;
-	private String nombre;
-	private String correo;
+public abstract class Persona {
+	protected int id;
+	protected String correo;
+	protected String nombre;
+	protected int ecoPuntos;
 	
-	Scanner scanner = new Scanner(System.in);
-	
-	public Persona(int id, String nombre, String correo) {
+	public Persona(int id, String correo, String nombre) {
 		this.id = id;
-		this.nombre = nombre;
 		this.correo = correo;
-	}
-	
-	// Constructor vacío para que las herencias no pongan problema
-	public Persona() {
-	}
-
-	
-	public int getId() {
-		return id;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-	
-	public String getCorreo() {
-		return correo;
-	}
-	
-	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
+	public int getId() {return id;}
 	
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+	public void setId(int id) {this.id = id;}
 	
-	public void mostrar() {
-		System.out.println("-----------------------");
-		System.out.println("Nombre: " + nombre);
-		System.out.println("id: " + id);
-		System.out.println("Correo: " + correo);
-	}
-
+	public String getCorreo() {return correo;}
+	
+	public void setCorreo(String correo) {this.correo = correo;}
+	
+	public String getNombre() {return nombre;}
+	
+	public void setNombre(String nombre) {this.nombre = nombre;}
+	
+	public void setEcopuntos(int ecoPuntos) {this.ecoPuntos= ecoPuntos;}
+	
+	public int getEcopuntos() {return ecoPuntos;}
+	
+	public abstract void mostrar();
+	
 }
