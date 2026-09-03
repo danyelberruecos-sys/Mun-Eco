@@ -11,6 +11,7 @@ public class App {
 		Verificador verificador = new Verificador();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
+		ArrayList <Operador> operadores = new ArrayList();
 		
 		
 		
@@ -79,7 +80,7 @@ public class App {
 					
 				switch (gestionPersonas) {
 				
-				case 1:
+				case 1: //Registrar usuario
 						int id ;
 						boolean verificado = false;
 						
@@ -119,7 +120,48 @@ public class App {
 					
 					
 					
-				case 2:
+				case 2: //Registrar Operdor
+					id = 0 ;
+					verificado = false;
+					
+				do {	do {
+					System.out.println("Ingrese ID: ");
+					try {
+						id = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido");
+					}
+					}while(true);
+				
+				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, usuarios)) {
+					verificado= true;
+				}
+					
+				}while(!verificado);
+				
+				System.out.println("Ingrese el correo: ");
+				correo = sc.nextLine();
+				
+				System.out.println("Ingrese el nombre: ");
+				nombre = sc.nextLine();
+				
+				boolean disponible;
+				boolean correcto = false;
+				String n;
+				do {
+					System.out.println("Ingrese disponibilidad (si/no):");
+					n = sc.nextLine().toLowerCase();
+					if(n.equals("si")) {
+						disponible = true;
+						correcto = true;
+					}else if(n.equals("no")){
+						disponible = false;
+						correcto = true;
+					}
+				}while(!correcto);
 					break;
 					
 				
@@ -128,14 +170,19 @@ public class App {
 					
 					
 				case 4:
+					if(usuarios.size() == 0 ) {System.out.println("No hay personas registradas");}
+					else {
 					System.out.println("=======================================");
 					System.out.println("||            VER PERSONAS           ||");
 					System.out.println("=======================================");
-					System.out.println("=======================================");
-					System.out.println("||              USUARIOS             ||");
-					System.out.println("=======================================");
-					for(int i = 0; i < usuarios.size(); i++) {
-						usuarios.get(i).mostrar();
+					if (usuarios.size() != 0) {
+						System.out.println("=======================================");
+						System.out.println("||              USUARIOS             ||");
+						System.out.println("=======================================");
+						for(int i = 0; i < usuarios.size(); i++) {
+							usuarios.get(i).mostrar();
+							}
+						}
 					}
 					break;
 					
