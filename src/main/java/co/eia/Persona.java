@@ -1,12 +1,17 @@
 package co.eia;
 
-public abstract class Persona {
+import java.util.ArrayList;
+
+public abstract class Persona implements Verificable {
 	protected int id;
 	protected String correo;
 	protected String nombre;
 	protected int ecoPuntos;
 	
-	public Persona(int id, String correo, String nombre) {
+	public Persona(int id, String correo, String nombre, ArrayList<? extends Verificable> lista) {
+		Verificador verificador = new Verificador();
+		if (!verificador.verificarLongitud(id)){return;}
+		if(!verificador.verificarUnico(id, lista)) {return;}
 		this.id = id;
 		this.correo = correo;
 		this.nombre = nombre;

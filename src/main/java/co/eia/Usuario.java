@@ -1,13 +1,15 @@
 package co.eia;
 
+import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Usuario extends Persona {
 	
 	private String tipo;
 	
-	public Usuario(int id, String correo, String nombre, String tipo) {
-		super(id,correo,nombre);
+	public Usuario(int id, String correo, String nombre, String tipo, ArrayList <Usuario> lista) {
+		super(id,correo,nombre,lista);
 		this.tipo = tipo;
 	}
 	
