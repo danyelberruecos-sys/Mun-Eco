@@ -12,14 +12,18 @@ public class Verificador {
 			}
 		}
 		if (unico) {return true;}
-		else {return false;}
+		else {
+			System.out.println("Error, el ID ya esta e uso");
+			return false;}
 	}
 	
 	public boolean verificarLongitud(int id) {
 		int cantidadDigitos = String.valueOf(id).length();
 		if(cantidadDigitos == 10) {
 			return true;
-		}else {return false;}
+		}else {
+			System.out.println("Error, la longitud del codigo debe ser de 10 digitos...");
+			return false;}
 	}
 
 }

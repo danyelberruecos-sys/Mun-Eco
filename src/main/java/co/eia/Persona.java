@@ -8,10 +8,9 @@ public abstract class Persona implements Verificable {
 	protected String nombre;
 	protected int ecoPuntos;
 	
-	public Persona(int id, String correo, String nombre, ArrayList<? extends Verificable> lista) {
-		Verificador verificador = new Verificador();
-		if (!verificador.verificarLongitud(id)){return;}
-		if(!verificador.verificarUnico(id, lista)) {return;}
+	
+
+	public Persona(int id, String correo, String nombre) {
 		this.id = id;
 		this.correo = correo;
 		this.nombre = nombre;
@@ -34,5 +33,6 @@ public abstract class Persona implements Verificable {
 	public int getEcopuntos() {return ecoPuntos;}
 	
 	public abstract void mostrar();
+	
 	
 }
