@@ -13,6 +13,7 @@ public class App {
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
 		ArrayList <Responsable> responsables = new ArrayList();
+		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
 		
 		
 		
@@ -34,7 +35,8 @@ public class App {
 			System.out.println("||5. Campañas ambientales            ||");
 			System.out.println("||6. Eco Puntos y consultas          ||");
 			System.out.println("||7. Indicadores generales           ||");
-			System.out.println("||8. Salir                           ||");
+			System.out.println("||8. Cargar objetos de prueba        ||");
+			System.out.println("||9. Salir                           ||");
 			System.out.println("=======================================");
 			
 			do {
@@ -45,7 +47,7 @@ public class App {
 				break;
 			}catch(Exception e) {
 				sc.nextLine();
-				System.out.println("Error, valor invalido");
+				System.out.println("Error, valor invalido...");
 			}
 			}while(true);
 			
@@ -75,7 +77,7 @@ public class App {
 						break;
 					}catch(Exception e) {
 						sc.nextLine();
-						System.out.println("Error, valor invalido");
+						System.out.println("Error, valor invalido...");
 					}
 					}while(true);
 					
@@ -93,7 +95,7 @@ public class App {
 							break;
 						}catch(Exception e) {
 							sc.nextLine();
-							System.out.println("Error, valor invalido");
+							System.out.println("Error, valor invalido...");
 					
 						}
 						}while(true);
@@ -134,7 +136,7 @@ public class App {
 						break;
 					}catch(Exception e) {
 						sc.nextLine();
-						System.out.println("Error, valor invalido");
+						System.out.println("Error, valor invalido...");
 					}
 					}while(true);
 				
@@ -162,7 +164,7 @@ public class App {
 					}else if(n.equals("no")){
 						disponible = false;
 						correcto = true;
-					}else {System.out.println("Error, valor invalido");}
+					}else {System.out.println("Error, valor invalido...");}
 				}while(!correcto);
 				
 				System.out.println("Ingrese la acciones permitidas: ");
@@ -185,7 +187,7 @@ public class App {
 						break;
 					}catch(Exception e) {
 						sc.nextLine();
-						System.out.println("Error, valor invalido");
+						System.out.println("Error, valor invalido...");
 					}
 					}while(true);
 				
@@ -262,7 +264,7 @@ public class App {
 					break;
 					
 					default:
-						System.out.println("Error, numero invalido, debe estar entre 1 y 4");
+						System.out.println("Error, numero invalido, debe estar entre 1 y 4...");
 						break;
 				}
 
@@ -273,7 +275,199 @@ public class App {
 				
 				
 			case 2: 
-				break;
+				
+				System.out.println("=======================================");
+				System.out.println("||          PUNTOS ECOLOGICOS        ||");
+				System.out.println("=======================================");
+				System.out.println("||1. Registrar  punto ecologico      ||");
+				System.out.println("||2. Ver puntos ecologicos           ||");
+				System.out.println("||3. Inactivar puntos segun reportes ||");
+				System.out.println("=======================================");
+				
+				int accionPuntosEcologicos = 0;
+				
+				do {
+					System.out.println("Ingrese el número de la accion que desee realizar: ");
+					try {
+						accionPuntosEcologicos = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido...");
+					}
+					}while(true);
+				
+				switch (accionPuntosEcologicos) {
+				
+				case 1: // REgistrar puntos ecologicos
+					long id = 0;
+					boolean verificado = false;
+					
+					do {	do {
+						System.out.println("Ingrese ID: ");
+						try {
+							id = sc.nextLong();
+							sc.nextLine();
+							break;
+						}catch(Exception e) {
+							sc.nextLine();
+							System.out.println("Error, valor invalido...");
+					
+						}
+						}while(true);
+					
+					if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, puntosEcologicos)) {
+						verificado= true;
+					}
+						
+					}while(!verificado);
+					
+					System.out.println("Ingrese ubicacion:");
+					String ubicacion = sc.nextLine();
+					
+
+					verificado = false;
+					int capacidad = 0;
+					
+					do {
+						System.out.println("Ingrese capacidad en kilos: ");
+						try {
+							capacidad = sc.nextInt();
+							sc.nextLine();
+						}catch(Exception e) {
+							sc.nextLine();
+							System.out.println("Valor invalido...");
+						}
+						if (capacidad > 0) {
+							verificado = true;
+						}else {
+							System.out.println("La capacidad debe ser mayor a 0...");
+						}
+					}while(!verificado);
+					
+					boolean lleno = false;;
+					boolean correcto = false;
+					String n = null;
+					do {
+						System.out.println("¿El punto ecologico esta lleno? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							lleno = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							lleno = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					 boolean activo = false;
+					correcto = false;
+					n = null;
+					do {
+						System.out.println("¿El punto ecologico esta activo? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							activo = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							activo = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					PuntoEcologico newPuntoEcologico = new PuntoEcologico(id, ubicacion, capacidad, lleno, activo);
+					
+					//Reciclaje
+					boolean admitido = false;
+					correcto = false;
+					n = null;
+					do {
+						System.out.println("¿El punto ecologico admite material reciclable? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							admitido = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							admitido = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					if (admitido) {
+						Material reciclaje = new MaterialReciclable("Reciclable", 0);
+						newPuntoEcologico.acgregarMaterial(reciclaje);
+					}
+					
+					//Organico
+					admitido = false;
+					correcto = false;
+					n = null;
+					do {
+						System.out.println("¿El punto ecologico admite material organico? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							admitido = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							admitido = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					if (admitido) {
+						Material organico = new MaterialOrganico("Organico", 0);
+						newPuntoEcologico.acgregarMaterial(organico);
+					}
+					
+					//Especial
+					admitido = false;
+					correcto = false;
+					n = null;
+					do {
+						System.out.println("¿El punto ecologico admite material especial? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							admitido = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							admitido = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					if (admitido) {
+						Material especial = new MaterialEspecial("Especial", 0);
+						newPuntoEcologico.acgregarMaterial(especial);
+					}
+					
+					puntosEcologicos.add(newPuntoEcologico);
+					
+					break;
+					
+					
+				case 2: //Ver puntos ecologicos
+					if (puntosEcologicos.size() == 0) {
+						System.out.println("No hay puntos ecologicos registrados...");
+					}else {
+						System.out.println("=======================================");
+						System.out.println("||       VER PUNTOS ECOLOGICOS       ||");
+						System.out.println("=======================================");
+						for (int i = 0; i < puntosEcologicos.size(); i++) {
+							puntosEcologicos.get(i).mostrar();
+						}
+					}
+					break;
+					
+				case 3: 
+					break;
+					
+					default:
+						System.out.println("Numero invalido, debe estar entre el 1 y el 3...");
+				
+				}
+				
+				break;// Aca acaba ecopuntos
 			
 				
 				
@@ -302,7 +496,19 @@ public class App {
 				
 				
 				
-			case 8: 
+				
+			case 8: // Cargar objetos de prueba
+				Usuario esteban = new Usuario(1029387354L, "estebanano@gmail.com", "Esteban Trujillo", "Estudiante");
+				usuarios.add(esteban);
+				Usuario mariana = new Usuario(2345432389L, "marryana@gmail.com", "Mariana Giraldo", "Estudiante");
+				usuarios.add(mariana);
+				Usuario santiago = new Usuario(5834549087L, "zantir4m1@gmail.com", "Santigo Ramirez", "Profesor");
+				usuarios.add(santiago);
+				break;
+				
+				
+				
+			case 9: 
 				System.out.println("Saliendo...");
 				salir = true;
 				break;

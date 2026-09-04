@@ -22,7 +22,7 @@ public class Verificador {
 		if(cantidadDigitos == 10) {
 			return true;
 		}else {
-			System.out.println("Error, la longitud del codigo debe ser de 10 digitos...");
+			System.out.println("Error, la longitud del ID debe ser de 10 digitos...");
 			return false;}
 	}
 
