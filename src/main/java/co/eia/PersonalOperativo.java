@@ -5,7 +5,7 @@ public class PersonalOperativo extends Persona {
 	private boolean disponible;
 	private String accionesPermitidas;
 	
-	public PersonalOperativo(int id, String correo,String nombre, boolean disponible, String accionesPermitidas) {
+	public PersonalOperativo(long id, String correo,String nombre, boolean disponible, String accionesPermitidas) {
 		super(id, correo, nombre);
 		this.disponible = disponible;
 		this.accionesPermitidas = accionesPermitidas;
@@ -22,7 +22,6 @@ public class PersonalOperativo extends Persona {
 			System.out.println("Disponibilidad: Disponible");
 		}else {System.out.println("Disponibilidad: Ocupado");}
 		System.out.println("Acciones: " + accionesPermitidas);
-		System.out.println("=======================================");
 	}
 	
 	public void setDisponibilidad(boolean disponible) {

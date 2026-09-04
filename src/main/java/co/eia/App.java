@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class App {
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -12,6 +12,7 @@ public class App {
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
+		ArrayList <Responsable> responsables = new ArrayList();
 		
 		
 		
@@ -81,18 +82,19 @@ public class App {
 				switch (gestionPersonas) {
 				
 				case 1: //Registrar usuario
-						int id ;
+						long id ;
 						boolean verificado = false;
 						
 					do {	do {
 						System.out.println("Ingrese ID: ");
 						try {
-							id = sc.nextInt();
+							id = sc.nextLong();
 							sc.nextLine();
 							break;
 						}catch(Exception e) {
 							sc.nextLine();
 							System.out.println("Error, valor invalido");
+					
 						}
 						}while(true);
 					
@@ -127,7 +129,7 @@ public class App {
 				do {	do {
 					System.out.println("Ingrese ID: ");
 					try {
-						id = sc.nextInt();
+						id = sc.nextLong();
 						sc.nextLine();
 						break;
 					}catch(Exception e) {
@@ -136,7 +138,7 @@ public class App {
 					}
 					}while(true);
 				
-				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, usuarios)) {
+				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, operadores)) {
 					verificado= true;
 				}
 					
@@ -148,7 +150,7 @@ public class App {
 				System.out.println("Ingrese el nombre: ");
 				nombre = sc.nextLine();
 				
-				boolean disponible;
+				boolean disponible = false;;
 				boolean correcto = false;
 				String n;
 				do {
@@ -160,17 +162,74 @@ public class App {
 					}else if(n.equals("no")){
 						disponible = false;
 						correcto = true;
-					}
+					}else {System.out.println("Error, valor invalido");}
 				}while(!correcto);
+				
+				System.out.println("Ingrese la acciones permitidas: ");
+				String accionesPermitidas = sc.nextLine();
+				
+				Operador newOperador = new Operador(id,correo,nombre,disponible,accionesPermitidas);
+				operadores.add(newOperador);
 					break;
 					
 				
-				case 3:
+				case 3:// Registrar responsable
+					id = 0 ;
+					verificado = false;
+					
+				do {	do {
+					System.out.println("Ingrese ID: ");
+					try {
+						id = sc.nextLong();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido");
+					}
+					}while(true);
+				
+				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, responsables)) {
+					verificado= true;
+				}
+					
+				}while(!verificado);
+				
+				System.out.println("Ingrese el correo: ");
+				correo = sc.nextLine();
+				
+				System.out.println("Ingrese el nombre: ");
+				nombre = sc.nextLine();
+				
+				disponible = false;;
+				correcto = false;
+				n = null;
+				do {
+					System.out.println("Ingrese disponibilidad (si/no):");
+					n = sc.nextLine().toLowerCase();
+					if(n.equals("si")) {
+						disponible = true;
+						correcto = true;
+					}else if(n.equals("no")){
+						disponible = false;
+						correcto = true;
+					}else {System.out.println("Error, valor invalido...");}
+				}while(!correcto);
+				
+				System.out.println("Ingrese la acciones permitidas: ");
+				accionesPermitidas = sc.nextLine();
+				
+				System.out.println("Ingrese su area de responsabilidad: ");
+				String areaResponsabilidad = sc.nextLine();
+				
+				Responsable newResponsable = new Responsable(id,correo,nombre,disponible,accionesPermitidas, areaResponsabilidad);
+				responsables.add(newResponsable);
 					break;
+			
 					
 					
 				case 4:
-					if(usuarios.size() == 0 ) {System.out.println("No hay personas registradas");}
+					if(usuarios.size() == 0 && operadores.size() == 0 && responsables.size() == 0) {System.out.println("No hay personas registradas");}
 					else {
 					System.out.println("=======================================");
 					System.out.println("||            VER PERSONAS           ||");
@@ -183,11 +242,28 @@ public class App {
 							usuarios.get(i).mostrar();
 							}
 						}
+					if (operadores.size() != 0) {
+						System.out.println("=======================================");
+						System.out.println("||              OPERADORES           ||");
+						System.out.println("=======================================");
+						for(int i = 0; i < operadores.size(); i++) {
+							operadores.get(i).mostrar();
+							}
+					}
+					if (responsables.size() != 0) {
+						System.out.println("=======================================");
+						System.out.println("||            RESPONSABLES           ||");
+						System.out.println("=======================================");
+						for(int i = 0; i < responsables.size(); i++) {
+							responsables.get(i).mostrar();
+							}
+						}
 					}
 					break;
 					
 					default:
-						System.out.println("Error, numero invalido, debe estar entre 1 y 8");
+						System.out.println("Error, numero invalido, debe estar entre 1 y 4");
+						break;
 				}
 
 				

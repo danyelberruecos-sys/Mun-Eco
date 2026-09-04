@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Verificador {
 	
-	public boolean verificarUnico(int id,  ArrayList<? extends Verificable> lista) {
+	public boolean verificarUnico(long id,  ArrayList<? extends Verificable> lista) {
 		boolean unico = true;
 		for (int i = 0; i < lista.size();i++) {
 			if (id == lista.get(i).getId()) {
@@ -17,7 +17,7 @@ public class Verificador {
 			return false;}
 	}
 	
-	public boolean verificarLongitud(int id) {
+	public boolean verificarLongitud(long id) {
 		int cantidadDigitos = String.valueOf(id).length();
 		if(cantidadDigitos == 10) {
 			return true;

@@ -8,7 +8,7 @@ public class Usuario extends Persona {
 	
 	private String tipo;
 	
-	public Usuario(int id, String correo, String nombre, String tipo) {
+	public Usuario(long id, String correo, String nombre, String tipo) {
 		super(id,correo,nombre);
 		this.tipo = tipo;
 	}

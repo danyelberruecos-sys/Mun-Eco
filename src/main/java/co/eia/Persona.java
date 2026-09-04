@@ -3,22 +3,22 @@ package co.eia;
 import java.util.ArrayList;
 
 public abstract class Persona implements Verificable {
-	protected int id;
+	protected long id;
 	protected String correo;
 	protected String nombre;
 	protected int ecoPuntos;
 	
 	
 
-	public Persona(int id, String correo, String nombre) {
+	public Persona(long id, String correo, String nombre) {
 		this.id = id;
 		this.correo = correo;
 		this.nombre = nombre;
 	}
 	
-	public int getId() {return id;}
+	public long getId() {return id;}
 	
-	public void setId(int id) {this.id = id;}
+	public void setId(long id) {this.id = id;}
 	
 	public String getCorreo() {return correo;}
 	
