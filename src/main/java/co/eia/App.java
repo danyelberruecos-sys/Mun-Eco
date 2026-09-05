@@ -14,7 +14,7 @@ public class App {
 		ArrayList <Operador> operadores = new ArrayList();
 		ArrayList <Responsable> responsables = new ArrayList();
 		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
-		
+		ArrayList <RutaRecoleccion> rutasRecoleccion = new ArrayList();
 		
 		
 		System.out.println("=======================================");
@@ -167,7 +167,7 @@ public class App {
 					}else {System.out.println("Error, valor invalido...");}
 				}while(!correcto);
 				
-				System.out.println("Ingrese la acciones permitidas: ");
+				System.out.println("Ingrese la acciones permitidas (Separads por comas): ");
 				String accionesPermitidas = sc.nextLine();
 				
 				Operador newOperador = new Operador(id,correo,nombre,disponible,accionesPermitidas);
@@ -396,7 +396,7 @@ public class App {
 					
 					if (admitido) {
 						Material reciclaje = new MaterialReciclable("Reciclable", 0);
-						newPuntoEcologico.acgregarMaterial(reciclaje);
+						newPuntoEcologico.agregarMaterial(reciclaje);
 					}
 					
 					//Organico
@@ -417,7 +417,7 @@ public class App {
 					
 					if (admitido) {
 						Material organico = new MaterialOrganico("Organico", 0);
-						newPuntoEcologico.acgregarMaterial(organico);
+						newPuntoEcologico.agregarMaterial(organico);
 					}
 					
 					//Especial
@@ -438,7 +438,7 @@ public class App {
 					
 					if (admitido) {
 						Material especial = new MaterialEspecial("Especial", 0);
-						newPuntoEcologico.acgregarMaterial(especial);
+						newPuntoEcologico.agregarMaterial(especial);
 					}
 					
 					puntosEcologicos.add(newPuntoEcologico);
@@ -476,8 +476,57 @@ public class App {
 				
 				
 				
-			case 4: 
-				break;
+			case 4: //Rutas y recoleccion
+				
+				
+				System.out.println("=======================================");
+				System.out.println("||         RUTAS Y RECOLECCION       ||");
+				System.out.println("=======================================");
+				System.out.println("||1. Registrar ruta                  ||");
+				System.out.println("||2. Mostrar Rutas                   ||");
+				System.out.println("||3. Registrar recoleccion           ||");
+				System.out.println("||4. Cerrar ruta                     ||");
+				System.out.println("=======================================");
+				
+				int accionRutas = 0;
+				
+				do {
+					System.out.println("Ingrese el número de la accion que desee realizar: ");
+					try {
+						accionRutas = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido...");
+					}
+					}while(true);
+				
+				switch(accionRutas) {
+				
+				default: 
+					System.out.println("Numero invalido, el numero debe estar entre el 1 y el 4...");
+					break;
+					
+					
+					
+				case 1:
+					break;
+					
+					
+				case 2:
+					break;
+					
+					
+				case 3:
+					break;
+					
+					
+				case 4:
+					break;
+				
+				}
+				break;// Hasta aca llegan rutas
 				
 				
 				
@@ -498,12 +547,21 @@ public class App {
 				
 				
 			case 8: // Cargar objetos de prueba
+				//Usuarios
 				Usuario esteban = new Usuario(1029387354L, "estebanano@gmail.com", "Esteban Trujillo", "Estudiante");
 				usuarios.add(esteban);
 				Usuario mariana = new Usuario(2345432389L, "marryana@gmail.com", "Mariana Giraldo", "Estudiante");
 				usuarios.add(mariana);
 				Usuario santiago = new Usuario(5834549087L, "zantir4m1@gmail.com", "Santigo Ramirez", "Profesor");
 				usuarios.add(santiago);
+				
+				//Operadores
+				Operador juan = new Operador(3382934784L,"juancho@gmial.com", "Juan Pablo Castaño", true, "Recolectar material especial, Inspeccion de puntos");
+				operadores.add(juan);
+				Operador estephanie = new Operador(5467389230L,"estephalaenana@gmial.com", "Estephanie Taborda", false, "Recolecccion general, Cierre de rutas");
+				operadores.add(estephanie);
+				Operador daniel = new Operador(1020116808L,"danyflow@gmial.com", "Daniel Gutierrez", true, "Recolectar material especial, Recoleccion material especial");
+				operadores.add(daniel);
 				break;
 				
 				

@@ -19,7 +19,7 @@ public class PuntoEcologico implements Verificable {
 		this.activo = activo;
 	}
 	
-	public void acgregarMaterial(Material material) {
+	public void agregarMaterial(Material material) {
 		materialesAdmitidos.add(material);
 	}
 	
