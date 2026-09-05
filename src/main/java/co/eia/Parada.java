@@ -15,8 +15,9 @@ public class Parada {
 		this.puntoEcologico = puntoEcologico;
 	}
 	
-	public void mostrar() {
-		System.out.println("Parada #" + orden + " , Accion a realizar: " + accionEsperada + "Punto ecologico: " + puntoEcologico.getId());
+	public String mostrar() {
+		String mostrar = "Parada #" + orden + " , Accion a realizar: " + accionEsperada + " ,Punto ecologico: " + puntoEcologico.getId();
+		return mostrar;
 	}
 	
 	public int getOrden() {return orden;}

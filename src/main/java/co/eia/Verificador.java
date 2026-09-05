@@ -13,7 +13,7 @@ public class Verificador {
 		}
 		if (unico) {return true;}
 		else {
-			System.out.println("Error, el ID ya esta e uso");
+			System.out.println("Error, el ID ya esta en uso");
 			return false;}
 	}
 	

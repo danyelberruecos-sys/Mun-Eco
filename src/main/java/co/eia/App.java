@@ -9,6 +9,7 @@ public class App {
 		Scanner sc = new Scanner(System.in);
 		
 		Verificador verificador = new Verificador();
+		VerificadorParada verificadorParada = new VerificadorParada();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
@@ -510,11 +511,132 @@ public class App {
 					
 					
 					
-				case 1:
+				case 1: //Registrar ruta
+					
+					long id = 0;
+					boolean verificado = false;
+					
+					do {	do {
+						System.out.println("Ingrese ID: ");
+						try {
+							id = sc.nextLong();
+							sc.nextLine();
+							break;
+						}catch(Exception e) {
+							sc.nextLine();
+							System.out.println("Error, valor invalido...");
+					
+						}
+						}while(true);
+					
+					if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, rutasRecoleccion)) {
+						verificado= true;
+					}
+					}while(!verificado);
+					
+					boolean activa = false;
+					boolean correcto = false;
+					String n = null;
+					do {
+						System.out.println("¿La ruta se registro como activa? (si/no):");
+						n = sc.nextLine().toLowerCase();
+						if(n.equals("si")) {
+							activa = true;
+							correcto = true;
+						}else if(n.equals("no")){
+							activa = false;
+							correcto = true;
+						}else {System.out.println("Error, valor invalido...");}
+					}while(!correcto);
+					
+					RutaRecoleccion newRuta = new RutaRecoleccion(id,activa);
+					int cantParadas = 1;
+					
+					System.out.println("¿Cuantas paradas tendra la ruta?");
+					do {
+						System.out.println("¿Cuantas paradas tendra la ruta?");
+						try {
+							cantParadas = sc.nextInt();
+							sc.nextLine();
+							if(cantParadas > 0) {
+							break;
+							}else {
+								System.out.println("Error, la cantidad de paradas debe ser mayor a cero...");
+							}
+						}catch(Exception e) {
+							sc.nextLine();
+							System.out.println("Error, valor invalido...");
+						}
+						}while(true);
+					
+					for (int i = 0; i < cantParadas; i++ ) {
+						
+						int orden = 0;
+						
+						do {
+							System.out.println("Ingrese el numero de oren de la parada:");
+							try {
+								orden = sc.nextInt();
+								sc.nextLine();
+							}catch (Exception e){ 
+								sc.nextLine();
+								System.out.println("Error, valor invalido...");
+								continue;
+							}
+							if(verificadorParada.verificarOrdenUnico(orden, newRuta)) {
+								break;
+							}
+						}while(true);
+						
+						System.out.println("Ingrese la accion que se esper realizar en esta parada:");
+						String accionEsperada = sc.nextLine();
+						
+						Parada newParada = new Parada(orden, accionEsperada);
+						long idPuntoEcologico = 0;
+						boolean encontrado = false;
+						
+							do {
+							System.out.println("Ingrese el ID del punto ecologico que corresponde a la parada:");
+							
+								try {
+									idPuntoEcologico = sc.nextLong();
+									sc.nextLine();
+							        for (int j = 0; j < puntosEcologicos.size(); j++) {
+							            if (idPuntoEcologico == puntosEcologicos.get(j).getId()
+							                    && verificadorParada.verificarPuntoActivo(puntosEcologicos.get(j))) {
+							                newParada.setPuntoEcologico(puntosEcologicos.get(j));
+							                encontrado = true;
+							                break;
+							            }
+							        }
+
+							        if (!encontrado) {
+							            System.out.println("Error, no se encontro un punto activo con ese ID...");
+							        }
+									
+								}catch(Exception e) {
+									sc.nextLine();
+									System.out.println("Error, valor invalido");
+								}
+								}while(!encontrado);
+						newRuta.agregarParada(newParada);
+					}
+					rutasRecoleccion.add(newRuta);
+					
 					break;
 					
 					
-				case 2:
+				case 2: //Mostrar Rutas 
+					if (rutasRecoleccion.size() == 0) {
+						System.out.println("No hay rutas de recoleccion registradas...");
+					}else {
+						System.out.println("=======================================");
+						System.out.println("||      VER RUTAS DE RECOLECCION     ||");
+						System.out.println("=======================================");
+						for (int i = 0; i < rutasRecoleccion.size(); i++) {
+							rutasRecoleccion.get(i).mostrar();
+						}
+					}
 					break;
 					
 					
@@ -548,6 +670,7 @@ public class App {
 				
 			case 8: // Cargar objetos de prueba
 				//Usuarios
+				System.out.println("Cargando Usuarios...");
 				Usuario esteban = new Usuario(1029387354L, "estebanano@gmail.com", "Esteban Trujillo", "Estudiante");
 				usuarios.add(esteban);
 				Usuario mariana = new Usuario(2345432389L, "marryana@gmail.com", "Mariana Giraldo", "Estudiante");
@@ -556,6 +679,7 @@ public class App {
 				usuarios.add(santiago);
 				
 				//Operadores
+				System.out.println("Cargando Operadores...");
 				Operador juan = new Operador(3382934784L,"juancho@gmial.com", "Juan Pablo Castaño", true, "Recolectar material especial, Inspeccion de puntos");
 				operadores.add(juan);
 				Operador estephanie = new Operador(5467389230L,"estephalaenana@gmial.com", "Estephanie Taborda", false, "Recolecccion general, Cierre de rutas");
