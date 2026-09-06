@@ -31,4 +31,6 @@ public class PersonalOperativo extends Persona {
 	public boolean getDisponible() {
 		return disponible;
 	}
+	
+	public String getAccionesPermitidas() {return accionesPermitidas;}
 }

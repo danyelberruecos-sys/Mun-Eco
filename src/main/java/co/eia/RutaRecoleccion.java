@@ -19,6 +19,8 @@ public class RutaRecoleccion implements Verificable {
 	
 	public long getId() {return id;}
 	
+	public boolean getActiva() {return activa;}
+	
 	public ArrayList <Parada> getParadas(){
 		return paradas;
 	}

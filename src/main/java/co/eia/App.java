@@ -8,14 +8,18 @@ public class App {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		Notificador notificador = new Notificador();
 		Verificador verificador = new Verificador();
 		VerificadorParada verificadorParada = new VerificadorParada();
+		VerificadorReporte verificadorReporte = new VerificadorReporte();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
 		ArrayList <Responsable> responsables = new ArrayList();
 		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
 		ArrayList <RutaRecoleccion> rutasRecoleccion = new ArrayList();
+		ArrayList <Reporte> reportes =new ArrayList();
+		ArrayList <Persona> todasPersonas = new ArrayList();
 		
 		
 		System.out.println("=======================================");
@@ -101,7 +105,7 @@ public class App {
 						}
 						}while(true);
 					
-					if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, usuarios)) {
+					if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, todasPersonas)) {
 						verificado= true;
 					}
 						
@@ -121,6 +125,7 @@ public class App {
 					
 					Usuario newUsusario = new Usuario(id, correo, nombre, tipo);
 					usuarios.add(newUsusario);
+					todasPersonas.add(newUsusario);
 					break;
 					
 					
@@ -141,7 +146,7 @@ public class App {
 					}
 					}while(true);
 				
-				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, operadores)) {
+				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, todasPersonas)) {
 					verificado= true;
 				}
 					
@@ -173,6 +178,7 @@ public class App {
 				
 				Operador newOperador = new Operador(id,correo,nombre,disponible,accionesPermitidas);
 				operadores.add(newOperador);
+				todasPersonas.add(newOperador);
 					break;
 					
 				
@@ -192,7 +198,7 @@ public class App {
 					}
 					}while(true);
 				
-				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, responsables)) {
+				if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, todasPersonas)) {
 					verificado= true;
 				}
 					
@@ -227,6 +233,7 @@ public class App {
 				
 				Responsable newResponsable = new Responsable(id,correo,nombre,disponible,accionesPermitidas, areaResponsabilidad);
 				responsables.add(newResponsable);
+				todasPersonas.add(newResponsable);
 					break;
 			
 					
@@ -472,8 +479,313 @@ public class App {
 			
 				
 				
-			case 3: 
-				break;
+			case 3: //Reportes
+				
+				System.out.println("=======================================");
+				System.out.println("||             REPORTES              ||");
+				System.out.println("=======================================");
+				System.out.println("||1.Registrar reporte                ||");
+				System.out.println("||2.Asignar reporte a operador o ruta||");
+				System.out.println("||3.Cambiar Estado                   ||");
+				System.out.println("||4.Consultar pendientes             ||");
+				System.out.println("=======================================");
+				
+				int accionReporte = 0;
+				
+				do {
+					System.out.println("Ingrese el número de la accion que desee realizar: ");
+					try {
+						accionReporte = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido...");
+					}
+					}while(true);
+				
+				switch (accionReporte) {
+				
+				default: 
+					System.out.println("Numero invalido, debe estar entre el 1 y el 4: ");
+					break;
+					
+				case 1: //Registrar
+				    
+				    long id = 0;
+				    boolean verificado = false;
+				    
+				    do {	do {
+				        System.out.println("Ingrese ID: ");
+				        try {
+				            id = sc.nextLong();
+				            sc.nextLine();
+				            break;
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				        }while(true);
+				    
+				    if(verificador.verificarLongitud(id) && verificador.verificarUnico(id, reportes)) {
+				        verificado= true;
+				    }
+				    }while(!verificado);
+				    
+				    Persona autorEncontrado = null;
+				    boolean encontrado = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la persona que registra el reporte:");
+				        try {
+				            long idAutor = sc.nextLong();
+				            sc.nextLine();
+
+				            for (int i = 0; i < todasPersonas.size(); i++) {
+				                if (todasPersonas.get(i).getId() == idAutor) {
+				                    autorEncontrado = todasPersonas.get(i);
+				                    encontrado = true;
+				                    break;
+				                }
+				            }
+
+				            if (!encontrado) {
+				                System.out.println("Error, no se encontro una persona con ese ID...");
+				            }
+
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontrado);
+				    
+				    PuntoEcologico puntoEncontrado = null;
+				    encontrado = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del punto ecologico donde ocurrio el reporte:");
+				        try {
+				            long idPunto = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < puntosEcologicos.size(); i++) {
+				                if (puntosEcologicos.get(i).getId() == idPunto
+				                        && verificadorReporte.verificarPuntoActivo(puntosEcologicos.get(i))) {
+				                    puntoEncontrado = puntosEcologicos.get(i);
+				                    encontrado = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontrado) {
+				                System.out.println("Error, no se encontro un punto activo con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontrado);
+				    
+				    System.out.println("Ingrese la fecha del reporte (dd/mm/aaaa):");
+				    String fecha = sc.nextLine();
+				    
+				    System.out.println("Ingrese la descripcion del reporte:");
+				    String descripcion = sc.nextLine();
+				    
+				    int opcionTipo = 0;
+				    String tipo = null;
+				    boolean tipoValido = false;
+				    
+				    do {
+				        System.out.println("Seleccione el tipo de reporte:");
+				        System.out.println("1. Desbordamiento");
+				        System.out.println("2. Contaminacion");
+				        System.out.println("3. Material especial");
+				        System.out.println("4. Otro");
+				        try {
+				            opcionTipo = sc.nextInt();
+				            sc.nextLine();
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				            continue;
+				        }
+				        
+				        switch(opcionTipo) {
+				        case 1: tipo = "Desbordamiento"; tipoValido = true; break;
+				        case 2: tipo = "Contaminacion"; tipoValido = true; break;
+				        case 3: tipo = "MaterialEspecial"; tipoValido = true; break;
+				        case 4: tipo = "Otro"; tipoValido = true; break;
+				        default: System.out.println("Error, opcion invalida..."); break;
+				        }
+				    }while(!tipoValido);
+				    
+				    int prioridad = 0;
+				    boolean prioridadValida = false;
+				    
+				    do {
+				        System.out.println("Ingrese la prioridad (1 = Baja, 2 = Media, 3 = Alta):");
+				        try {
+				            prioridad = sc.nextInt();
+				            sc.nextLine();
+				            if (prioridad >= 1 && prioridad <= 3) {
+				                prioridadValida = true;
+				            }else {
+				                System.out.println("Error, la prioridad debe ser 1, 2 o 3...");
+				            }
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!prioridadValida);
+				    
+				    Reporte newReporte = new Reporte(id, autorEncontrado, puntoEncontrado, fecha, descripcion, tipo, prioridad);
+				    reportes.add(newReporte);
+				    
+				    System.out.println("Reporte registrado correctamente.");
+				    
+				 
+					break;
+					
+					
+				case 2: //Asignar 
+				    
+				    Reporte reporteSeleccionado = null;
+				    boolean encontradoReporte = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del reporte a asignar:");
+				        try {
+				            long idReporte = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < reportes.size(); i++) {
+				                if (reportes.get(i).getId() == idReporte) {
+				                    reporteSeleccionado = reportes.get(i);
+				                    encontradoReporte = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoReporte) {
+				                System.out.println("Error, no se encontro un reporte con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoReporte);
+				    
+				    if (!verificadorReporte.verificarPuedeAsignar(reporteSeleccionado)) {
+				        break; 
+				    }
+				    
+				    int tipoAsignacion = 0;
+				    boolean opcionValida = false;
+				    
+				    do {
+				        System.out.println("Asignar a: 1) Operador   2) Ruta");
+				        try {
+				            tipoAsignacion = sc.nextInt();
+				            sc.nextLine();
+				            if (tipoAsignacion == 1 || tipoAsignacion == 2) {
+				                opcionValida = true;
+				            }else {
+				                System.out.println("Error, la opcion debe ser 1 o 2...");
+				            }
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!opcionValida);
+				    
+				    if (tipoAsignacion == 1) { 
+				      
+				        Operador operadorSeleccionado = null;
+				        boolean encontradoOperador = false;
+				        
+				        do {
+				            System.out.println("Ingrese el ID del operador:");
+				            try {
+				                long idOperador = sc.nextLong();
+				                sc.nextLine();
+				                
+				                for (int i = 0; i < operadores.size(); i++) {
+				                    if (operadores.get(i).getId() == idOperador) {
+				                        operadorSeleccionado = operadores.get(i);
+				                        encontradoOperador = true;
+				                        break;
+				                    }
+				                }
+				                
+				                if (!encontradoOperador) {
+				                    System.out.println("Error, no se encontro un operador con ese ID...");
+				                }
+				                
+				            }catch(Exception e) {
+				                sc.nextLine();
+				                System.out.println("Error, valor invalido...");
+				            }
+				        }while(!encontradoOperador);
+				        
+				        if (verificadorReporte.verificarOperadorDisponible(operadorSeleccionado)
+				                && verificadorReporte.verificarOperadorHabilitadoParaEspecial(operadorSeleccionado, reporteSeleccionado.getTipo())) {
+				            
+				            reporteSeleccionado.asignarOperador(operadorSeleccionado, notificador);
+				            System.out.println("Reporte asignado al operador correctamente.");
+				        }
+				        
+				    } else { 
+				        
+				        RutaRecoleccion rutaSeleccionada = null;
+				        boolean encontradaRuta = false;
+				        
+				        do {
+				            System.out.println("Ingrese el ID de la ruta:");
+				            try {
+				                long idRuta = sc.nextLong();
+				                sc.nextLine();
+				                
+				                for (int i = 0; i < rutasRecoleccion.size(); i++) {
+				                    if (rutasRecoleccion.get(i).getId() == idRuta) {
+				                        rutaSeleccionada = rutasRecoleccion.get(i);
+				                        encontradaRuta = true;
+				                        break;
+				                    }
+				                }
+				                
+				                if (!encontradaRuta) {
+				                    System.out.println("Error, no se encontro una ruta con ese ID...");
+				                }
+				                
+				            }catch(Exception e) {
+				                sc.nextLine();
+				                System.out.println("Error, valor invalido...");
+				            }
+				        }while(!encontradaRuta);
+				        
+				        if (verificadorReporte.verificarRutaActivaParaAsignar(rutaSeleccionada)) {
+				            reporteSeleccionado.asignarRuta(rutaSeleccionada, notificador);
+				            System.out.println("Reporte asignado a la ruta correctamente.");
+				        }
+				    }
+				    
+					break;
+					
+					
+				case 3:
+					break;
+					
+					
+				case 4:
+					break;
+				
+				}
+				
+				
+				break;//Hasta aca va reportes
 				
 				
 				
@@ -574,7 +886,7 @@ public class App {
 						int orden = 0;
 						
 						do {
-							System.out.println("Ingrese el numero de oren de la parada:");
+							System.out.println("Ingrese el numero de orden de la parada:");
 							try {
 								orden = sc.nextInt();
 								sc.nextLine();
@@ -588,7 +900,7 @@ public class App {
 							}
 						}while(true);
 						
-						System.out.println("Ingrese la accion que se esper realizar en esta parada:");
+						System.out.println("Ingrese la accion que se espera realizar en esta parada:");
 						String accionEsperada = sc.nextLine();
 						
 						Parada newParada = new Parada(orden, accionEsperada);
@@ -686,6 +998,15 @@ public class App {
 				operadores.add(estephanie);
 				Operador daniel = new Operador(1020116808L,"danyflow@gmial.com", "Daniel Gutierrez", true, "Recolectar material especial, Recoleccion material especial");
 				operadores.add(daniel);
+				
+				//Responsables
+				System.out.println("Cargando Responsables...");
+				Responsable responsable1 = new Responsable(1234567801L,"laura.gomez@eia.edu.co","Laura Gómez",true,"Inspeccion, Cierre de rutas","Gestión de residuos sólidos");
+				responsables.add(responsable1);
+				Responsable responsable2 = new Responsable(2345678912L,"andres.paez@eia.edu.co","Andrés Páez",true,"Recoleccion general, Recoleccion de material especial","Manejo de residuos especiales");
+				responsables.add(responsable2);
+				Responsable responsable3 = new Responsable(3456789023L,"camila.rios@eia.edu.co","Camila Ríos", false,"Inspeccion","Sostenibilidad y campañas ambientales");
+				responsables.add(responsable3);
 				break;
 				
 				
