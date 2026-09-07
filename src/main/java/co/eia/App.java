@@ -13,6 +13,7 @@ public class App {
 		VerificadorParada verificadorParada = new VerificadorParada();
 		VerificadorReporte verificadorReporte = new VerificadorReporte();
 		VerificadorRecoleccion verificadorRecoleccion = new VerificadorRecoleccion();
+		VerificadorPunto verificadorPunto = new VerificadorPunto();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
@@ -468,9 +469,45 @@ public class App {
 						}
 					}
 					break;
-					
-				case 3: 
-					break;
+			
+				case 3: // Inactivar puntos 
+				    
+				    PuntoEcologico puntoParaInactivar = null;
+				    boolean encontradoPuntoInactivar = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del punto ecologico a inactivar:");
+				        try {
+				            long idPunto = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < puntosEcologicos.size(); i++) {
+				                if (puntosEcologicos.get(i).getId() == idPunto) {
+				                    puntoParaInactivar = puntosEcologicos.get(i);
+				                    encontradoPuntoInactivar = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoPuntoInactivar) {
+				                System.out.println("Error, no se encontro un punto con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoPuntoInactivar);
+				    
+				    if (!puntoParaInactivar.getActivo()) {
+				        System.out.println("Error, el punto ya esta inactivo...");
+				    } else if (verificadorPunto.verificarSinReportesAbiertos(puntoParaInactivar, reportes)) {
+				        puntoParaInactivar.inactivar(notificador);
+				        System.out.println("Punto inactivado correctamente.");
+				    }
+				    
+				    break;
+				
 					
 					default:
 						System.out.println("Numero invalido, debe estar entre el 1 y el 3...");

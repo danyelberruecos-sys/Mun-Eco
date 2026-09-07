@@ -43,10 +43,14 @@ public class PuntoEcologico implements Verificable {
 		System.out.println("=======================================");
 	}
 	
+	public void inactivar(Notificador notificador) {
+		this.activo = false;
+		notificador.notificar("El punto ecologico de ID " + id + " \nse cerro correctamente");
+	}
+	
 	public String getUbicacion() {return ubicacion;}
 	
 	public boolean getActivo() {return activo;}
 	
-	public void setActivo(boolean activo) {this.activo = activo;}
 
 }

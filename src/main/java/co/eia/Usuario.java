@@ -25,19 +25,9 @@ public class Usuario extends Persona {
 	
 	public void setTipo(String tipo) {this.tipo = tipo;}
 	
-	public void setTipo() {
-		Scanner scanner = new Scanner(System.in);
-		tipo = scanner.nextLine();
-	}
 	
 	public String getTipo() {return tipo;}
 	
-	public void registrar() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Ingrese nombre: ");
-		nombre = scanner.nextLine();
-		System.out.println("Ingrese el ID:");
-	}
 	
 	
 }
