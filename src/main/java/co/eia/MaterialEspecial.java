@@ -7,5 +7,8 @@ public class MaterialEspecial extends Material{
 	}
 	
 	public int calcularValorPuntos() {return 5;}
+	
+    
+
 
 }

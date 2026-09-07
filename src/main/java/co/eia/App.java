@@ -12,6 +12,7 @@ public class App {
 		Verificador verificador = new Verificador();
 		VerificadorParada verificadorParada = new VerificadorParada();
 		VerificadorReporte verificadorReporte = new VerificadorReporte();
+		VerificadorRecoleccion verificadorRecoleccion = new VerificadorRecoleccion();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
@@ -20,6 +21,7 @@ public class App {
 		ArrayList <RutaRecoleccion> rutasRecoleccion = new ArrayList();
 		ArrayList <Reporte> reportes =new ArrayList();
 		ArrayList <Persona> todasPersonas = new ArrayList();
+		ArrayList <Recoleccion> recolecciones = new ArrayList();
 		
 		
 		System.out.println("=======================================");
@@ -775,12 +777,85 @@ public class App {
 					break;
 					
 					
-				case 3:
+				case 3: // Cambiar estado
+				    
+				    Reporte reporteParaCerrar = null;
+				    boolean encontradoReporteCerrar = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del reporte a cerrar:");
+				        try {
+				            long idReporte = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < reportes.size(); i++) {
+				                if (reportes.get(i).getId() == idReporte) {
+				                    reporteParaCerrar = reportes.get(i);
+				                    encontradoReporteCerrar = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoReporteCerrar) {
+				                System.out.println("Error, no se encontro un reporte con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoReporteCerrar);
+				    
+				    Recoleccion recoleccionDelReporte = null;
+				    
+				    for (int i = 0; i < recolecciones.size(); i++) {
+				        if (recolecciones.get(i).getReporteAsociado().getId() == reporteParaCerrar.getId()) {
+				            recoleccionDelReporte = recolecciones.get(i);
+				            break;
+				        }
+				    }
+				    
+				    boolean tieneRecoleccion = recoleccionDelReporte != null;
+				    double pesoTotal = tieneRecoleccion ? recoleccionDelReporte.getPesoTotal() : 0;
+				    
+				    if (verificadorReporte.verificarPuedeCerrar(reporteParaCerrar, tieneRecoleccion, pesoTotal)) {
+				        reporteParaCerrar.cerrar(notificador);
+				        
+				        if (tieneRecoleccion) {
+				            int puntosGanados = recoleccionDelReporte.calcularEcoPuntos();
+				            reporteParaCerrar.getAutor().sumarEcopuntos(puntosGanados);
+				            System.out.println(reporteParaCerrar.getAutor().getNombre() + " gano " + puntosGanados + " eco-puntos.");
+				        }
+				        
+				        System.out.println("Reporte cerrado correctamente.");
+				    }
+				    
 					break;
 					
 					
-				case 4:
-					break;
+				case 4: //Pendientes
+				    
+				    System.out.println("=======================================");
+				    System.out.println("||        REPORTES PENDIENTES        ||");
+				    System.out.println("=======================================");
+				    
+				    boolean hayResultados = false;
+				    
+				    for (int i = 0; i < reportes.size(); i++) {
+				        Reporte r = reportes.get(i);
+				        boolean esPendiente = r.getEstado().equals("REGISTRADO") || r.getEstado().equals("ASIGNADO");
+				        
+				        if (esPendiente) {
+				            r.mostrar();
+				            hayResultados = true;
+				        }
+				    }
+				    
+				    if (!hayResultados) {
+				        System.out.println("No hay reportes pendientes...");
+				    }
+				    
+				    break;
 				
 				}
 				
@@ -952,12 +1027,204 @@ public class App {
 					break;
 					
 					
-				case 3:
-					break;
+				case 3: //Registrar recoleccion
+				    
+				    Reporte reporteParaRecoleccion = null;
+				    boolean encontradoReporteRec = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del reporte asociado a esta recoleccion:");
+				        try {
+				            long idReporte = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < reportes.size(); i++) {
+				                if (reportes.get(i).getId() == idReporte) {
+				                    reporteParaRecoleccion = reportes.get(i);
+				                    encontradoReporteRec = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoReporteRec) {
+				                System.out.println("Error, no se encontro un reporte con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoReporteRec);
+				    
+				    if (!verificadorRecoleccion.verificarReporteAsignado(reporteParaRecoleccion)) {
+				        break;
+				    }
+				    
+				    Operador operadorResponsable = null;
+				    boolean encontradoOperadorRec = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del operador responsable de la recoleccion:");
+				        try {
+				            long idOperador = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < operadores.size(); i++) {
+				                if (operadores.get(i).getId() == idOperador) {
+				                    operadorResponsable = operadores.get(i);
+				                    encontradoOperadorRec = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoOperadorRec) {
+				                System.out.println("Error, no se encontro un operador con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoOperadorRec);
+				    
+				    long idRecoleccion = 0;
+				    boolean verificadoRec = false;
+				    
+				    do {	do {
+				        System.out.println("Ingrese ID de la recoleccion: ");
+				        try {
+				            idRecoleccion = sc.nextLong();
+				            sc.nextLine();
+				            break;
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				        }while(true);
+				    
+				    if(verificador.verificarLongitud(idRecoleccion) && verificador.verificarUnico(idRecoleccion, recolecciones)) {
+				        verificadoRec = true;
+				    }
+				    }while(!verificadoRec);
+				    
+				    System.out.println("Ingrese observaciones de la recoleccion:");
+				    String observaciones = sc.nextLine();
+				    
+				    Recoleccion newRecoleccion = new Recoleccion(idRecoleccion, observaciones, operadorResponsable, reporteParaRecoleccion);
+				    
+				    boolean agregarMasMateriales = true;
+				    
+				    do {
+				        int opcionMaterial = 0;
+				        boolean opcionMaterialValida = false;
+				        
+				        do {
+				            System.out.println("Seleccione el material recolectado:");
+				            System.out.println("1. Reciclable");
+				            System.out.println("2. Organico");
+				            System.out.println("3. Especial");
+				            try {
+				                opcionMaterial = sc.nextInt();
+				                sc.nextLine();
+				                if (opcionMaterial >= 1 && opcionMaterial <= 3) {
+				                    opcionMaterialValida = true;
+				                }else {
+				                    System.out.println("Error, la opcion debe ser 1, 2 o 3...");
+				                }
+				            }catch(Exception e) {
+				                sc.nextLine();
+				                System.out.println("Error, valor invalido...");
+				            }
+				        }while(!opcionMaterialValida);
+				        
+				        Material materialSeleccionado = null;
+				        if (opcionMaterial == 1) { materialSeleccionado = new MaterialReciclable("Reciclable", 0); }
+				        else if (opcionMaterial == 2) { materialSeleccionado = new MaterialOrganico("Organico", 0); }
+				        else { materialSeleccionado = new MaterialEspecial("Especial", 0); }
+				        
+				        if (!verificadorRecoleccion.verificarOperadorHabilitado(operadorResponsable, materialSeleccionado)) {
+				            System.out.println("No se agrego este material a la recoleccion.");
+				        }else {
+				            double pesoMaterial = 0;
+				            boolean pesoValido = false;
+				            
+				            do {
+				                System.out.println("Ingrese el peso recolectado (kg):");
+				                try {
+				                    pesoMaterial = sc.nextDouble();
+				                    sc.nextLine();
+				                    if (pesoMaterial > 0) {
+				                        pesoValido = true;
+				                    }else {
+				                        System.out.println("Error, el peso debe ser mayor a cero...");
+				                    }
+				                }catch(Exception e) {
+				                    sc.nextLine();
+				                    System.out.println("Error, valor invalido...");
+				                }
+				            }while(!pesoValido);
+				            
+				            newRecoleccion.agregarMaterial(materialSeleccionado, pesoMaterial);
+				        }
+				        
+				        String respuesta;
+				        boolean respuestaValida = false;
+				        do {
+				            System.out.println("¿Desea agregar otro material? (si/no):");
+				            respuesta = sc.nextLine().toLowerCase();
+				            if (respuesta.equals("si")) {
+				                agregarMasMateriales = true;
+				                respuestaValida = true;
+				            }else if (respuesta.equals("no")) {
+				                agregarMasMateriales = false;
+				                respuestaValida = true;
+				            }else {
+				                System.out.println("Error, valor invalido...");
+				            }
+				        }while(!respuestaValida);
+				        
+				    }while(agregarMasMateriales);
+				    
+				    recolecciones.add(newRecoleccion);
+				    System.out.println("Recoleccion registrada correctamente.");
+				    
+				    break;
+		
 					
 					
-				case 4:
-					break;
+				case 4: // Cerrar ruta 
+				    
+				    RutaRecoleccion rutaParaCerrar = null;
+				    boolean encontradaRutaCerrar = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la ruta a cerrar:");
+				        try {
+				            long idRuta = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < rutasRecoleccion.size(); i++) {
+				                if (rutasRecoleccion.get(i).getId() == idRuta) {
+				                    rutaParaCerrar = rutasRecoleccion.get(i);
+				                    encontradaRutaCerrar = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradaRutaCerrar) {
+				                System.out.println("Error, no se encontro una ruta con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradaRutaCerrar);
+				    
+				    rutaParaCerrar.cerrar(notificador);
+				    
+				    break;
+					
 				
 				}
 				break;// Hasta aca llegan rutas
@@ -1007,6 +1274,85 @@ public class App {
 				responsables.add(responsable2);
 				Responsable responsable3 = new Responsable(3456789023L,"camila.rios@eia.edu.co","Camila Ríos", false,"Inspeccion","Sostenibilidad y campañas ambientales");
 				responsables.add(responsable3);
+				
+				//Puntos ecologicos
+				System.out.println("Cargando Puntos Ecologicos...");
+				PuntoEcologico punto1 = new PuntoEcologico(1122334455L, "Bloque 5 - Cafeteria", 100, false, true);
+				punto1.agregarMaterial(new MaterialReciclable("Reciclable", 0));
+				punto1.agregarMaterial(new MaterialOrganico("Organico", 0));
+				puntosEcologicos.add(punto1);
+
+				PuntoEcologico punto2 = new PuntoEcologico(2233445566L, "Zona deportiva", 150, false, true);
+				punto2.agregarMaterial(new MaterialReciclable("Reciclable", 0));
+				punto2.agregarMaterial(new MaterialEspecial("Especial", 0));
+				puntosEcologicos.add(punto2);
+
+				PuntoEcologico punto3 = new PuntoEcologico(3344556677L, "Parqueadero Norte", 80, true, false);
+				punto3.agregarMaterial(new MaterialOrganico("Organico", 0));
+				puntosEcologicos.add(punto3);
+
+				//Paradas
+				System.out.println("Cargando Paradas...");
+				Parada parada1 = new Parada(1, "Recoger material reciclable");
+				parada1.setPuntoEcologico(punto1);
+
+				Parada parada2 = new Parada(2, "Inspeccionar caneca");
+				parada2.setPuntoEcologico(punto2);
+
+				Parada parada3 = new Parada(1, "Recoger material especial");
+				parada3.setPuntoEcologico(punto2);
+
+				Parada parada4 = new Parada(2, "Vaciar caneca");
+				parada4.setPuntoEcologico(punto1);
+
+				Parada parada5 = new Parada(1, "Inspeccionar punto");
+				parada5.setPuntoEcologico(punto2);
+
+				//Rutas de recoleccion
+				System.out.println("Cargando Rutas de Recoleccion...");
+				RutaRecoleccion ruta1 = new RutaRecoleccion(4455667788L, true);
+				ruta1.agregarParada(parada1);
+				ruta1.agregarParada(parada2);
+				rutasRecoleccion.add(ruta1);
+
+				RutaRecoleccion ruta2 = new RutaRecoleccion(5566778899L, true);
+				ruta2.agregarParada(parada3);
+				ruta2.agregarParada(parada4);
+				rutasRecoleccion.add(ruta2);
+
+				RutaRecoleccion ruta3 = new RutaRecoleccion(6677889900L, false);
+				ruta3.agregarParada(parada5);
+				rutasRecoleccion.add(ruta3);
+
+				//Reportes
+				System.out.println("Cargando Reportes...");
+				Reporte reporte1 = new Reporte(7788990011L, esteban, punto1, "01/09/2026", "Caneca desbordada", "Desbordamiento", 3);
+				reporte1.asignarOperador(juan, notificador);
+				reportes.add(reporte1);
+
+				Reporte reporte2 = new Reporte(8899001122L, mariana, punto2, "02/09/2026", "Material especial depositado sin autorizacion", "MaterialEspecial", 3);
+				reporte2.asignarRuta(ruta1, notificador);
+				reportes.add(reporte2);
+
+				Reporte reporte3 = new Reporte(9900112233L, santiago, punto1, "03/09/2026", "Contaminacion por residuos organicos", "Contaminacion", 2);
+				reporte3.asignarOperador(daniel, notificador);
+				reportes.add(reporte3);
+
+				//Recolecciones
+				System.out.println("Cargando Recolecciones...");
+				Recoleccion recoleccion1 = new Recoleccion(1112223334L, "Recoleccion sin novedades", juan, reporte1);
+				recoleccion1.agregarMaterial(new MaterialReciclable("Reciclable", 0), 12.5);
+				recoleccion1.agregarMaterial(new MaterialOrganico("Organico", 0), 5.0);
+				recolecciones.add(recoleccion1);
+
+				Recoleccion recoleccion2 = new Recoleccion(2223334445L, "Se encontro material adicional", daniel, reporte3);
+				recoleccion2.agregarMaterial(new MaterialOrganico("Organico", 0), 3.2);
+				recolecciones.add(recoleccion2);
+
+				Recoleccion recoleccion3 = new Recoleccion(3334445556L, "Recoleccion rutinaria de la ruta", estephanie, reporte2);
+				recoleccion3.agregarMaterial(new MaterialEspecial("Especial", 0), 8.0);
+				recolecciones.add(recoleccion3);
+
 				break;
 				
 				

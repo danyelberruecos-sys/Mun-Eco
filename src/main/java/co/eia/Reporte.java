@@ -66,7 +66,7 @@ public class Reporte implements Verificable{
 		System.out.println("PuntoEcologico: " + puntoEcologico.getUbicacion());
 		System.out.println("Fecha: " + fecha);
 		System.out.println("Estado: " + estado);
-		System.out.println("Nivel de prioridad: Nivel" + prioridad);
+		System.out.println("Nivel de prioridad: Nivel " + prioridad);
 		System.out.println("Descripcion: " + descripcion);
 		if(rutaAsignada != null) {
 			System.out.println("Ruta asignada: " + rutaAsignada.getId());

@@ -33,7 +33,7 @@ public class RutaRecoleccion implements Verificable {
 			activa = false;
 			notificador.notificar(mensaje);
 		}else {
-			System.out.println("Error, la ruta de recoleccino ya estaba cerrada...");
+			System.out.println("Error, la ruta de recoleccion ya estaba cerrada...");
 		}
 	}
 	

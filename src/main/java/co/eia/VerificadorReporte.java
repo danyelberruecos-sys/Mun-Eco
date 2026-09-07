@@ -38,7 +38,7 @@ public class VerificadorReporte {
     
     public boolean verificarPuedeAsignar(Reporte reporte) {
         String estado = reporte.getEstado();
-        if (estado.equals("REGISTRADO") || estado.equals("REABIERTO")) {
+        if (estado.equals("REGISTRADO")) {
             return true;
         } else {
             System.out.println("Error, el reporte no se puede asignar desde su estado actual (" + estado + ")...");

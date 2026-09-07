@@ -16,6 +16,12 @@ public abstract class Persona implements Verificable {
 		this.nombre = nombre;
 	}
 	
+	public void sumarEcopuntos(int puntos) {
+	    if (puntos > 0) {
+	        this.ecoPuntos += puntos;
+	    }
+	}
+	
 	public long getId() {return id;}
 	
 	public void setId(long id) {this.id = id;}
@@ -33,6 +39,5 @@ public abstract class Persona implements Verificable {
 	public int getEcopuntos() {return ecoPuntos;}
 	
 	public abstract void mostrar();
-	
 	
 }

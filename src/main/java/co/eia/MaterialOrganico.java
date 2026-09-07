@@ -7,4 +7,6 @@ public class MaterialOrganico extends Material {
 	}
 	
 	public int calcularValorPuntos() {return 1;}
+	
+ 
 }

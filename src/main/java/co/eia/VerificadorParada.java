@@ -5,7 +5,7 @@ public class VerificadorParada {
 		if( puntoEcologico.getActivo()) {
 			return true;
 		}else {
-			System.out.println("Error, el punot ecologico seleccionado esta inactivo...");
+			System.out.println("Error, el punto ecologico seleccionado esta inactivo...");
 			return false;
 		}
 	}

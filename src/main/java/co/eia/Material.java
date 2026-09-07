@@ -15,6 +15,5 @@ public abstract class Material {
 	public String getNombre() {return nombre;}
 	
 	public int getCantidad() {return cantidad;}
-	
 
 }
