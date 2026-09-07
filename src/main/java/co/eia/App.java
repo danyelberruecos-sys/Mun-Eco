@@ -863,8 +863,6 @@ public class App {
 				            reporteParaCerrar.getAutor().sumarEcopuntos(puntosGanados);
 				            System.out.println(reporteParaCerrar.getAutor().getNombre() + " gano " + puntosGanados + " eco-puntos.");
 				        }
-				        
-				        System.out.println("Reporte cerrado correctamente.");
 				    }
 				    
 					break;
