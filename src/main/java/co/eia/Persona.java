@@ -1,6 +1,5 @@
 package co.eia;
 
-import java.util.ArrayList;
 
 public abstract class Persona implements Verificable {
 	protected long id;
@@ -33,8 +32,6 @@ public abstract class Persona implements Verificable {
 	public String getNombre() {return nombre;}
 	
 	public void setNombre(String nombre) {this.nombre = nombre;}
-	
-	public void setEcopuntos(int ecoPuntos) {this.ecoPuntos= ecoPuntos;}
 	
 	public int getEcopuntos() {return ecoPuntos;}
 	
