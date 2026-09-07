@@ -91,5 +91,7 @@ public class Reporte implements Verificable{
     public int getPrioridad() { return prioridad; }
     
     public Operador getOperadorAsignado() { return operadorAsignado; }
+    
+    public String getFecha() {return fecha;}
 		
 }

@@ -860,10 +860,12 @@ public class App {
 				        
 				        if (tieneRecoleccion) {
 				            int puntosGanados = recoleccionDelReporte.calcularEcoPuntos();
-				            reporteParaCerrar.getAutor().sumarEcopuntos(puntosGanados);
-				            System.out.println(reporteParaCerrar.getAutor().getNombre() + " gano " + puntosGanados + " eco-puntos.");
+				            String concepto = "Recoleccion de material - Reporte #" + reporteParaCerrar.getId();
+				            reporteParaCerrar.getAutor().sumarEcoPuntos(puntosGanados, concepto, reporteParaCerrar.getFecha());
+				            notificador.notificar(reporteParaCerrar.getAutor().getNombre() + " gano " + puntosGanados + " eco-puntos.");
 				        }
 				    }
+				    
 				    
 					break;
 					

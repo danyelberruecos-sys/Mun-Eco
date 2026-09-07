@@ -18,7 +18,7 @@ public class Usuario extends Persona {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("ID: " + id);
 		System.out.println("Correo: " + correo);
-		System.out.println("EcoPuntos: " + ecoPuntos);
+		System.out.println("EcoPuntos: " + getEcopuntos());
 		System.out.println("Tipo: " + tipo);
 		System.out.println("=======================================");
 	}

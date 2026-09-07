@@ -17,7 +17,7 @@ public class PersonalOperativo extends Persona {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("ID: " + id);
 		System.out.println("Correo: " + correo);
-		System.out.println("EcoPuntos: " + ecoPuntos);
+		System.out.println("EcoPuntos: " + getEcopuntos());
 		if(disponible) {
 			System.out.println("Disponibilidad: Disponible");
 		}else {System.out.println("Disponibilidad: Ocupado");}
