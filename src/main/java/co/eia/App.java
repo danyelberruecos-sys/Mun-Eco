@@ -14,6 +14,7 @@ public class App {
 		VerificadorReporte verificadorReporte = new VerificadorReporte();
 		VerificadorRecoleccion verificadorRecoleccion = new VerificadorRecoleccion();
 		VerificadorPunto verificadorPunto = new VerificadorPunto();
+		VerificadorCampania verificadorCampania = new VerificadorCampania();
 		
 		ArrayList <Usuario> usuarios = new ArrayList();
 		ArrayList <Operador> operadores = new ArrayList();
@@ -23,6 +24,8 @@ public class App {
 		ArrayList <Reporte> reportes =new ArrayList();
 		ArrayList <Persona> todasPersonas = new ArrayList();
 		ArrayList <Recoleccion> recolecciones = new ArrayList();
+		ArrayList <Campania> campanias = new ArrayList();
+		ArrayList<Actividad> actividades = new ArrayList();
 		
 		
 		System.out.println("=======================================");
@@ -40,7 +43,7 @@ public class App {
 			System.out.println("||2. Puntos ecologicos               ||");
 			System.out.println("||3. Reportes                        ||");
 			System.out.println("||4. Rutas y recoleccion             ||");
-			System.out.println("||5. Campañas ambientales            ||");
+			System.out.println("||5. Campanias ambientales           ||");
 			System.out.println("||6. Eco-puntos y consultas          ||");
 			System.out.println("||7. Indicadores generales           ||");
 			System.out.println("||8. Cargar objetos de prueba        ||");
@@ -1268,8 +1271,286 @@ public class App {
 				
 				
 				
-			case 5: 
-				break;
+			case 5: // Campanias
+				System.out.println("=======================================");
+				System.out.println("||       CAMPANIAS AMBIENTALES       ||");
+				System.out.println("=======================================");
+				System.out.println("||1. Registrar campania              ||");
+				System.out.println("||2. Agregar actividad a campania    ||");
+				System.out.println("||3. Inscribir participante          ||");
+				System.out.println("||4. Cerrar campaña                  ||");
+				System.out.println("=======================================");
+				
+				int accionCampanias = 0;
+				
+				do {
+					System.out.println("Ingrese el número de la accion que desee realizar: ");
+					try {
+						accionCampanias = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido...");
+					}
+					}while(true);
+				
+				switch (accionCampanias) {
+				
+				default:
+					System.out.println("Numero invalido, debe estar entre el 1 y el 4...");
+					break;
+					
+				case 1: // registrar campania
+				    
+				    long idCampania = 0;
+				    boolean verificadoCampania = false;
+				    
+				    do {	do {
+				        System.out.println("Ingrese ID: ");
+				        try {
+				            idCampania = sc.nextLong();
+				            sc.nextLine();
+				            break;
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				        }while(true);
+				    
+				    if(verificador.verificarLongitud(idCampania) && verificador.verificarUnico(idCampania, campanias)) {
+				        verificadoCampania = true;
+				    }
+				    }while(!verificadoCampania);
+				    
+				    System.out.println("Ingrese la fecha de la campania (dd/mm/aaaa):");
+				    String fechaCampania = sc.nextLine();
+				    
+				    int cupoCampania = 0;
+				    boolean cupoValido = false;
+				    
+				    do {
+				        System.out.println("Ingrese el cupo maximo de participantes:");
+				        try {
+				            cupoCampania = sc.nextInt();
+				            sc.nextLine();
+				            if (cupoCampania > 0) {
+				                cupoValido = true;
+				            }else {
+				                System.out.println("Error, el cupo debe ser mayor a cero...");
+				            }
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!cupoValido);
+				    
+				    int puntosCampania = 0;
+				    boolean puntosValidosCampania = false;
+				    
+				    do {
+				        System.out.println("Ingrese los eco-puntos que otorga la participacion:");
+				        try {
+				            puntosCampania = sc.nextInt();
+				            sc.nextLine();
+				            if (puntosCampania > 0) {
+				                puntosValidosCampania = true;
+				            }else {
+				                System.out.println("Error, los puntos deben ser mayor a cero...");
+				            }
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!puntosValidosCampania);
+				    
+				    Campania newCampania = new Campania(idCampania, fechaCampania, cupoCampania, puntosCampania);
+				    campanias.add(newCampania);
+				    
+				    break;
+					
+					
+				case 2: // agregar actividad
+				    
+				    Campania campaniaParaActividad = null;
+				    boolean encontradaCampaniaAct = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la campania:");
+				        try {
+				            long idBuscada = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < campanias.size(); i++) {
+				                if (campanias.get(i).getId() == idBuscada) {
+				                    campaniaParaActividad = campanias.get(i);
+				                    encontradaCampaniaAct = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradaCampaniaAct) {
+				                System.out.println("Error, no se encontro una campania con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradaCampaniaAct);
+				    
+				    if (!verificadorCampania.verificarCampaniaActiva(campaniaParaActividad)) {
+				        break;
+				    }
+				    
+				    long idActividad = 0;
+				    boolean verificadoActividad = false;
+				    
+				    do {	do {
+				        System.out.println("Ingrese ID de la actividad: ");
+				        try {
+				            idActividad = sc.nextLong();
+				            sc.nextLine();
+				            break;
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				        }while(true);
+				    
+				    if(verificador.verificarLongitud(idActividad) && verificador.verificarUnico(idActividad, actividades)) {
+				        verificadoActividad = true;
+				    }
+				    }while(!verificadoActividad);
+				    
+				    System.out.println("Ingrese el nombre de la actividad:");
+				    String nombreActividad = sc.nextLine();
+				    
+				    System.out.println("Ingrese el tipo de actividad:");
+				    String tipoActividad = sc.nextLine();
+				    
+				    System.out.println("Ingrese la fecha de la actividad (dd/mm/aaaa):");
+				    String fechaActividad = sc.nextLine();
+				    
+				    Actividad newActividad = new Actividad(idActividad, nombreActividad, tipoActividad, fechaActividad);
+				    actividades.add(newActividad); 
+				    campaniaParaActividad.agregarActividad(newActividad); 
+				    
+				    
+				    break;
+					
+					
+				case 3: // inscripcion
+				    
+				    Campania campaniaParaInscripcion = null;
+				    boolean encontradaCampaniaIns = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la campania:");
+				        try {
+				            long idBuscada = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < campanias.size(); i++) {
+				                if (campanias.get(i).getId() == idBuscada) {
+				                    campaniaParaInscripcion = campanias.get(i);
+				                    encontradaCampaniaIns = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradaCampaniaIns) {
+				                System.out.println("Error, no se encontro una campania con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradaCampaniaIns);
+				    
+				    Usuario usuarioParaInscribir = null;
+				    boolean encontradoUsuarioIns = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID del usuario a inscribir:");
+				        try {
+				            long idUsuario = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < usuarios.size(); i++) {
+				                if (usuarios.get(i).getId() == idUsuario) {
+				                    usuarioParaInscribir = usuarios.get(i);
+				                    encontradoUsuarioIns = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradoUsuarioIns) {
+				                System.out.println("Error, no se encontro un usuario con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradoUsuarioIns);
+				    
+				    if (verificadorCampania.verificarCampaniaActiva(campaniaParaInscripcion)
+				            && verificadorCampania.verificarNoInscritoPreviamente(usuarioParaInscribir, campaniaParaInscripcion)
+				            && verificadorCampania.verificarCupoDisponible(campaniaParaInscripcion)) {
+				        
+				        System.out.println("Ingrese la fecha de inscripcion (dd/mm/aaaa):");
+				        String fechaInscripcion = sc.nextLine();
+				        
+				        campaniaParaInscripcion.inscribirParticipante(usuarioParaInscribir, fechaInscripcion, notificador);
+				        System.out.println("Participante inscrito correctamente.");
+				    }
+				    
+				    break;
+					
+					
+				case 4: // cerrar
+				    
+				    Campania campaniaParaCerrar = null;
+				    boolean encontradaCampaniaCerrar = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la campania a cerrar:");
+				        try {
+				            long idBuscada = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < campanias.size(); i++) {
+				                if (campanias.get(i).getId() == idBuscada) {
+				                    campaniaParaCerrar = campanias.get(i);
+				                    encontradaCampaniaCerrar = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradaCampaniaCerrar) {
+				                System.out.println("Error, no se encontro una campania con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradaCampaniaCerrar);
+				    
+				    if (!verificadorCampania.verificarCampaniaActiva(campaniaParaCerrar)) {
+				        break;
+				    }
+				    
+				    campaniaParaCerrar.cerrar(notificador);
+				    System.out.println("Campania cerrada correctamente.");
+				    
+				    break;
+					
+				}
+				
+				break; // hasta aqui va campanias
 				
 				
 				
@@ -1485,119 +1766,327 @@ public class App {
 				
 				
 				
-			case 7: 
-				break;
+			case 7: // Resumen general
+			    
+			    System.out.println("=======================================");
+			    System.out.println("||       INDICADORES GENERALES       ||");
+			    System.out.println("=======================================");
+			    
+			    // --- PERSONAS ---
+			    System.out.println("--- PERSONAS ---");
+			    System.out.println("Total de personas registradas: " + todasPersonas.size());
+			    System.out.println("  - Usuarios: " + usuarios.size());
+			    System.out.println("  - Operadores: " + operadores.size());
+			    System.out.println("  - Responsables: " + responsables.size());
+			    
+			    int operadoresDisponibles = 0;
+			    for (int i = 0; i < operadores.size(); i++) {
+			        if (operadores.get(i).getDisponible()) {
+			            operadoresDisponibles++;
+			        }
+			    }
+			    System.out.println("  - Operadores disponibles: " + operadoresDisponibles + " de " + operadores.size());
+			    
+			    // --- PUNTOS ECOLOGICOS ---
+			    System.out.println("-----------------------------------");
+			    System.out.println("--- PUNTOS ECOLOGICOS ---");
+			    System.out.println("Total de puntos ecologicos: " + puntosEcologicos.size());
+			    
+			    int puntosActivos = 0;
+			    for (int i = 0; i < puntosEcologicos.size(); i++) {
+			        if (puntosEcologicos.get(i).getActivo()) {
+			            puntosActivos++;
+			        }
+			    }
+			    System.out.println("  - Activos: " + puntosActivos);
+			    System.out.println("  - Inactivos: " + (puntosEcologicos.size() - puntosActivos));
+			    
+			    // --- REPORTES ---
+			    System.out.println("-----------------------------------");
+			    System.out.println("--- REPORTES ---");
+			    System.out.println("Total de reportes: " + reportes.size());
+			    
+			    int registrados = 0, asignados = 0, cerrados = 0;
+			    int prioridadAlta = 0, prioridadMedia = 0, prioridadBaja = 0;
+			    
+			    for (int i = 0; i < reportes.size(); i++) {
+			        Reporte r = reportes.get(i);
+			        String estado = r.getEstado();
+			        
+			        if (estado.equals("REGISTRADO")) { registrados++; }
+			        else if (estado.equals("ASIGNADO")) { asignados++; }
+			        else if (estado.equals("CERRADO")) { cerrados++; }
+			        
+			        if (r.getPrioridad() == 3) { prioridadAlta++; }
+			        else if (r.getPrioridad() == 2) { prioridadMedia++; }
+			        else if (r.getPrioridad() == 1) { prioridadBaja++; }
+			    }
+			    
+			    System.out.println("  - Registrados: " + registrados);
+			    System.out.println("  - Asignados: " + asignados);
+			    System.out.println("  - Cerrados: " + cerrados);
+			    System.out.println("  - Prioridad alta: " + prioridadAlta);
+			    System.out.println("  - Prioridad media: " + prioridadMedia);
+			    System.out.println("  - Prioridad baja: " + prioridadBaja);
+			    
+			    // --- RUTAS Y RECOLECCION ---
+			    System.out.println("-----------------------------------");
+			    System.out.println("--- RUTAS Y RECOLECCION ---");
+			    System.out.println("Total de rutas de recoleccion: " + rutasRecoleccion.size());
+			    
+			    int rutasActivas = 0;
+			    int totalParadas = 0;
+			    for (int i = 0; i < rutasRecoleccion.size(); i++) {
+			        if (rutasRecoleccion.get(i).getActiva()) {
+			            rutasActivas++;
+			        }
+			        totalParadas += rutasRecoleccion.get(i).getParadas().size();
+			    }
+			    System.out.println("  - Activas: " + rutasActivas);
+			    System.out.println("  - Cerradas: " + (rutasRecoleccion.size() - rutasActivas));
+			    System.out.println("  - Total de paradas registradas: " + totalParadas);
+			    
+			    System.out.println("Total de recolecciones registradas: " + recolecciones.size());
+			    
+			    double pesoTotalGeneral = 0;
+			    for (int i = 0; i < recolecciones.size(); i++) {
+			        pesoTotalGeneral += recolecciones.get(i).getPesoTotal();
+			    }
+			    System.out.println("  - Peso total recolectado: " + pesoTotalGeneral + " kg");
+			    
+			    // --- MATERIALES POR TIPO ---
+			    double totalReciclable = 0, totalOrganico = 0, totalEspecial = 0;
+			    for (int i = 0; i < recolecciones.size(); i++) {
+			        ArrayList<Material> mats = recolecciones.get(i).getMateriales();
+			        ArrayList<Double> pesosRec = recolecciones.get(i).getPesos();
+			        for (int j = 0; j < mats.size(); j++) {
+			            if (mats.get(j) instanceof MaterialReciclable) { totalReciclable += pesosRec.get(j); }
+			            else if (mats.get(j) instanceof MaterialOrganico) { totalOrganico += pesosRec.get(j); }
+			            else if (mats.get(j) instanceof MaterialEspecial) { totalEspecial += pesosRec.get(j); }
+			        }
+			    }
+			    System.out.println("  - Reciclable: " + totalReciclable + " kg");
+			    System.out.println("  - Organico: " + totalOrganico + " kg");
+			    System.out.println("  - Especial: " + totalEspecial + " kg");
+			    
+			    // --- CAMPANIAS ---
+			    System.out.println("-----------------------------------");
+			    System.out.println("--- CAMPANIAS AMBIENTALES ---");
+			    System.out.println("Total de campanias: " + campanias.size());
+			    
+			    int campaniasActivas = 0;
+			    int totalParticipaciones = 0;
+			    int cupoTotalOfrecido = 0;
+			    
+			    for (int i = 0; i < campanias.size(); i++) {
+			        if (campanias.get(i).getEstado().equals("ACTIVA")) {
+			            campaniasActivas++;
+			        }
+			        totalParticipaciones += campanias.get(i).getParticipaciones().size();
+			        cupoTotalOfrecido += campanias.get(i).getCupo();
+			    }
+			    
+			    System.out.println("  - Activas: " + campaniasActivas);
+			    System.out.println("  - Cerradas: " + (campanias.size() - campaniasActivas));
+			    System.out.println("  - Total de actividades registradas: " + actividades.size());
+			    System.out.println("  - Total de inscripciones: " + totalParticipaciones);
+			    System.out.println("  - Cupo total ofrecido: " + cupoTotalOfrecido);
+			    
+			    // --- ECO-PUNTOS ---
+			    System.out.println("-----------------------------------");
+			    System.out.println("--- ECO-PUNTOS ---");
+			    
+			    int totalEcoPuntosSistema = 0;
+			    Persona personaConMasPuntos = null;
+			    
+			    for (int i = 0; i < todasPersonas.size(); i++) {
+			        int puntos = todasPersonas.get(i).getEcopuntos();
+			        totalEcoPuntosSistema += puntos;
+			        
+			        if (personaConMasPuntos == null || puntos > personaConMasPuntos.getEcopuntos()) {
+			            personaConMasPuntos = todasPersonas.get(i);
+			        }
+			    }
+			    
+			    System.out.println("Total de eco-puntos otorgados en el sistema: " + totalEcoPuntosSistema);
+			    if (personaConMasPuntos != null) {
+			        System.out.println("Persona con mas eco-puntos: " + personaConMasPuntos.getNombre() + " (" + personaConMasPuntos.getEcopuntos() + " pts)");
+			    }
+			    
+			    if (todasPersonas.size() > 0) {
+			        double promedioEcoPuntos = (double) totalEcoPuntosSistema / todasPersonas.size();
+			        System.out.println("Promedio de eco-puntos por persona: " + String.format("%.2f", promedioEcoPuntos));
+			    }
+			    
+			    System.out.println("=======================================");
+			    
+			    break;
+
 				
 				
 				
 				
 			case 8: // Cargar objetos de prueba
-				//Usuarios
-				System.out.println("Cargando Usuarios...");
-				Usuario esteban = new Usuario(1029387354L, "estebanano@gmail.com", "Esteban Trujillo", "Estudiante");
-				usuarios.add(esteban);
-				Usuario mariana = new Usuario(2345432389L, "marryana@gmail.com", "Mariana Giraldo", "Estudiante");
-				usuarios.add(mariana);
-				Usuario santiago = new Usuario(5834549087L, "zantir4m1@gmail.com", "Santigo Ramirez", "Profesor");
-				usuarios.add(santiago);
-				
-				//Operadores
-				System.out.println("Cargando Operadores...");
-				Operador juan = new Operador(3382934784L,"juancho@gmial.com", "Juan Pablo Castaño", true, "Recolectar material especial, Inspeccion de puntos");
-				operadores.add(juan);
-				Operador estephanie = new Operador(5467389230L,"estephalaenana@gmial.com", "Estephanie Taborda", false, "Recolecccion general, Cierre de rutas");
-				operadores.add(estephanie);
-				Operador daniel = new Operador(1020116808L,"danyflow@gmial.com", "Daniel Gutierrez", true, "Recolectar material especial, Recoleccion material especial");
-				operadores.add(daniel);
-				
-				//Responsables
-				System.out.println("Cargando Responsables...");
-				Responsable responsable1 = new Responsable(1234567801L,"laura.gomez@eia.edu.co","Laura Gómez",true,"Inspeccion, Cierre de rutas","Gestión de residuos sólidos");
-				responsables.add(responsable1);
-				Responsable responsable2 = new Responsable(2345678912L,"andres.paez@eia.edu.co","Andrés Páez",true,"Recoleccion general, Recoleccion de material especial","Manejo de residuos especiales");
-				responsables.add(responsable2);
-				Responsable responsable3 = new Responsable(3456789023L,"camila.rios@eia.edu.co","Camila Ríos", false,"Inspeccion","Sostenibilidad y campañas ambientales");
-				responsables.add(responsable3);
-				
-				//Puntos ecologicos
-				System.out.println("Cargando Puntos Ecologicos...");
-				PuntoEcologico punto1 = new PuntoEcologico(1122334455L, "Bloque 5 - Cafeteria", 100, false, true);
-				punto1.agregarMaterial(new MaterialReciclable("Reciclable", 0));
-				punto1.agregarMaterial(new MaterialOrganico("Organico", 0));
-				puntosEcologicos.add(punto1);
 
-				PuntoEcologico punto2 = new PuntoEcologico(2233445566L, "Zona deportiva", 150, false, true);
-				punto2.agregarMaterial(new MaterialReciclable("Reciclable", 0));
-				punto2.agregarMaterial(new MaterialEspecial("Especial", 0));
-				puntosEcologicos.add(punto2);
+			    
+			    //Usuarios
+			    System.out.println("Cargando Usuarios...");
+			    Usuario esteban = new Usuario(1029387354L, "estebanano@gmail.com", "Esteban Trujillo", "Estudiante");
+			    usuarios.add(esteban);
+			    todasPersonas.add(esteban);
+			    
+			    Usuario mariana = new Usuario(2345432389L, "marryana@gmail.com", "Mariana Giraldo", "Estudiante");
+			    usuarios.add(mariana);
+			    todasPersonas.add(mariana);
+			    
+			    Usuario santiago = new Usuario(5834549087L, "zantir4m1@gmail.com", "Santigo Ramirez", "Profesor");
+			    usuarios.add(santiago);
+			    todasPersonas.add(santiago);
+			    
+			    //Operadores
+			    System.out.println("Cargando Operadores...");
+			    Operador juan = new Operador(3382934784L, "juancho@gmial.com", "Juan Pablo Castaño", true, "Recolectar material especial, Inspeccion de puntos");
+			    operadores.add(juan);
+			    todasPersonas.add(juan);
+			    
+			    Operador estephanie = new Operador(5467389230L, "estephalaenana@gmial.com", "Estephanie Taborda", false, "Recolecccion general, Cierre de rutas");
+			    operadores.add(estephanie);
+			    todasPersonas.add(estephanie);
+			    
+			    Operador daniel = new Operador(1020116808L, "danyflow@gmial.com", "Daniel Gutierrez", true, "Recolectar material especial, Recoleccion material especial");
+			    operadores.add(daniel);
+			    todasPersonas.add(daniel);
+			    
+			    //Responsables
+			    System.out.println("Cargando Responsables...");
+			    Responsable responsable1 = new Responsable(1234567801L, "laura.gomez@eia.edu.co", "Laura Gómez", true, "Inspeccion, Cierre de rutas", "Gestión de residuos sólidos");
+			    responsables.add(responsable1);
+			    todasPersonas.add(responsable1);
+			    
+			    Responsable responsable2 = new Responsable(2345678912L, "andres.paez@eia.edu.co", "Andrés Páez", true, "Recoleccion general, Recoleccion de material especial", "Manejo de residuos especiales");
+			    responsables.add(responsable2);
+			    todasPersonas.add(responsable2);
+			    
+			    Responsable responsable3 = new Responsable(3456789023L, "camila.rios@eia.edu.co", "Camila Ríos", false, "Inspeccion", "Sostenibilidad y campañas ambientales");
+			    responsables.add(responsable3);
+			    todasPersonas.add(responsable3);
+			    
+			    //Puntos ecologicos
+			    System.out.println("Cargando Puntos Ecologicos...");
+			    PuntoEcologico punto1 = new PuntoEcologico(1122334455L, "Bloque 5 - Cafeteria", 100, false, true);
+			    punto1.agregarMaterial(new MaterialReciclable("Reciclable", 0));
+			    punto1.agregarMaterial(new MaterialOrganico("Organico", 0));
+			    puntosEcologicos.add(punto1);
+			    
+			    PuntoEcologico punto2 = new PuntoEcologico(2233445566L, "Zona deportiva", 150, false, true);
+			    punto2.agregarMaterial(new MaterialReciclable("Reciclable", 0));
+			    punto2.agregarMaterial(new MaterialEspecial("Especial", 0));
+			    puntosEcologicos.add(punto2);
+			    
+			    PuntoEcologico punto3 = new PuntoEcologico(3344556677L, "Parqueadero Norte", 80, true, false);
+			    punto3.agregarMaterial(new MaterialOrganico("Organico", 0));
+			    puntosEcologicos.add(punto3);
+			    
+			    //Paradas
+			    System.out.println("Cargando Paradas...");
+			    Parada parada1 = new Parada(1, "Recoger material reciclable");
+			    parada1.setPuntoEcologico(punto1);
+			    
+			    Parada parada2 = new Parada(2, "Inspeccionar caneca");
+			    parada2.setPuntoEcologico(punto2);
+			    
+			    Parada parada3 = new Parada(1, "Recoger material especial");
+			    parada3.setPuntoEcologico(punto2);
+			    
+			    Parada parada4 = new Parada(2, "Vaciar caneca");
+			    parada4.setPuntoEcologico(punto1);
+			    
+			    Parada parada5 = new Parada(1, "Inspeccionar punto");
+			    parada5.setPuntoEcologico(punto2);
+			    
+			    //Rutas de recoleccion
+			    System.out.println("Cargando Rutas de Recoleccion...");
+			    RutaRecoleccion ruta1 = new RutaRecoleccion(4455667788L, true);
+			    ruta1.agregarParada(parada1);
+			    ruta1.agregarParada(parada2);
+			    rutasRecoleccion.add(ruta1);
+			    
+			    RutaRecoleccion ruta2 = new RutaRecoleccion(5566778899L, true);
+			    ruta2.agregarParada(parada3);
+			    ruta2.agregarParada(parada4);
+			    rutasRecoleccion.add(ruta2);
+			    
+			    RutaRecoleccion ruta3 = new RutaRecoleccion(6677889900L, false);
+			    ruta3.agregarParada(parada5);
+			    rutasRecoleccion.add(ruta3);
+			    
+			    //Reportes
+			    System.out.println("Cargando Reportes...");
+			    Reporte reporte1 = new Reporte(7788990011L, esteban, punto1, "01/09/2026", "Caneca desbordada", "Desbordamiento", 3);
+			    reporte1.asignarOperador(juan, notificador);
+			    reportes.add(reporte1);
+			    
+			    Reporte reporte2 = new Reporte(8899001122L, mariana, punto2, "02/09/2026", "Material especial depositado sin autorizacion", "MaterialEspecial", 3);
+			    reporte2.asignarRuta(ruta1, notificador);
+			    reportes.add(reporte2);
+			    
+			    Reporte reporte3 = new Reporte(9900112233L, santiago, punto1, "03/09/2026", "Contaminacion por residuos organicos", "Contaminacion", 2);
+			    reporte3.asignarOperador(daniel, notificador);
+			    reportes.add(reporte3);
+			    
+			    //Recolecciones
+			    System.out.println("Cargando Recolecciones...");
+			    Recoleccion recoleccion1 = new Recoleccion(1112223334L, "Recoleccion sin novedades", juan, reporte1);
+			    recoleccion1.agregarMaterial(new MaterialReciclable("Reciclable", 0), 12.5);
+			    recoleccion1.agregarMaterial(new MaterialOrganico("Organico", 0), 5.0);
+			    recolecciones.add(recoleccion1);
+			    
+			    Recoleccion recoleccion2 = new Recoleccion(2223334445L, "Se encontro material adicional", daniel, reporte3);
+			    recoleccion2.agregarMaterial(new MaterialOrganico("Organico", 0), 3.2);
+			    recolecciones.add(recoleccion2);
+			    
+			    Recoleccion recoleccion3 = new Recoleccion(3334445556L, "Recoleccion rutinaria de la ruta", estephanie, reporte2);
+			    recoleccion3.agregarMaterial(new MaterialEspecial("Especial", 0), 8.0);
+			    recolecciones.add(recoleccion3);
+			    
+			    //Campanias
+			    System.out.println("Cargando Campanias...");
+			    Campania campania1 = new Campania(4445556667L, "15/09/2026", 3, 10);
+			    campanias.add(campania1);
+			    
+			    Campania campania2 = new Campania(5556667778L, "20/09/2026", 2, 15);
+			    campanias.add(campania2);
+			    
+			    Campania campania3 = new Campania(6667778889L, "10/08/2026", 5, 5);
+			    campania3.cerrar(notificador);
+			    campanias.add(campania3);
+			    
+			    //Actividades
+			    System.out.println("Cargando Actividades...");
+			    Actividad actividad1 = new Actividad(7778889990L, "Jornada de reciclaje", "Recoleccion", "15/09/2026");
+			    actividades.add(actividad1);
+			    campania1.agregarActividad(actividad1);
+			    
+			    Actividad actividad2 = new Actividad(8889990011L, "Charla de sensibilizacion ambiental", "Educativa", "16/09/2026");
+			    actividades.add(actividad2);
+			    campania1.agregarActividad(actividad2);
+			    
+			    Actividad actividad3 = new Actividad(9990011122L, "Siembra de arboles", "Reforestacion", "20/09/2026");
+			    actividades.add(actividad3);
+			    campania2.agregarActividad(actividad3);
+			    
+			    //Participaciones
+			    System.out.println("Cargando Participaciones...");
+			    campania1.inscribirParticipante(esteban, "10/09/2026", notificador);
+			    campania1.inscribirParticipante(mariana, "11/09/2026", notificador);
+			    
+			    campania2.inscribirParticipante(santiago, "18/09/2026", notificador);
+			    
+			    System.out.println("Datos de prueba cargados correctamente.");
+			    
+			    break;
 
-				PuntoEcologico punto3 = new PuntoEcologico(3344556677L, "Parqueadero Norte", 80, true, false);
-				punto3.agregarMaterial(new MaterialOrganico("Organico", 0));
-				puntosEcologicos.add(punto3);
 
-				//Paradas
-				System.out.println("Cargando Paradas...");
-				Parada parada1 = new Parada(1, "Recoger material reciclable");
-				parada1.setPuntoEcologico(punto1);
-
-				Parada parada2 = new Parada(2, "Inspeccionar caneca");
-				parada2.setPuntoEcologico(punto2);
-
-				Parada parada3 = new Parada(1, "Recoger material especial");
-				parada3.setPuntoEcologico(punto2);
-
-				Parada parada4 = new Parada(2, "Vaciar caneca");
-				parada4.setPuntoEcologico(punto1);
-
-				Parada parada5 = new Parada(1, "Inspeccionar punto");
-				parada5.setPuntoEcologico(punto2);
-
-				//Rutas de recoleccion
-				System.out.println("Cargando Rutas de Recoleccion...");
-				RutaRecoleccion ruta1 = new RutaRecoleccion(4455667788L, true);
-				ruta1.agregarParada(parada1);
-				ruta1.agregarParada(parada2);
-				rutasRecoleccion.add(ruta1);
-
-				RutaRecoleccion ruta2 = new RutaRecoleccion(5566778899L, true);
-				ruta2.agregarParada(parada3);
-				ruta2.agregarParada(parada4);
-				rutasRecoleccion.add(ruta2);
-
-				RutaRecoleccion ruta3 = new RutaRecoleccion(6677889900L, false);
-				ruta3.agregarParada(parada5);
-				rutasRecoleccion.add(ruta3);
-
-				//Reportes
-				System.out.println("Cargando Reportes...");
-				Reporte reporte1 = new Reporte(7788990011L, esteban, punto1, "01/09/2026", "Caneca desbordada", "Desbordamiento", 3);
-				reporte1.asignarOperador(juan, notificador);
-				reportes.add(reporte1);
-
-				Reporte reporte2 = new Reporte(8899001122L, mariana, punto2, "02/09/2026", "Material especial depositado sin autorizacion", "MaterialEspecial", 3);
-				reporte2.asignarRuta(ruta1, notificador);
-				reportes.add(reporte2);
-
-				Reporte reporte3 = new Reporte(9900112233L, santiago, punto1, "03/09/2026", "Contaminacion por residuos organicos", "Contaminacion", 2);
-				reporte3.asignarOperador(daniel, notificador);
-				reportes.add(reporte3);
-
-				//Recolecciones
-				System.out.println("Cargando Recolecciones...");
-				Recoleccion recoleccion1 = new Recoleccion(1112223334L, "Recoleccion sin novedades", juan, reporte1);
-				recoleccion1.agregarMaterial(new MaterialReciclable("Reciclable", 0), 12.5);
-				recoleccion1.agregarMaterial(new MaterialOrganico("Organico", 0), 5.0);
-				recolecciones.add(recoleccion1);
-
-				Recoleccion recoleccion2 = new Recoleccion(2223334445L, "Se encontro material adicional", daniel, reporte3);
-				recoleccion2.agregarMaterial(new MaterialOrganico("Organico", 0), 3.2);
-				recolecciones.add(recoleccion2);
-
-				Recoleccion recoleccion3 = new Recoleccion(3334445556L, "Recoleccion rutinaria de la ruta", estephanie, reporte2);
-				recoleccion3.agregarMaterial(new MaterialEspecial("Especial", 0), 8.0);
-				recolecciones.add(recoleccion3);
-
-				break;
 				
 				
 				

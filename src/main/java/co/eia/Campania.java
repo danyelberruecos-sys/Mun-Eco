@@ -1,4 +1,4 @@
-package co.eia;   //Falta inscribir participante
+package co.eia;  
 
 import java.util.ArrayList;
 
@@ -8,28 +8,44 @@ public class Campania implements Verificable {
 	private String fecha;
 	private int cupo;
 	private String estado;
-	private ArrayList <Actividad> actividades;
-	private ArrayList <Participacion> participaciones;
+	private ArrayList <Actividad> actividades = new ArrayList();
+	private ArrayList <Participacion> participaciones = new ArrayList();
+	private int puntosPorParticipacion;
 	
-	public Campania(long id, String fecha, int cupo) {
+	public Campania(long id, String fecha, int cupo, int puntosPorParticipacion) {
 		this.id = id;
 		this.fecha = fecha;
 		this.cupo = cupo;
 		this.estado = "ACTIVA";
+		this.puntosPorParticipacion = puntosPorParticipacion;
 	}
 	
 	public void agregarActividad(Actividad actividad) {
 		actividades.add(actividad);
 	}
 	
-	public void incribirParticipante() {
-		
+	public void inscribirParticipante(Usuario usuario, String fechaInscripcion, Notificador notificador) {
+	    Participacion nuevaParticipacion = new Participacion(fechaInscripcion, usuario, this);
+	    participaciones.add(nuevaParticipacion);
+	    
+	    if (participaciones.size() == cupo) {
+	        notificador.notificar("La campania con ID " + id + " alcanzo su cupo maximo de " + cupo + " participantes.");
+	    }
 	}
 	
 	public void cerrar(Notificador notificador) {
-		this.estado = "CERRADO";
-		notificador.notificar("La acitividad con el ID " + id + 
-							"\nfue cerrada correctamente");
+	    this.estado = "CERRADA";
+	    
+	    for (int i = 0; i < participaciones.size(); i++) {
+	        Usuario participante = participaciones.get(i).getUsuario();
+	        String concepto = "Participacion en campania #" + id;
+	        participante.sumarEcoPuntos(puntosPorParticipacion, concepto, fecha);
+	    }
+	    
+	    notificador.notificar("La campania con ID " + id + " \n"
+	    					+ "ha sido cerrada. \n"
+	    					+ "Se otorgaron eco-puntos a\n"
+	    					+ " " + participaciones.size() + " participantes.");
 	}
 	
 	public void mostrar() {
