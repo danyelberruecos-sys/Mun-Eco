@@ -41,7 +41,7 @@ public class App {
 			System.out.println("||3. Reportes                        ||");
 			System.out.println("||4. Rutas y recoleccion             ||");
 			System.out.println("||5. Campañas ambientales            ||");
-			System.out.println("||6. Eco Puntos y consultas          ||");
+			System.out.println("||6. Eco-puntos y consultas          ||");
 			System.out.println("||7. Indicadores generales           ||");
 			System.out.println("||8. Cargar objetos de prueba        ||");
 			System.out.println("||9. Salir                           ||");
@@ -1273,8 +1273,215 @@ public class App {
 				
 				
 				
-			case 6: 
+			case 6: //Historial y movimientos
+				
+				System.out.println("=======================================");
+				System.out.println("||       ECO-PUNTOS Y CONSULTAS      ||");
+				System.out.println("=======================================");
+				System.out.println("||1. Consultar hisotrial             ||");
+				System.out.println("||2. Consultar ranking de eco-puntos ||");
+				System.out.println("||3. Ver materiales recolectados     ||");
+				System.out.println("||4. Registrar movimiento            ||");
+				System.out.println("=======================================");
+				
+				int accionEcopuntos = 0;
+				
+				do {
+					System.out.println("Ingrese el número de la accion que desee realizar: ");
+					try {
+						accionEcopuntos = sc.nextInt();
+						sc.nextLine();
+						break;
+					}catch(Exception e) {
+						sc.nextLine();
+						System.out.println("Error, valor invalido...");
+					}
+					}while(true);
+				
+				switch(accionEcopuntos) {
+				
+				default:
+					System.out.println("Numero invalido, debe estar entre el 1 y el 4...");
 				break;
+				
+				case 1: // Consultar historial
+				    
+				    Persona personaConsultada = null;
+				    boolean encontradaPersona = false;
+				    
+				    do {
+				        System.out.println("Ingrese el ID de la persona a consultar:");
+				        try {
+				            long idPersona = sc.nextLong();
+				            sc.nextLine();
+				            
+				            for (int i = 0; i < todasPersonas.size(); i++) {
+				                if (todasPersonas.get(i).getId() == idPersona) {
+				                    personaConsultada = todasPersonas.get(i);
+				                    encontradaPersona = true;
+				                    break;
+				                }
+				            }
+				            
+				            if (!encontradaPersona) {
+				                System.out.println("Error, no se encontro una persona con ese ID...");
+				            }
+				            
+				        }catch(Exception e) {
+				            sc.nextLine();
+				            System.out.println("Error, valor invalido...");
+				        }
+				    }while(!encontradaPersona);
+				    
+				    personaConsultada.getHistorial().mostrar();
+				    
+				    break;
+				
+				
+				case 2: // Ranking de eco-puntos
+				    
+				    if (todasPersonas.size() == 0) {
+				        System.out.println("No hay personas registradas...");
+				    }else {
+				        
+				        ArrayList<Persona> ranking = new ArrayList<>(todasPersonas);
+				        
+				        for (int i = 0; i < ranking.size() - 1; i++) {
+				            for (int j = 0; j < ranking.size() - 1 - i; j++) {
+				                if (ranking.get(j).getEcopuntos() < ranking.get(j + 1).getEcopuntos()) {
+				                    Persona temp = ranking.get(j);
+				                    ranking.set(j, ranking.get(j + 1));
+				                    ranking.set(j + 1, temp);
+				                }
+				            }
+				        }
+				        
+				        System.out.println("=======================================");
+				        System.out.println("||      RANKING DE ECO-PUNTOS        ||");
+				        System.out.println("=======================================");
+				        
+				        int topLimite = Math.min(5, ranking.size());
+				        
+				        System.out.println("--- TOP " + topLimite + " ---");
+				        for (int i = 0; i < topLimite; i++) {
+				            System.out.println((i + 1) + ". " + ranking.get(i).getNombre() + " - " + ranking.get(i).getEcopuntos() + " eco-puntos");
+				        }
+				        
+				        if (ranking.size() > topLimite) {
+				            System.out.println("--- RESTO DEL RANKING ---");
+				            for (int i = topLimite; i < ranking.size(); i++) {
+				                System.out.println((i + 1) + ". " + ranking.get(i).getNombre() + " - " + ranking.get(i).getEcopuntos() + " eco-puntos");
+				            }
+				        }
+				        
+				        System.out.println("=======================================");
+				    }
+				    
+				    break;
+				
+				
+			case 3: // Ver materiales recolectados
+			    
+			    if (recolecciones.size() == 0) {
+			        System.out.println("No hay recolecciones registradas...");
+			    }else {
+			        
+			        double totalReciclable = 0;
+			        double totalOrganico = 0;
+			        double totalEspecial = 0;
+			        
+			        for (int i = 0; i < recolecciones.size(); i++) {
+			            ArrayList<Material> materialesRec = recolecciones.get(i).getMateriales();
+			            ArrayList<Double> pesosRec = recolecciones.get(i).getPesos();
+			            
+			            for (int j = 0; j < materialesRec.size(); j++) {
+			                Material m = materialesRec.get(j);
+			                double peso = pesosRec.get(j);
+			                
+			                if (m instanceof MaterialReciclable) {
+			                    totalReciclable += peso;
+			                }else if (m instanceof MaterialOrganico) {
+			                    totalOrganico += peso;
+			                }else if (m instanceof MaterialEspecial) {
+			                    totalEspecial += peso;
+			                }
+			            }
+			        }
+			        
+			        System.out.println("=======================================");
+			        System.out.println("||     MATERIALES RECOLECTADOS       ||");
+			        System.out.println("=======================================");
+			        System.out.println("Reciclable: " + totalReciclable + " kg");
+			        System.out.println("Organico: " + totalOrganico + " kg");
+			        System.out.println("Especial: " + totalEspecial + " kg");
+			        System.out.println("Total general: " + (totalReciclable + totalOrganico + totalEspecial) + " kg");
+			        System.out.println("=======================================");
+			    }
+			    
+			    break;
+				
+			case 4: // Registrar movimiento manual
+			    
+			    Persona personaParaMovimiento = null;
+			    boolean encontradaPersonaMov = false;
+			    
+			    do {
+			        System.out.println("Ingrese el ID de la persona:");
+			        try {
+			            long idPersona = sc.nextLong();
+			            sc.nextLine();
+			            
+			            for (int i = 0; i < todasPersonas.size(); i++) {
+			                if (todasPersonas.get(i).getId() == idPersona) {
+			                    personaParaMovimiento = todasPersonas.get(i);
+			                    encontradaPersonaMov = true;
+			                    break;
+			                }
+			            }
+			            
+			            if (!encontradaPersonaMov) {
+			                System.out.println("Error, no se encontro una persona con ese ID...");
+			            }
+			            
+			        }catch(Exception e) {
+			            sc.nextLine();
+			            System.out.println("Error, valor invalido...");
+			        }
+			    }while(!encontradaPersonaMov);
+			    
+			    int puntosManual = 0;
+			    boolean puntosValidos = false;
+			    
+			    do {
+			        System.out.println("Ingrese la cantidad de eco-puntos a otorgar:");
+			        try {
+			            puntosManual = sc.nextInt();
+			            sc.nextLine();
+			            if (puntosManual > 0) {
+			                puntosValidos = true;
+			            }else {
+			                System.out.println("Error, la cantidad debe ser mayor a cero...");
+			            }
+			        }catch(Exception e) {
+			            sc.nextLine();
+			            System.out.println("Error, valor invalido...");
+			        }
+			    }while(!puntosValidos);
+			    
+			    System.out.println("Ingrese el concepto del movimiento:");
+			    String conceptoManual = sc.nextLine();
+			    
+			    System.out.println("Ingrese la fecha (dd/mm/aaaa):");
+			    String fechaManual = sc.nextLine();
+			    
+			    personaParaMovimiento.sumarEcoPuntos(puntosManual, conceptoManual, fechaManual);
+			    System.out.println("Movimiento registrado correctamente.");
+			    
+			    break;
+				
+			}
+				
+				break; //Hasta aca llega ecopuntos y consultas 
 				
 				
 				

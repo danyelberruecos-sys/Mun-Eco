@@ -58,4 +58,8 @@ public class Recoleccion implements Verificable{
     public long getId() {return id;}
     
     public Reporte getReporteAsociado() {return reporteAsociado;}
+    
+    public ArrayList<Material> getMateriales() { return materiales; }
+    
+    public ArrayList<Double> getPesos() { return pesos; }
 }
