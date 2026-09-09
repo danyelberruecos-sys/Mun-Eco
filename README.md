@@ -1,4 +1,4 @@
-img/Logo%20MunEco.png
+![Logo MunEco](img/Logo%20MunEco.png)
 # MunEco
 ## Descripción
 Sistema de gestión de residuos, campañas ambientales y eco puntos para la Universidad.
