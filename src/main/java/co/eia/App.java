@@ -16,16 +16,16 @@ public class App {
 		VerificadorPunto verificadorPunto = new VerificadorPunto();
 		VerificadorCampania verificadorCampania = new VerificadorCampania();
 		
-		ArrayList <Usuario> usuarios = new ArrayList();
-		ArrayList <Operador> operadores = new ArrayList();
-		ArrayList <Responsable> responsables = new ArrayList();
-		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList();
-		ArrayList <RutaRecoleccion> rutasRecoleccion = new ArrayList();
-		ArrayList <Reporte> reportes =new ArrayList();
-		ArrayList <Persona> todasPersonas = new ArrayList();
-		ArrayList <Recoleccion> recolecciones = new ArrayList();
-		ArrayList <Campania> campanias = new ArrayList();
-		ArrayList<Actividad> actividades = new ArrayList();
+		ArrayList <Usuario> usuarios = new ArrayList<>();
+		ArrayList <Operador> operadores = new ArrayList<>();
+		ArrayList <Responsable> responsables = new ArrayList<>();
+		ArrayList <PuntoEcologico> puntosEcologicos = new ArrayList<>();
+		ArrayList <RutaRecoleccion> rutasRecoleccion = new ArrayList<>();
+		ArrayList <Reporte> reportes =new ArrayList<>();
+		ArrayList <Persona> todasPersonas = new ArrayList<>();
+		ArrayList <Recoleccion> recolecciones = new ArrayList<>();
+		ArrayList <Campania> campanias = new ArrayList<>();
+		ArrayList<Actividad> actividades = new ArrayList<>();
 		
 		
 		System.out.println("=======================================");
@@ -352,6 +352,7 @@ public class App {
 						}catch(Exception e) {
 							sc.nextLine();
 							System.out.println("Valor invalido...");
+							continue;
 						}
 						if (capacidad > 0) {
 							verificado = true;
@@ -979,7 +980,6 @@ public class App {
 					RutaRecoleccion newRuta = new RutaRecoleccion(id,activa);
 					int cantParadas = 1;
 					
-					System.out.println("¿Cuantas paradas tendra la ruta?");
 					do {
 						System.out.println("¿Cuantas paradas tendra la ruta?");
 						try {
@@ -2098,7 +2098,7 @@ public class App {
 				
 				
 			default:
-				System.out.println("Error, numero invalido, debe estar entre el 1 y el 8");
+				System.out.println("Error, numero invalido, debe estar entre el 1 y el 9");
 				break;
 			
 			

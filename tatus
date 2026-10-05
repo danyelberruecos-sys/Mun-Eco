@@ -1,0 +1,42 @@
+* [33m5dc52d6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update logo syntax in README.md
+* [33mfbb7d0c[m Add logo image to README
+*   [33m075d847[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Merge branch 'main' of https://github.com/danyelberruecos-sys/Mun-Eco
+[32m|[m[33m\[m  
+[32m|[m * [33mf1f25b3[m Delete img
+[32m|[m * [33m082a318[m Carpeta para imagenes
+[32m|[m * [33mbced554[m Se hizo el README con los requisitos minimos
+* [33m|[m [33m383f9e6[m Se sube imagen del logo
+[33m|[m[33m/[m  
+* [33m4d139b8[m Se organizo el gitignore
+* [33m3c26a87[m Configuracion gitignore
+* [33m611a569[m Acabamos el codigo como tal, con muchas posibles mejoras
+* [33m3ecb08e[m Clases Actividad, Participacion, Campania y VerificadorCampania
+* [33m6df31cf[m Se acabo puntos-ecologicos y consultas
+* [33mf39d3aa[m Se implemento Historial y MOvimiento a lo que ya teniamos
+* [33m282da2b[m Clases Historial y Movimiento
+* [33m96515b1[m me falto agregar esta correcion en el push anterior
+* [33m2414401[m se completo Punto Ecologico
+* [33ma8f57fa[m Acabo reportes, recoleccion y rutas
+* [33m1307fac[m Hizo la clase reporte y verificador reporte
+* [33m90ecb7a[m Registro de rutas y mostrar rutas, clases rutas, paradas, verificador paradas
+* [33m86d2fb4[m Trabajando en Rutas
+* [33m3e20d08[m Clases material y Punto Ecologico
+* [33md4f3097[m Gestion de personas terminada
+* [33m487f1bd[m Clse Reporte
+* [33ma97452f[m Clase operador
+* [33m75a2a59[m Agregue el .gitignore
+* [33m550b17f[m Inicio clase App + registro usuario
+* [33mb502e90[m Se integro verificacion de codigo
+* [33mb3e32d2[m Reinicio de clases desde 0, Persona
+* [33m99a9464[m Enseñando a ema
+* [33m9bf9964[m Asi quedo hasta antes de ema
+* [33mcbb6cab[m Se arreglo reporte, registro parada y punto ecologico
+* [33m28931ca[m registro reporte pero le falta
+* [33m30e3129[m Se agrego verificador de id y codigos unicos
+* [33mf8db9b5[m se agrego mostrar
+* [33m00afaf3[m Menu registro iniciado
+* [33m3a97f65[m Creo clase app
+* [33m3f7d83e[m Se subieron todas la clases con sus atributos, faltan metodos
+* [33mf7fd693[m Ahora si se pone campania y actividad
+* [33m33ac0db[m Se agrega campania y actividad
+* [33mce5a46f[m Primer commit de MunEco
