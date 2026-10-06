@@ -1,31 +1,25 @@
 package co.edu.eia.ecocampus.servicio;
 
-import java.util.ArrayList;
+import co.edu.eia.ecocampus.excepcion.*;
+import co.edu.eia.ecocampus.repositorio.*;
 
-import co.edu.eia.ecocampus.modelo.Identificable;
 
 public class Verificador {
 	
-	public boolean verificarUnico(long id,  ArrayList<? extends Identificable> lista) {
-		boolean unico = true;
-		for (int i = 0; i < lista.size();i++) {
-			if (id == lista.get(i).getId()) {
-				unico = false;
-			}
+	public void verificarId(long id) throws DatoInvalidoException, DuplicadoException {
+		if (id <= 0) {
+			throw new DatoInvalidoException("El ID debe ser mayor a cero");
 		}
-		if (unico) {return true;}
-		else {
-			System.out.println("Error, el ID ya esta en uso");
-			return false;}
+		if(RepositorioMemoria.idExistenteEnTodos(id)) {
+			throw new DuplicadoException("El ID ya esta en uso, intente con uno distinto");
+		}
 	}
 	
-	public boolean verificarLongitud(long id) {
-		int cantidadDigitos = String.valueOf(id).length();
-		if(cantidadDigitos == 10) {
-			return true;
-		}else {
-			System.out.println("Error, la longitud del ID debe ser de 10 digitos...");
-			return false;}
+
+	public void verificarTextoObligatorio(String texto, String campo) throws DatoInvalidoException {
+		if (texto == null || texto.trim().isEmpty()) {
+			throw new DatoInvalidoException (campo + "es obligatorio. ");
+		}
 	}
 
 }
