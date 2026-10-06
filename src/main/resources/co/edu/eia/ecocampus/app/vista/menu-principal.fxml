@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" styleClass="raiz" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.controlador.MenuPrincipalController">
+   <left>
+      <VBox prefHeight="260.0" prefWidth="260.0" styleClass="barra-lateral" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="TOP_LEFT" contentDisplay="TOP" styleClass="marca-titulo" text="MunEco" textFill="#1972c5">
+               <font>
+                  <Font name="Times New Roman Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label styleClass="marca-subtitulo" text="Ecocampus circular" textFill="#1972c5">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Button id="botonInicio" fx:id="botonInicio" mnemonicParsing="false" onAction="#abrirInicio" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Inicio">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Label styleClass="seccion-menu" text="Gestión" textFill="#1972c5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button id="botonInicio" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#abrirPersonas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Personas" textFill="#0c7943">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#abrirPuntos" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Puntos Ecológicos">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="138.0" mnemonicParsing="false" onAction="#abrirReportes" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Reportes">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#abrirRutas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Rutas y recolección">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="138.0" mnemonicParsing="false" onAction="#abrirCampanias" prefHeight="25.0" prefWidth="260.0" styleClass="boton-menu, activo" text="Campañas ambientales">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="10.0" layoutY="87.0" styleClass="seccion-menu" text="Análisis" textFill="#1972c5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button id="botonInicio" layoutX="10.0" layoutY="214.0" mnemonicParsing="false" onAction="#abrirConsultas" prefHeight="25.0" prefWidth="260.0" styleClass="boton-menu, activo" text="Eco-Puntos y consultas">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="265.0" mnemonicParsing="false" onAction="#abrirIndicadores" prefHeight="25.0" prefWidth="260.0" styleClass="boton-menu, activo" text="Indicadores generales">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="10.0" layoutY="239.0" styleClass="seccion-menu" text="Sistema" textFill="#1972c5">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button id="botonInicio" fx:id="botonCargarDatos" layoutX="10.0" layoutY="265.0" mnemonicParsing="false" onAction="#cargarDatosPrueba" prefHeight="25.0" prefWidth="260.0" styleClass="boton-menu, activo" text="Cargar datos">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="342.0" mnemonicParsing="false" onAction="#salir" prefHeight="25.0" prefWidth="260.0" text="Salir">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="boton-menu" />
+                  <String fx:value=" activo" />
+               </styleClass>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="barra-superior" BorderPane.alignment="CENTER">
+               <children>
+                  <Label styleClass="titulo-seccion" text="   Inicio" textFill="#1972c5">
+                     <font>
+                        <Font name="Times New Roman" size="30.0" />
+                     </font>
+                  </Label>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="estadoDatos" styleClass="estado-datos, estado-pendiente" text="Datos de prueba: Sin cargar     ">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <StackPane fx:id="contenido" prefHeight="150.0" prefWidth="200.0" styleClass="contenido" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="pnatllaInicio" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="titulo-bienvenida" stylesheets="@../estilos/estilos.css">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/Logo.png" />
+                           </image>
+                        </ImageView>
+                        <Label styleClass="titulo-bienvenida" text="Bienvenido a MunEco">
+                           <font>
+                              <Font name="Times New Roman" size="31.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="texto-secundario" text="Gestión de residuos y eco-puntos del campus">
+                           <font>
+                              <Font name="Times New Roman" size="31.0" />
+                           </font>
+                        </Label>
+                        <Label contentDisplay="CENTER" layoutX="150.0" layoutY="315.0" prefHeight="84.0" prefWidth="733.0" styleClass="texto-secundario" text="Seleccione una opción del menú o cargue los datos de prueba para empezar." wrapText="true">
+                           <font>
+                              <Font name="Times New Roman" size="31.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
