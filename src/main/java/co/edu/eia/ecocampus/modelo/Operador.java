@@ -8,9 +8,8 @@ public class Operador extends PersonalOperativo {
 	}
 	
 	@Override
-	public void mostrar() {
-		super.mostrar();
-		System.out.println("=======================================");
+	public String getRol() {
+	    return "Operador";
 	}
 
 }

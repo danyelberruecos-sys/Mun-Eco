@@ -1,11 +1,16 @@
 package co.edu.eia.ecocampus.app.controlador;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
+import co.edu.eia.ecocampus.servicio.ServicioPersona;
+import co.edu.eia.ecocampus.util.Alertas;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -22,19 +27,29 @@ public class MenuPrincipalController {
     @FXML private VBox pantallaInicio;
     @FXML private Button botonInicio;
     @FXML private Button botonCargarDatos;
+    @FXML private Button botonPersonas;
 
     private CargadorDatos cargador;
     private Button botonActivo;
+    private ServicioPersona servicioPersona;
 
     
     @FXML
     private void initialize() {
         botonActivo = botonInicio;
+        
+        if (botonPersonas != null) {
+            botonPersonas.setOnAction(this::abrirPersonas);
+        }
     }
 
 
     public void setCargador(CargadorDatos cargador) {
         this.cargador = cargador;
+    }
+    
+    public void setServicioPersona(ServicioPersona servicioPersona) {
+        this.servicioPersona = servicioPersona;
     }
 
    
@@ -48,7 +63,23 @@ public class MenuPrincipalController {
     @FXML
     private void abrirPersonas(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Gestión de personas");
+        tituloSeccion.setText("Gestión de personas");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/personas.fxml"));
+            Parent pantalla = loader.load();
+
+            PersonasController controlador = loader.getController();
+            if (controlador != null && servicioPersona != null) {
+                controlador.setServicio(servicioPersona);
+            }
+
+            contenido.getChildren().setAll(pantalla);
+        } catch (Exception e) { // Cambiado de IOException a Exception para ver todo
+            e.printStackTrace();
+            Alertas.error("Error al abrir personas: " + e.getMessage());
+        }
     }
 
     @FXML

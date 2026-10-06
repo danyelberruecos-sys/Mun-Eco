@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" styleClass="raiz" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.controlador.MenuPrincipalController">
    <left>
       <VBox prefHeight="260.0" prefWidth="260.0" styleClass="barra-lateral" BorderPane.alignment="CENTER">
@@ -37,7 +36,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Button id="botonInicio" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#abrirPersonas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Personas" textFill="#0c7943">
+            <Button id="botonInicio" fx:id="botonPersonas" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#abrirPersonas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Personas" textFill="#0c7943">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
@@ -104,7 +103,7 @@
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="barra-superior" BorderPane.alignment="CENTER">
                <children>
-                  <Label styleClass="titulo-seccion" text="   Inicio" textFill="#1972c5">
+                  <Label fx:id="tituloSeccion" styleClass="titulo-seccion" text="   Inicio" textFill="#1972c5">
                      <font>
                         <Font name="Times New Roman" size="30.0" />
                      </font>

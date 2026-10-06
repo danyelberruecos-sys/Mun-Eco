@@ -9,9 +9,7 @@ public class Responsable extends PersonalOperativo {
 	}
 	
 	@Override
-	public void mostrar() {
-		super.mostrar();
-		System.out.println("Area responsabilidad: " + areaReponsabilidad);
-		System.out.println("=======================================");
+	public String getRol() {
+	    return "Responsable";
 	}
 }

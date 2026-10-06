@@ -30,5 +30,7 @@ public abstract class Persona implements Identificable {
 	public int getEcopuntos() {return historial.getEcopuntosTotales();}
 	public Historial getHistorial() {return historial;}
 	
-	public abstract void mostrar();
+
+	
+	public abstract String getRol();
 }
