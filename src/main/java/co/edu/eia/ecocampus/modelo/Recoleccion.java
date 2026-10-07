@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Recoleccion implements Identificable{
 	
     private long id;
-    private ArrayList <Material> materiales = new ArrayList();
-    private ArrayList <Double> pesos = new ArrayList();
+    private ArrayList <Material> materiales = new ArrayList<>();
+    private ArrayList <Double> pesos = new ArrayList<>();
     private String observaciones;
     private Operador operadorResponsable;
     private Reporte reporteAsociado;
@@ -32,19 +32,7 @@ public class Recoleccion implements Identificable{
         return total;
     }
     
-    public void mostrar() {
-        System.out.println("=======================================");
-        System.out.println("ID: " + id);
-        System.out.println("Operador responsable: " + operadorResponsable.getNombre());
-        System.out.println("Reporte asociado: " + reporteAsociado.getId());
-        System.out.println("Observaciones: " + observaciones);
-        System.out.println("Materiales recolectados:");
-        for (int i = 0; i < materiales.size(); i++) {
-            System.out.println("-" + materiales.get(i).getNombre() + ": " + pesos.get(i) + " kg");
-        }
-        System.out.println("Peso total: " + getPesoTotal() + " kg");
-        System.out.println("=======================================");
-    }
+
     
  
     public int calcularEcoPuntos() {

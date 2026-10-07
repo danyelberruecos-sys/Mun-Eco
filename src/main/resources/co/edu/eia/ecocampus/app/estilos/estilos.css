@@ -208,3 +208,38 @@
 .tab:selected .tab-label {
     -fx-text-fill: #14352a;
 }
+.boton-peligro {
+    -fx-background-color: #b3392f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 9 20 9 20;
+    -fx-cursor: hand;
+}
+
+.boton-peligro:hover {
+    -fx-background-color: #8f2c24;
+}
+.panel-tabla {
+    -fx-padding: 24;
+    -fx-spacing: 12;
+}
+.table-view {
+    -fx-font-size: 14px;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+.table-cell {
+    -fx-wrap-text: true;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 4 8 4 8;
+}
+
+.table-row-cell {
+    -fx-cell-size: 56px;
+}

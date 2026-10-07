@@ -4,6 +4,7 @@ import co.edu.eia.ecocampus.excepcion.EcoCampusException;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.util.Alertas;
+import co.edu.eia.ecocampus.util.Conversor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -109,7 +110,7 @@ public class PersonasController {
     @FXML
     private void registrarResponsable() {
         try {
-            long id = Long.parseLong(campoIdResponsable.getText().trim());
+            long id = Conversor.aLong(campoId.getText(), "El ID");
             servicio.registrarResponsable(id, campoCorreoResponsable.getText(),
                     campoNombreResponsable.getText(), checkDisponibleResponsable.isSelected(),
                     campoAccionesResponsable.getText(), campoAreaResponsable.getText());
@@ -118,9 +119,7 @@ public class PersonasController {
             limpiarResponsable();
             
             actualizarTabla();
-
-        } catch (NumberFormatException e) {
-            Alertas.error("El ID debe ser un número entero.");
+            
         } catch (EcoCampusException e) {
             Alertas.error(e.getMessage());
         }

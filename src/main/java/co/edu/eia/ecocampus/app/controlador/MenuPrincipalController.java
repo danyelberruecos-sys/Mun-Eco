@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
+import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
 import co.edu.eia.ecocampus.util.Alertas;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,6 +33,7 @@ public class MenuPrincipalController {
     private CargadorDatos cargador;
     private Button botonActivo;
     private ServicioPersona servicioPersona;
+    private ServicioPuntoEcologico servicioPunto;
 
     
     @FXML
@@ -50,6 +52,10 @@ public class MenuPrincipalController {
     
     public void setServicioPersona(ServicioPersona servicioPersona) {
         this.servicioPersona = servicioPersona;
+    }
+    
+    public void setServicioPunto(ServicioPuntoEcologico servicioPunto) {
+        this.servicioPunto = servicioPunto;
     }
 
    
@@ -85,7 +91,20 @@ public class MenuPrincipalController {
     @FXML
     private void abrirPuntos(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Puntos ecológicos");
+        tituloSeccion.setText("Puntos ecológicos");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/puntos-ecologicos.fxml"));
+            Parent pantalla = loader.load();
+
+            PuntosEcologicosController controlador = loader.getController();
+            controlador.setServicio(servicioPunto);
+
+            contenido.getChildren().setAll(pantalla);
+        } catch (IOException e) {
+            Alertas.error("No se pudo abrir la pantalla de puntos ecológicos.");
+        }
     }
 
     @FXML

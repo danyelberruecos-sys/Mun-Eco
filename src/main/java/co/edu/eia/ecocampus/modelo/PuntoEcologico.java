@@ -9,7 +9,7 @@ public class PuntoEcologico implements Identificable {
 	private int capacidad;
 	private boolean lleno;
 	private boolean activo; 
-	private ArrayList <Material> materialesAdmitidos = new ArrayList();
+	private ArrayList <Material> materialesAdmitidos = new ArrayList<>();
 	
 	public PuntoEcologico(long id, String ubicacion, int capacidad, boolean lleno, boolean activo) {
 		this.id = id;
@@ -25,32 +25,36 @@ public class PuntoEcologico implements Identificable {
 	
 	public long getId() {return id;}
 	
-	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("ID: " + id);
-		System.out.println("Ubicacion: " + ubicacion );
-		System.out.println("Capacidad: " + capacidad);
-		if (lleno) {
-			System.out.println("El punto ecologico esta lleno");
-		}else {System.out.println("El punto ecologico aun tinene capacidad");}
-		if (activo) {
-			System.out.println("El punto ecologico esta activo");
-		}else {System.out.println("El punto ecologico esta inactivo");}
-		System.out.println("Materiales: ");
-		for (int i = 0; i < materialesAdmitidos.size();i++) {
-			System.out.println("-"+ materialesAdmitidos.get(i).getNombre());
-		}
-		System.out.println("=======================================");
-	}
+
 	
 	public void inactivar(Notificador notificador) {
 		this.activo = false;
 		notificador.notificar("El punto ecologico de ID " + id + " \nse cerro correctamente");
 	}
 	
+	public int getCapacidad() {return capacidad;}
+	
 	public String getUbicacion() {return ubicacion;}
 	
 	public boolean getActivo() {return activo;}
 	
+	public String getEstadoTexto() {
+	    return activo ? "Activo" : "Inactivo";
+	}
+
+	public String getLlenoTexto() {
+	    return lleno ? "Sí" : "No";
+	}
+
+	public String getMaterialesTexto() {
+	    String texto = "";
+	    for (int i = 0; i < materialesAdmitidos.size(); i++) {
+	        if (i > 0) {
+	            texto = texto + ", ";
+	        }
+	        texto = texto + materialesAdmitidos.get(i).getNombre();
+	    }
+	    return texto;
+	}
 
 }

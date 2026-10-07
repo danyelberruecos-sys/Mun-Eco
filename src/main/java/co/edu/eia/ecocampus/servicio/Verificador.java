@@ -21,5 +21,11 @@ public class Verificador {
 			throw new DatoInvalidoException (campo + "es obligatorio. ");
 		}
 	}
+	
+	public void verificarPositivo(double valor, String campo) throws DatoInvalidoException {
+	    if (valor <= 0) {
+	        throw new DatoInvalidoException(campo + " debe ser mayor a cero.");
+	    }
+	}
 
 }

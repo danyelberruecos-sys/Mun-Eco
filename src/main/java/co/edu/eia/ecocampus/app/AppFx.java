@@ -3,6 +3,7 @@ package co.edu.eia.ecocampus.app;
 import co.edu.eia.ecocampus.app.controlador.MenuPrincipalController;
 import co.edu.eia.ecocampus.modelo.Actividad;
 import co.edu.eia.ecocampus.modelo.Campania;
+import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.PuntoEcologico;
 import co.edu.eia.ecocampus.modelo.Recoleccion;
@@ -12,7 +13,9 @@ import co.edu.eia.ecocampus.patron.NotificadorProvisional;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
+import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
 import co.edu.eia.ecocampus.servicio.Verificador;
+import co.edu.eia.ecocampus.servicio.VerificadorPunto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,9 +37,13 @@ public class AppFx extends Application {
     	RepositorioMemoria<Actividad> actividades = new RepositorioMemoria<>();
 
         // 2. Cargador de datos de prueba
-        CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, new NotificadorProvisional());
+    	Notificador notificador = new NotificadorProvisional();
+        CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, notificador);
         Verificador verificador = new Verificador();
+        VerificadorPunto verificadorPunto = new VerificadorPunto();
         ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
+        ServicioPuntoEcologico servicioPunto = new ServicioPuntoEcologico(puntos, reportes, verificador, verificadorPunto, notificador);
+     
         
         
         // 3. Cargar la pantalla del menu principal
@@ -48,7 +55,7 @@ public class AppFx extends Application {
         MenuPrincipalController controlador = loader.getController();
         controlador.setCargador(cargador);
         controlador.setServicioPersona(servicioPersona);
-        
+        controlador.setServicioPunto(servicioPunto);
         
         // 5. Mostrar la ventana
         ventana.setTitle("MunEco");
