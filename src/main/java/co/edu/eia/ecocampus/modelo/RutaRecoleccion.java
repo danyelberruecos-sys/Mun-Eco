@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class RutaRecoleccion implements Identificable {
 	
-	private ArrayList <Parada> paradas = new ArrayList();
+	private ArrayList <Parada> paradas = new ArrayList<>();
 	private long id;
 	private boolean activa;
 	
@@ -26,31 +26,18 @@ public class RutaRecoleccion implements Identificable {
 	}
 	
 	public void cerrar(Notificador notificador) {
-		
-		String mensaje = "Se cerro con exito a ruta con el siguiente ID:\n" + id;
-		
-		if (activa) {
-			activa = false;
-			notificador.notificar(mensaje);
-		}else {
-			System.out.println("Error, la ruta de recoleccion ya estaba cerrada...");
-		}
+	    if (activa) {
+	        activa = false;
+	        notificador.notificar("Se cerró con éxito la ruta con el siguiente ID:\n" + id);
+	    }
 	}
 	
-	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("ID: " + id);
-		if (activa) {
-			System.out.println("La ruta de recoleccion esta activa");
-		}else {
-			System.out.println("La ruta de recoleccion esta cerrada");
-		}
-		System.out.println("Paradas:");
-		for (int i = 0; i < paradas.size();i++) {
-			System.out.println("-" + paradas.get(i).mostrar());
-		}
-		System.out.println("=======================================");
+	public String getEstadoTexto() {
+	    return activa ? "Activa" : "Cerrada";
+	}
 
+	public int getCantidadParadas() {
+	    return paradas.size();
 	}
 
 }

@@ -22,4 +22,10 @@ public class Parada {
 	
 	public int getOrden() {return orden;}
 	
+	public String getUbicacionPunto() {
+	    return puntoEcologico.getUbicacion();
+	}
+	
+	public String getAccionEsperada() {return accionEsperada;}
+	
 }

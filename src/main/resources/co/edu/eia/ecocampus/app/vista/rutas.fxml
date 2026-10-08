@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../estilos/estilos.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.controlador.RutasController">
+  <tabs>
+    <Tab text="Registrar ruta">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox layoutX="10.0" layoutY="-2.0" prefHeight="363.0" prefWidth="575.0" spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="14.0" />
+                     </padding>
+                     <children>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="309.0" prefWidth="320.0" spacing="8.0">
+                           <children>
+                              <Label styleClass="titulo-seccion" text="Datos de la ruta" />
+                              <Label styleClass="etiqueta-campo" text="ID de la ruta" />
+                              <TextField fx:id="campoIdRuta" />
+                              <CheckBox fx:id="checkRutaActiva" mnemonicParsing="false" text="La ruta esta activa" />
+                              <Label layoutX="10.0" layoutY="46.0" styleClass="etiqueta-campo" text="Agregar parada" />
+                              <Label layoutX="10.0" layoutY="125.0" styleClass="etiqueta-campo" text="Orden" />
+                              <TextField fx:id="campoOrden" layoutX="10.0" layoutY="69.0" />
+                              <Label layoutX="10.0" layoutY="149.0" styleClass="etiqueta-campo" text="Acción esperada" />
+                              <TextField fx:id="campoAccion" layoutX="10.0" layoutY="172.0" />
+                              <Label layoutX="10.0" layoutY="203.0" styleClass="etiqueta-campo" text="Punto ecológico" />
+                              <ComboBox fx:id="comboPunto" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+                              <Button mnemonicParsing="false" onAction="#agregarParada" styleClass="boton-secundario" text="Agregar parada" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="337.0" prefWidth="221.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="titulo-seccion" text="Paradas de la ruta" />
+                              <TableView fx:id="tablaParadasNuevas" prefHeight="249.0" prefWidth="203.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn fx:id="colOrdenNueva" prefWidth="75.0" text="Orden" />
+                                  <TableColumn fx:id="colAccionNueva" prefWidth="75.0" text="Accion" />
+                                    <TableColumn fx:id="colPuntoNueva" prefWidth="75.0" text="Punto ecológico" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <VBox prefHeight="87.0" prefWidth="203.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#quitarParada" styleClass="boton-secundario" text="Quitar parada" />
+                                    <Region prefHeight="15.0" prefWidth="203.0" />
+                                    <Button mnemonicParsing="false" onAction="#registrarRuta" styleClass="boton-primario" text="Registrar ruta" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Ver rutas">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutY="-19.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="388.0" prefWidth="585.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="titulo-seccion" text="Rutas de recolección" />
+                        <TableView fx:id="tablaRutas" onMouseClicked="#mostrarParadas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colIdRuta" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="colEstadoRuta" prefWidth="75.0" text="Estado" />
+                              <TableColumn fx:id="colCantParadas" prefWidth="75.0" text="Paradas" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label styleClass="titulo-seccion" text="Paradas de la ruta seleccionada" />
+                        <TableView fx:id="tablaParadasRuta" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="colOrdenParada" prefWidth="75.0" text="Orden" />
+                            <TableColumn fx:id="colAccionParada" prefWidth="75.0" text="Accion" />
+                              <TableColumn fx:id="colPuntoParada" prefWidth="75.0" text="Punto ecológico" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" />
+                              <Button mnemonicParsing="false" onAction="#actualizarTabla" styleClass="boton-secundario" text="Actualizar" />
+                              <Button mnemonicParsing="false" onAction="#cerrarRuta" styleClass="boton-peligro" text="Cerrar ruta" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

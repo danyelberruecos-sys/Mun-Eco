@@ -56,5 +56,10 @@ public class PuntoEcologico implements Identificable {
 	    }
 	    return texto;
 	}
+	
+	@Override
+	public String toString() {
+	    return ubicacion + " (" + id + ")";
+	}
 
 }

@@ -20,7 +20,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="165.0" layoutY="30.0" prefHeight="301.0" prefWidth="267.0" spacing="8.0" styleClass="formulario">
+                  <VBox layoutX="165.0" layoutY="30.0" prefHeight="301.0" prefWidth="267.0" spacing="8.0" styleClass="formulario" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label styleClass="etiqueta-campo" text="ID" />
                         <TextField fx:id="campoId" />
@@ -41,7 +41,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="167.0" layoutY="17.0" prefHeight="253.0" prefWidth="266.0" spacing="8.0" styleClass="formulario">
+                  <VBox layoutX="167.0" layoutY="17.0" prefHeight="253.0" prefWidth="266.0" spacing="8.0" styleClass="formulario" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label styleClass="etiqueta-campo" text="ID" />
                         <TextField fx:id="campoIdOperador" />
@@ -62,7 +62,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="167.0" prefHeight="253.0" prefWidth="266.0" spacing="8.0" styleClass="formulario">
+                  <VBox layoutX="167.0" prefHeight="253.0" prefWidth="266.0" spacing="8.0" styleClass="formulario" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label styleClass="etiqueta-campo" text="ID" />
                         <TextField fx:id="campoIdResponsable" />
@@ -77,6 +77,9 @@
                         <TextField fx:id="campoAreaResponsable" layoutX="10.0" layoutY="222.0" />
                         <Button mnemonicParsing="false" onAction="#registrarResponsable" styleClass="boton-primario" text="Registrar responsable" />
                      </children>
+                     <padding>
+                        <Insets bottom="23.0" left="23.0" right="23.0" top="23.0" />
+                     </padding>
                   </VBox>
                </children>
             </AnchorPane>
@@ -86,7 +89,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="38.0" layoutY="34.0" prefHeight="302.0" prefWidth="534.0" spacing="12.0">
+                  <VBox layoutX="38.0" layoutY="34.0" prefHeight="302.0" prefWidth="534.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                      </padding>

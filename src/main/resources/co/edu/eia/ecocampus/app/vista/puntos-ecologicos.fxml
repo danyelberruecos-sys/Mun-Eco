@@ -20,31 +20,35 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="41.0" layoutY="29.0" prefHeight="301.0" prefWidth="223.0" spacing="8.0" styleClass="formulario">
+                  <HBox prefHeight="357.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label styleClass="etiqueta-campo" text="ID" />
-                        <TextField fx:id="campoIdPunto" prefHeight="5.0" prefWidth="65.0" />
-                        <Label layoutX="34.0" layoutY="34.0" styleClass="etiqueta-campo" text="Ubicación" />
-                        <TextField fx:id="campoUbicacion" layoutX="34.0" layoutY="57.0" prefHeight="5.0" prefWidth="65.0" />
-                        <Label layoutX="34.0" layoutY="99.0" styleClass="etiqueta-campo" text="Capacidad (kg)" />
-                        <TextField fx:id="campoCapacidad" layoutX="34.0" layoutY="123.0" prefHeight="5.0" prefWidth="65.0" />
-                        <CheckBox fx:id="checkLleno" mnemonicParsing="false" text="El punto esta lleno" />
-                        <CheckBox fx:id="checkActivo" mnemonicParsing="false" text="El punto esta activo" />
+                        <VBox prefHeight="301.0" prefWidth="223.0" spacing="8.0" styleClass="formulario" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="etiqueta-campo" text="ID" />
+                              <TextField fx:id="campoIdPunto" prefHeight="5.0" prefWidth="65.0" />
+                              <Label layoutX="34.0" layoutY="34.0" styleClass="etiqueta-campo" text="Ubicación" />
+                              <TextField fx:id="campoUbicacion" layoutX="34.0" layoutY="57.0" prefHeight="5.0" prefWidth="65.0" />
+                              <Label layoutX="34.0" layoutY="99.0" styleClass="etiqueta-campo" text="Capacidad (kg)" />
+                              <TextField fx:id="campoCapacidad" layoutX="34.0" layoutY="123.0" prefHeight="5.0" prefWidth="65.0" />
+                              <CheckBox fx:id="checkLleno" mnemonicParsing="false" text="El punto esta lleno" />
+                              <CheckBox fx:id="checkActivo" mnemonicParsing="false" text="El punto esta activo" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="285.0" prefWidth="233.0" spacing="8.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="etiqueta-campo" text="Materiales que admite" />
+                              <Region prefHeight="13.0" prefWidth="233.0" />
+                              <CheckBox fx:id="checkReciclable" mnemonicParsing="false" text="Reciclable" />
+                              <Region layoutX="10.0" layoutY="72.0" prefHeight="13.0" prefWidth="233.0" />
+                              <CheckBox fx:id="checkOrganico" mnemonicParsing="false" text="Organico" />
+                              <Region layoutX="10.0" layoutY="55.0" prefHeight="13.0" prefWidth="233.0" />
+                              <CheckBox fx:id="checkEspecial" mnemonicParsing="false" text="Especial" />
+                              <Region layoutX="10.0" layoutY="85.0" prefHeight="26.0" prefWidth="233.0" />
+                              <Button mnemonicParsing="false" onAction="#registrarPunto" styleClass="boton-primario" text="Registrar punto ecologico" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox layoutX="332.0" layoutY="52.0" prefHeight="285.0" prefWidth="233.0">
-                     <children>
-                        <Label styleClass="etiqueta-campo" text="Materiales que admite" />
-                        <Region prefHeight="13.0" prefWidth="233.0" />
-                        <CheckBox fx:id="checkReciclable" mnemonicParsing="false" text="Reciclable" />
-                        <Region layoutX="10.0" layoutY="25.0" prefHeight="13.0" prefWidth="233.0" />
-                        <CheckBox fx:id="checkOrganico" mnemonicParsing="false" text="Organico" />
-                        <Region layoutX="10.0" layoutY="55.0" prefHeight="13.0" prefWidth="233.0" />
-                        <CheckBox fx:id="checkEspecial" mnemonicParsing="false" text="Especial" />
-                        <Region layoutX="10.0" layoutY="85.0" prefHeight="26.0" prefWidth="233.0" />
-                        <Button mnemonicParsing="false" onAction="#registrarPunto" styleClass="boton-primario" text="Registrar punto ecologico" />
-                     </children>
-                  </VBox>
+                  </HBox>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -52,7 +56,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="13.0" layoutY="31.0" prefHeight="316.0" prefWidth="582.0" spacing="12.0" styleClass="panel-tabla">
+                  <VBox layoutX="13.0" layoutY="31.0" prefHeight="316.0" prefWidth="582.0" spacing="12.0" styleClass="panel-tabla" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
                      </padding>

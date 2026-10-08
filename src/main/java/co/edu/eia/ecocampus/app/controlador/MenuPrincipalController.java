@@ -6,6 +6,7 @@ import java.util.Optional;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
+import co.edu.eia.ecocampus.servicio.ServicioRuta;
 import co.edu.eia.ecocampus.util.Alertas;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -31,9 +33,14 @@ public class MenuPrincipalController {
     @FXML private Button botonPersonas;
 
     private CargadorDatos cargador;
+    
     private Button botonActivo;
+    
     private ServicioPersona servicioPersona;
     private ServicioPuntoEcologico servicioPunto;
+    private ServicioRuta servicioRuta;
+
+    
 
     
     @FXML
@@ -56,6 +63,10 @@ public class MenuPrincipalController {
     
     public void setServicioPunto(ServicioPuntoEcologico servicioPunto) {
         this.servicioPunto = servicioPunto;
+    }
+    
+    public void setServicioRuta(ServicioRuta servicioRuta) {
+        this.servicioRuta = servicioRuta;
     }
 
    
@@ -81,7 +92,7 @@ public class MenuPrincipalController {
                 controlador.setServicio(servicioPersona);
             }
 
-            contenido.getChildren().setAll(pantalla);
+            mostrarPantalla(pantalla);
         } catch (Exception e) { // Cambiado de IOException a Exception para ver todo
             e.printStackTrace();
             Alertas.error("Error al abrir personas: " + e.getMessage());
@@ -101,7 +112,7 @@ public class MenuPrincipalController {
             PuntosEcologicosController controlador = loader.getController();
             controlador.setServicio(servicioPunto);
 
-            contenido.getChildren().setAll(pantalla);
+            mostrarPantalla(pantalla);
         } catch (IOException e) {
             Alertas.error("No se pudo abrir la pantalla de puntos ecológicos.");
         }
@@ -116,7 +127,21 @@ public class MenuPrincipalController {
     @FXML
     private void abrirRutas(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Rutas y recolección");
+        tituloSeccion.setText("Rutas y recolección");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/rutas.fxml"));
+            Parent pantalla = loader.load();
+
+            RutasController controlador = loader.getController();
+            controlador.setServicio(servicioRuta);
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de rutas.\n" + e.getMessage());
+        }
     }
 
     @FXML
@@ -201,5 +226,14 @@ public class MenuPrincipalController {
         alerta.setTitle("MunEco");
         alerta.setHeaderText(titulo);
         alerta.showAndWait();
+    }
+    
+    private void mostrarPantalla(Parent pantalla) {
+        if (pantalla instanceof Region) {
+            Region region = (Region) pantalla;
+            region.setMaxWidth(Double.MAX_VALUE);
+            region.setMaxHeight(Double.MAX_VALUE);
+        }
+        contenido.getChildren().setAll(pantalla);
     }
 }

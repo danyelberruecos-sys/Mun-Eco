@@ -14,7 +14,9 @@ import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
+import co.edu.eia.ecocampus.servicio.ServicioRuta;
 import co.edu.eia.ecocampus.servicio.Verificador;
+import co.edu.eia.ecocampus.servicio.VerificadorParada;
 import co.edu.eia.ecocampus.servicio.VerificadorPunto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -39,11 +41,14 @@ public class AppFx extends Application {
         // 2. Cargador de datos de prueba
     	Notificador notificador = new NotificadorProvisional();
         CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, notificador);
+        
         Verificador verificador = new Verificador();
         VerificadorPunto verificadorPunto = new VerificadorPunto();
+        VerificadorParada verificadorParada = new VerificadorParada();
+        
         ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
         ServicioPuntoEcologico servicioPunto = new ServicioPuntoEcologico(puntos, reportes, verificador, verificadorPunto, notificador);
-     
+        ServicioRuta servicioRuta = new ServicioRuta(rutas, puntos, verificador,verificadorParada, notificador);
         
         
         // 3. Cargar la pantalla del menu principal
@@ -56,6 +61,7 @@ public class AppFx extends Application {
         controlador.setCargador(cargador);
         controlador.setServicioPersona(servicioPersona);
         controlador.setServicioPunto(servicioPunto);
+        controlador.setServicioRuta(servicioRuta);
         
         // 5. Mostrar la ventana
         ventana.setTitle("MunEco");
