@@ -71,10 +71,36 @@ public class Reporte implements Identificable{
     
     public Persona getAutor() { return autor; }
     
-    public int getPrioridad() { return prioridad; }
+    public String getPrioridadTexto() {
+        if (prioridad == 1) {
+            return "Baja";
+        }
+        if (prioridad == 2) {
+            return "Media";
+        }
+        return "Alta";
+    }
     
     public Operador getOperadorAsignado() { return operadorAsignado; }
     
     public String getFecha() {return fecha;}
+    
+    public String getAutorNombre() {
+        return autor.getNombre();
+    }
+    
+    public String getUbicacionPunto() {
+        return puntoEcologico.getUbicacion();
+    }
+    
+    public String getAsignadoA() {
+        if (operadorAsignado != null) {
+            return "Operador: " + operadorAsignado.getNombre();
+        }
+        if (rutaAsignada != null) {
+            return "Ruta: " + rutaAsignada.getId();
+        }
+        return "Sin asignar";
+    }
 		
 }

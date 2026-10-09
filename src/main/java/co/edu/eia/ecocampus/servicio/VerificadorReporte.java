@@ -1,5 +1,6 @@
 package co.edu.eia.ecocampus.servicio;
 
+import co.edu.eia.ecocampus.excepcion.OperacionNoPermitidaException;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.PuntoEcologico;
 import co.edu.eia.ecocampus.modelo.Reporte;
@@ -7,76 +8,55 @@ import co.edu.eia.ecocampus.modelo.RutaRecoleccion;
 
 public class VerificadorReporte {
 
-	
-    public boolean verificarPuntoActivo(PuntoEcologico punto) {
-        if (punto.getActivo()) {
-            return true;
-        } else {
-            System.out.println("Error, no se puede registrar un reporte sobre un punto inactivo...");
-            return false;
+    public void verificarPuntoActivo(PuntoEcologico punto) throws OperacionNoPermitidaException {
+        if (!punto.getActivo()) {
+            throw new OperacionNoPermitidaException(
+                    "No se puede registrar un reporte sobre un punto inactivo.");
         }
     }
-    
-    
-    public boolean verificarOperadorDisponible(Operador operador) {
-        if (operador.getDisponible()) {
-            return true;
-        } else {
-            System.out.println("Error, el operador seleccionado no esta disponible...");
-            return false;
+
+    public void verificarOperadorDisponible(Operador operador) throws OperacionNoPermitidaException {
+        if (!operador.getDisponible()) {
+            throw new OperacionNoPermitidaException(
+                    "El operador seleccionado no está disponible.");
         }
     }
-    
-    
-    public boolean verificarOperadorHabilitadoParaEspecial(Operador operador, String tipoReporte) {
+
+    public void verificarOperadorHabilitadoParaEspecial(Operador operador, String tipoReporte) throws OperacionNoPermitidaException {
         if (!tipoReporte.equalsIgnoreCase("MaterialEspecial")) {
-            return true;
+            return;
         }
-        if (operador.getAccionesPermitidas().toLowerCase().contains("especial")) {
-            return true;
-        } else {
-            System.out.println("Error, el operador no esta habilitado para material especial...");
-            return false;
+        if (!operador.getAccionesPermitidas().toLowerCase().contains("especial")) {
+            throw new OperacionNoPermitidaException(
+                    "El operador no está habilitado para material especial.");
         }
     }
-    
-    
-    public boolean verificarPuedeAsignar(Reporte reporte) {
+
+    public void verificarPuedeAsignar(Reporte reporte) throws OperacionNoPermitidaException {
         String estado = reporte.getEstado();
-        if (estado.equals("REGISTRADO")) {
-            return true;
-        } else {
-            System.out.println("Error, el reporte no se puede asignar desde su estado actual (" + estado + ")...");
-            return false;
+        if (!estado.equals("REGISTRADO")) {
+            throw new OperacionNoPermitidaException(
+                    "El reporte no se puede asignar desde su estado actual (" + estado + ").");
         }
     }
-    
-    
-    public boolean verificarRutaActivaParaAsignar(RutaRecoleccion ruta) {
-        if (ruta.getActiva()) {
-            return true;
-        } else {
-            System.out.println("Error, no se puede asignar el reporte a una ruta cerrada...");
-            return false;
+
+    public void verificarRutaActivaParaAsignar(RutaRecoleccion ruta) throws OperacionNoPermitidaException {
+        if (!ruta.getActiva()) {
+            throw new OperacionNoPermitidaException(
+                    "No se puede asignar el reporte a una ruta cerrada.");
         }
     }
-    
-    
-    public boolean verificarPuedeCerrar(Reporte reporte, boolean tieneRecoleccionAsociada, double pesoTotal) {
+
+    public void verificarPuedeCerrar(Reporte reporte, boolean tieneRecoleccionAsociada,double pesoTotal) throws OperacionNoPermitidaException {
         if (!reporte.getEstado().equals("ASIGNADO")) {
-            System.out.println("Error, solo se puede cerrar un reporte que este asignado...");
-            return false;
+            throw new OperacionNoPermitidaException(
+                    "Solo se puede cerrar un reporte que esté asignado.");
         }
-        if (!tieneRecoleccionAsociada) {
-            System.out.println("Error, el reporte no tiene una recoleccion asociada...");
-            return false;
+        if (!tieneRecoleccionAsociada) {throw new OperacionNoPermitidaException(
+                    "El reporte no tiene una recolección asociada.");
         }
-        if (pesoTotal <= 0) {
-            System.out.println("Error, el peso total debe ser mayor a cero...");
-            return false;
+        if (pesoTotal <= 0) {throw new OperacionNoPermitidaException(
+                    "El peso total debe ser mayor a cero.");
         }
-        return true;
     }
-    
-    
 }

@@ -104,7 +104,21 @@ public class MenuPrincipalController {
     @FXML
     private void abrirReportes(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Reportes");
+        tituloSeccion.setText("Reportes");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/reportes.fxml"));
+            Parent pantalla = loader.load();
+
+            ReportesController controlador = loader.getController();
+            controlador.setServicio(servicios.getReportes());
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de reportes.\n" + e.getMessage());
+        }
     }
 
     @FXML

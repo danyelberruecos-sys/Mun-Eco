@@ -27,5 +27,11 @@ public class Verificador {
 	        throw new DatoInvalidoException(campo + " debe ser mayor a cero.");
 	    }
 	}
+	
+	public void verificarSeleccionado(Object valor, String que) throws DatoInvalidoException {
+	    if (valor == null) {
+	        throw new DatoInvalidoException("Seleccione " + que + ".");
+	    }
+	}
 
 }

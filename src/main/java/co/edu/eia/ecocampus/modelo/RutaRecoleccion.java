@@ -39,5 +39,10 @@ public class RutaRecoleccion implements Identificable {
 	public int getCantidadParadas() {
 	    return paradas.size();
 	}
+	
+	@Override
+	public String toString() {
+	    return "Ruta " + id + " (" + getEstadoTexto() + ")";
+	}
 
 }
