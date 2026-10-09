@@ -17,12 +17,5 @@ public class Actividad implements Identificable{
 	
 	public String getNombre() {return nombre;}
 	
-	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("Nombre: " + nombre);
-		System.out.println("ID: " + id);
-		System.out.println("Tipo: " + tipo);
-		System.out.println("Fecha: " + fecha);
-		System.out.println("=======================================");
-	}
+
 }

@@ -11,13 +11,7 @@ public class Historial {
  		this.persona = persona;
  	}
  	
- 	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("HISTRIAL DE " + persona.getNombre().toUpperCase());
-		for (int i = 0 ; i < movimientos.size(); i++) {
-			movimientos.get(i).mostrar();
-		}
- 	}
+
  	
  	public void agregarMovimiento(Movimiento movimiento) {
  		movimientos.add(movimiento);

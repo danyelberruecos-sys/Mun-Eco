@@ -59,25 +59,7 @@ public class Reporte implements Identificable{
 		notificador.notificar("El reporte con el id " + id + " fue cerrado");
 	}
 	
-	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("ID: " + id);
-		System.out.println("Tipo: " + tipo);
-		System.out.println("Autor: " + autor.getNombre());
-		System.out.println("PuntoEcologico: " + puntoEcologico.getUbicacion());
-		System.out.println("Fecha: " + fecha);
-		System.out.println("Estado: " + estado);
-		System.out.println("Nivel de prioridad: Nivel " + prioridad);
-		System.out.println("Descripcion: " + descripcion);
-		if(rutaAsignada != null) {
-			System.out.println("Ruta asignada: " + rutaAsignada.getId());
-		}
-		if(operadorAsignado != null) {
-			System.out.println("Operador asignado " + operadorAsignado.getId());
-		}
-		System.out.println("=======================================");
 
-	}
 	
     public long getId() { return id; }
     

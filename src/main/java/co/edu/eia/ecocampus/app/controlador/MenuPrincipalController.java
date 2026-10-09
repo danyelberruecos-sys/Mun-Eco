@@ -3,10 +3,7 @@ package co.edu.eia.ecocampus.app.controlador;
 import java.io.IOException;
 import java.util.Optional;
 
-import co.edu.eia.ecocampus.servicio.CargadorDatos;
-import co.edu.eia.ecocampus.servicio.ServicioPersona;
-import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
-import co.edu.eia.ecocampus.servicio.ServicioRuta;
+import co.edu.eia.ecocampus.servicio.Servicios;
 import co.edu.eia.ecocampus.util.Alertas;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,14 +29,10 @@ public class MenuPrincipalController {
     @FXML private Button botonCargarDatos;
     @FXML private Button botonPersonas;
 
-    private CargadorDatos cargador;
     
     private Button botonActivo;
     
-    private ServicioPersona servicioPersona;
-    private ServicioPuntoEcologico servicioPunto;
-    private ServicioRuta servicioRuta;
-
+  
     
 
     
@@ -53,20 +46,10 @@ public class MenuPrincipalController {
     }
 
 
-    public void setCargador(CargadorDatos cargador) {
-        this.cargador = cargador;
-    }
-    
-    public void setServicioPersona(ServicioPersona servicioPersona) {
-        this.servicioPersona = servicioPersona;
-    }
-    
-    public void setServicioPunto(ServicioPuntoEcologico servicioPunto) {
-        this.servicioPunto = servicioPunto;
-    }
-    
-    public void setServicioRuta(ServicioRuta servicioRuta) {
-        this.servicioRuta = servicioRuta;
+    private Servicios servicios;
+
+    public void setServicios(Servicios servicios) {
+        this.servicios = servicios;
     }
 
    
@@ -88,8 +71,8 @@ public class MenuPrincipalController {
             Parent pantalla = loader.load();
 
             PersonasController controlador = loader.getController();
-            if (controlador != null && servicioPersona != null) {
-                controlador.setServicio(servicioPersona);
+            if (controlador != null && servicios.getPersonas() != null) {
+                controlador.setServicio(servicios.getPersonas());
             }
 
             mostrarPantalla(pantalla);
@@ -110,7 +93,7 @@ public class MenuPrincipalController {
             Parent pantalla = loader.load();
 
             PuntosEcologicosController controlador = loader.getController();
-            controlador.setServicio(servicioPunto);
+            controlador.setServicio(servicios.getPuntos());
 
             mostrarPantalla(pantalla);
         } catch (IOException e) {
@@ -135,7 +118,7 @@ public class MenuPrincipalController {
             Parent pantalla = loader.load();
 
             RutasController controlador = loader.getController();
-            controlador.setServicio(servicioRuta);
+            controlador.setServicio(servicios.getRutas());
 
             mostrarPantalla(pantalla);
         } catch (IOException e) {
@@ -172,7 +155,7 @@ public class MenuPrincipalController {
             return;
         }
 
-        if (cargador.cargar()) {
+        if (servicios.getCargador().cargar()) {
             estadoDatos.setText("Datos de prueba: cargados");
             estadoDatos.getStyleClass().remove("estado-pendiente");
             estadoDatos.getStyleClass().add("estado-ok");

@@ -48,30 +48,7 @@ public class Campania implements Identificable {
 	    					+ " " + participaciones.size() + " participantes.");
 	}
 	
-	public void mostrar() {
-		System.out.println("=======================================");
-		System.out.println("ID: " + id);
-		System.out.println("Estado: " + estado);
-		System.out.println("Fecha: " + fecha);
-		System.out.println("Cupo: " + cupo);
-		System.out.println("Actividades: ");
-		if (actividades.size() == 0) {
-			System.out.println("No hay actividades registradas");
-		}else {
-			for (int i = 0; i < actividades.size(); i++) {
-				System.out.println("- " + actividades.get(i).getNombre());
-			}
-		}
-		System.out.println("Participantes: ");
-		if (participaciones.size() == 0) {
-			System.out.println("No hay participantes incritos");
-		}else {
-			for (int i = 0; i < participaciones.size(); i++) {
-				System.out.println("- " + participaciones.get(i).getUsuario().getNombre());
-			}
-		}
-		System.out.println("=======================================");
-	}
+
 	
 	
 	public long getId() {return id;}
