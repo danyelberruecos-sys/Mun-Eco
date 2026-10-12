@@ -51,7 +51,12 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
-            <Button id="botonInicio" layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#abrirRutas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Rutas y recolección">
+            <Button id="botonInicio" layoutX="10.0" layoutY="113.0" mnemonicParsing="false" onAction="#abrirRutas" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Rutas ">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button id="botonInicio" layoutX="10.0" layoutY="294.0" mnemonicParsing="false" onAction="#abrirRecolecciones" prefHeight="25.0" prefWidth="285.0" styleClass="boton-menu, activo" text="Recolecciones">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>

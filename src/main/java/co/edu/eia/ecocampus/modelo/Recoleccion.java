@@ -32,6 +32,10 @@ public class Recoleccion implements Identificable{
         return total;
     }
     
+    public String getObservaciones() {
+        return observaciones;
+    }
+    
 
     
  
@@ -50,4 +54,30 @@ public class Recoleccion implements Identificable{
     public ArrayList<Material> getMateriales() { return materiales; }
     
     public ArrayList<Double> getPesos() { return pesos; }
+    
+    public long getReporteId() {
+        return getReporteAsociado().getId();
+    }
+
+    public String getOperadorNombre() {
+        return operadorResponsable.getNombre();
+    }
+
+    public String getMaterialesTexto() {
+        String texto = "";
+        ArrayList<Material> materiales = getMateriales();
+        ArrayList<Double> pesos = getPesos();
+
+        for (int i = 0; i < materiales.size(); i++) {
+            if (i > 0) {
+                texto = texto + ", ";
+            }
+            texto = texto + materiales.get(i).getNombre() + " (" + pesos.get(i) + " kg)";
+        }
+        return texto;
+    }
+
+    public int getEcoPuntosCalculados() {
+        return calcularEcoPuntos();
+    }
 }

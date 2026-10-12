@@ -34,7 +34,7 @@
                         <DatePicker fx:id="fechaReporte" />
                         <Label layoutX="34.0" layoutY="165.0" styleClass="etiqueta-campo" text="Descripción" />
                         <TextArea fx:id="campoDescripcion" prefHeight="200.0" prefRowCount="3" prefWidth="200.0" />
-                        <Label layoutX="34.0" layoutY="230.0" styleClass="etiqueta-campo" text="Tio de reporte" />
+                        <Label layoutX="34.0" layoutY="230.0" styleClass="etiqueta-campo" text="Tipo de reporte" />
                         <ComboBox fx:id="comboTipoReporte" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
                         <Label layoutX="34.0" layoutY="290.0" styleClass="etiqueta-campo" text="Prioridad" />
                         <ComboBox fx:id="comboPrioridad" layoutX="34.0" layoutY="295.0" maxWidth="1.7976931348623157E308" prefWidth="150.0" />

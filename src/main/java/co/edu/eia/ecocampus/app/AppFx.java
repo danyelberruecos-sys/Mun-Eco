@@ -14,12 +14,14 @@ import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
+import co.edu.eia.ecocampus.servicio.ServicioRecoleccion;
 import co.edu.eia.ecocampus.servicio.ServicioReporte;
 import co.edu.eia.ecocampus.servicio.ServicioRuta;
 import co.edu.eia.ecocampus.servicio.Servicios;
 import co.edu.eia.ecocampus.servicio.Verificador;
 import co.edu.eia.ecocampus.servicio.VerificadorParada;
 import co.edu.eia.ecocampus.servicio.VerificadorPunto;
+import co.edu.eia.ecocampus.servicio.VerificadorRecoleccion;
 import co.edu.eia.ecocampus.servicio.VerificadorReporte;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,15 +51,18 @@ public class AppFx extends Application {
         VerificadorPunto verificadorPunto = new VerificadorPunto();
         VerificadorParada verificadorParada = new VerificadorParada();
         VerificadorReporte verificadorReporte = new VerificadorReporte();
+        VerificadorRecoleccion verificadorRecoleccion = new VerificadorRecoleccion();
         
         CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, notificador);
         ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
         ServicioPuntoEcologico servicioPunto = new ServicioPuntoEcologico(puntos, reportes, verificador, verificadorPunto, notificador);
         ServicioRuta servicioRuta = new ServicioRuta(rutas, puntos, verificador,verificadorParada, notificador);
         ServicioReporte servicioReporte = new ServicioReporte(reportes, personas, puntos, rutas,verificador, verificadorReporte, notificador);
+        ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion);
+        
         
         //Contenedor completo
-        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte);
+        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion);
         
         // 3. Cargar la pantalla del menu principal
         FXMLLoader loader = new FXMLLoader(

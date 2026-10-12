@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="600.0" stylesheets="@../estilos/estilos.css" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="co.edu.eia.ecocampus.app.controlador.RecoleccionesController">
+  <tabs>
+    <Tab text="Registrar recoleccion">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox layoutX="200.0" layoutY="130.0" prefHeight="366.0" prefWidth="600.0" spacing="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                     </padding>
+                     <children>
+                        <VBox maxWidth="340.0" prefHeight="200.0" prefWidth="340.0" spacing="8.0">
+                           <children>
+                              <Label styleClass="titulo-seccion" text="Datos de la recolección" />
+                              <Label styleClass="etiqueta-campo" text="ID de la recolección" />
+                              <TextField fx:id="campoIdRecoleccion" />
+                              <Label layoutX="10.0" layoutY="46.0" styleClass="etiqueta-campo" text="Reporte asociado" />
+                              <ComboBox fx:id="comboReporteRec" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+                              <Label layoutX="10.0" layoutY="101.0" styleClass="etiqueta-campo" text="Operador responsable" />
+                              <ComboBox fx:id="comboOperadorRec" layoutX="10.0" layoutY="124.0" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+                              <Label layoutX="10.0" layoutY="155.0" styleClass="etiqueta-campo" text="Observaciones" />
+                              <TextArea fx:id="campoObservaciones" prefHeight="200.0" prefRowCount="3" prefWidth="200.0" />
+                              <Label layoutX="10.0" layoutY="210.0" styleClass="titulo-seccion" text="Agregar material" />
+                              <Label layoutX="10.0" layoutY="210.0" styleClass="etiqueta-campo" text="Material" />
+                              <ComboBox fx:id="comboMaterial" layoutX="10.0" layoutY="179.0" maxWidth="1.7976931348623157E308" prefWidth="150.0" />
+                              <Label layoutX="10.0" layoutY="210.0" styleClass="etiqueta-campo" text="Peso (Kg)" />
+                              <TextField fx:id="campoPeso" layoutX="10.0" layoutY="69.0" />
+                              <Button mnemonicParsing="false" onAction="#agregarMaterial" styleClass="boton-secundario" text="Agregar material" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="491.0" prefWidth="202.0">
+                           <children>
+                              <Label styleClass="titulo-seccion" text="Materiaes recolectados" />
+                              <TableView fx:id="tablaMaterialesNuevos" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn fx:id="colTipoNuevo" prefWidth="75.0" text="Material" />
+                                  <TableColumn fx:id="colPesoNuevo" prefWidth="75.0" text="Peso" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <Label fx:id="etiquetaPesoTotal" styleClass="etiqueta-campo" text="Peso total: 0.0 kg" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#quitarMaterial" styleClass="boton-secundario" text="Quitar material" />
+                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#registrarRecoleccion" styleClass="boton-primario" text="Registrar recolección" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Ver recolecciones">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="250.0" layoutY="161.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="titulo-seccion" text="Recolecciones" />
+                        <TableView fx:id="tablaRecolecciones" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colIdRec" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="colReporteRec" prefWidth="75.0" text="Reporte" />
+                              <TableColumn fx:id="colOperadorRec" prefWidth="75.0" text="Operador" />
+                              <TableColumn fx:id="colMaterialesRec" prefWidth="75.0" text="Materiales" />
+                              <TableColumn fx:id="colPesoRec" prefWidth="75.0" text="Peso (Kg)" />
+                              <TableColumn fx:id="colEcoPuntosRec" prefWidth="75.0" text="Eco-puntos" />
+                              <TableColumn fx:id="colObservacionesRec" prefWidth="75.0" text="colObservacionesRec" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Button mnemonicParsing="false" onAction="#actualizarTabla" styleClass="boton-secundario" text="Actualizar" />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

@@ -28,7 +28,8 @@ public class MenuPrincipalController {
     @FXML private Button botonInicio;
     @FXML private Button botonCargarDatos;
     @FXML private Button botonPersonas;
-
+    @FXML private Button botonRutas;
+    @FXML private Button botonRecolecciones;
     
     private Button botonActivo;
     
@@ -124,7 +125,7 @@ public class MenuPrincipalController {
     @FXML
     private void abrirRutas(ActionEvent evento) {
         activar(evento);
-        tituloSeccion.setText("Rutas y recolección");
+        tituloSeccion.setText("Rutas");
 
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -138,6 +139,26 @@ public class MenuPrincipalController {
         } catch (IOException e) {
             e.printStackTrace();
             Alertas.error("No se pudo abrir la pantalla de rutas.\n" + e.getMessage());
+        }
+    }
+    
+    @FXML
+    private void abrirRecolecciones(ActionEvent evento) {
+        activar(evento);
+        tituloSeccion.setText("Recolección");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/recolecciones.fxml"));
+            Parent pantalla = loader.load();
+
+            RecoleccionesController controlador = loader.getController();
+            controlador.setServicio(servicios.getRecolecciones());
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de recolección.\n" + e.getMessage());
         }
     }
 

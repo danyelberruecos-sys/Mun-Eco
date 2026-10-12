@@ -27,7 +27,7 @@ public class Conversor {
 
     public static double aDouble(String texto, String campo) throws DatoInvalidoException {
         try {
-            return Double.parseDouble(texto.trim());
+            return Double.parseDouble(texto.trim().replace(',', '.'));
         } catch (NumberFormatException e) {
             throw new DatoInvalidoException(campo + " debe ser un número.");
         }

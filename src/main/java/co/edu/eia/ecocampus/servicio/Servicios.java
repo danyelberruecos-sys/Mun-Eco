@@ -7,17 +7,21 @@ public class Servicios {
     private ServicioPuntoEcologico puntos;
     private ServicioRuta rutas;
     private ServicioReporte reportes;
+    private ServicioRecoleccion recolecciones;
+    
 
     public Servicios(CargadorDatos cargador,
                      ServicioPersona personas,
                      ServicioPuntoEcologico puntos,
                      ServicioRuta rutas,
-                     ServicioReporte reportes) {
+                     ServicioReporte reportes,
+                     ServicioRecoleccion recolecciones) {
         this.cargador = cargador;
         this.personas = personas;
         this.puntos = puntos;
         this.rutas = rutas;
         this.reportes =reportes;
+        this.recolecciones = recolecciones;
     }
 
     public CargadorDatos getCargador() {
@@ -37,4 +41,6 @@ public class Servicios {
     }
     
     public ServicioReporte getReportes() { return reportes; }
+    
+    public ServicioRecoleccion getRecolecciones() {return recolecciones;}
 }
