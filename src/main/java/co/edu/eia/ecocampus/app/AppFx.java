@@ -57,7 +57,7 @@ public class AppFx extends Application {
         ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
         ServicioPuntoEcologico servicioPunto = new ServicioPuntoEcologico(puntos, reportes, verificador, verificadorPunto, notificador);
         ServicioRuta servicioRuta = new ServicioRuta(rutas, puntos, verificador,verificadorParada, notificador);
-        ServicioReporte servicioReporte = new ServicioReporte(reportes, personas, puntos, rutas,verificador, verificadorReporte, notificador);
+        ServicioReporte servicioReporte = new ServicioReporte(reportes, personas, puntos, rutas, recolecciones, verificador, verificadorReporte, notificador);
         ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion);
         
         

@@ -8,6 +8,7 @@ import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.PuntoEcologico;
+import co.edu.eia.ecocampus.modelo.Recoleccion;
 import co.edu.eia.ecocampus.modelo.Reporte;
 import co.edu.eia.ecocampus.modelo.RutaRecoleccion;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
@@ -18,6 +19,7 @@ public class ServicioReporte {
     private RepositorioMemoria<Persona> personas;
     private RepositorioMemoria<PuntoEcologico> puntos;
     private RepositorioMemoria<RutaRecoleccion> rutas;
+    private RepositorioMemoria<Recoleccion> recolecciones;
     private Verificador verificador;
     private VerificadorReporte verificadorReporte;
     private Notificador notificador;
@@ -26,6 +28,7 @@ public class ServicioReporte {
                            RepositorioMemoria<Persona> personas,
                            RepositorioMemoria<PuntoEcologico> puntos,
                            RepositorioMemoria<RutaRecoleccion> rutas,
+                           RepositorioMemoria <Recoleccion> recolecciones,
                            Verificador verificador,
                            VerificadorReporte verificadorReporte,
                            Notificador notificador) {
@@ -33,6 +36,7 @@ public class ServicioReporte {
         this.personas = personas;
         this.puntos = puntos;
         this.rutas = rutas;
+        this.recolecciones = recolecciones;
         this.verificador = verificador;
         this.verificadorReporte = verificadorReporte;
         this.notificador = notificador;
@@ -145,4 +149,37 @@ public class ServicioReporte {
         }
         return tipo;
     }
+    
+
+	 public int cerrar(Reporte reporte) throws EcoCampusException {
+	     verificador.verificarSeleccionado(reporte, "un reporte de la tabla");
+	
+	     Recoleccion recoleccion = buscarRecoleccion(reporte);
+	     boolean tieneRecoleccion = recoleccion != null;
+	     double pesoTotal = tieneRecoleccion ? recoleccion.getPesoTotal() : 0;
+	
+	     verificadorReporte.verificarPuedeCerrar(reporte, tieneRecoleccion, pesoTotal);
+	
+	     reporte.cerrar(notificador);
+	
+	     int puntosGanados = recoleccion.calcularEcoPuntos();
+	     String concepto = "Recoleccion de material - Reporte #" + reporte.getId();
+	     reporte.getAutor().sumarEcoPuntos(puntosGanados, concepto, reporte.getFecha());
+	     notificador.notificar(reporte.getAutor().getNombre() + " ganó " + puntosGanados
+	             + " eco-puntos.");
+	
+	     return puntosGanados;
+	 }
+	
+	 private Recoleccion buscarRecoleccion(Reporte reporte) {
+	     ArrayList<Recoleccion> todas = recolecciones.listar();
+	     for (int i = 0; i < todas.size(); i++) {
+	         if (todas.get(i).getReporteAsociado().getId() == reporte.getId()) {
+	             return todas.get(i);
+	         }
+	     }
+	     return null;
+	 }
+    
+    
 }

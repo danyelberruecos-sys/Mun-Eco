@@ -54,10 +54,11 @@
                      </padding>
                      <children>
                         <Label styleClass="titulo-seccion" text="Reportes" />
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="12.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="12.0" VBox.vgrow="ALWAYS">
                            <children>
                               <CheckBox fx:id="checkSoloPendientes" mnemonicParsing="false" onAction="#actualizarTabla" text="Mostrar solo pendientes" />
                               <Button mnemonicParsing="false" onAction="#actualizarTabla" styleClass="boton-secundario" text="Actualizar" />
+                              <Button mnemonicParsing="false" onAction="#cerrarReporte" styleClass="boton-primario" text="Cerrar reporte" />
                            </children>
                         </HBox>
                         <TableView fx:id="tablaReportes" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

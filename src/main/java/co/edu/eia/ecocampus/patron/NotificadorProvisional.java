@@ -6,6 +6,6 @@ public class NotificadorProvisional implements Notificador {
 
     @Override
     public void notificar(String mensaje) {
-        // Provisional: las notificaciones se implementan mas adelante
+        
     }
 }

@@ -130,6 +130,31 @@ public class ReportesController {
         }
     }
 
+    
+    @FXML
+    private void cerrarReporte() {
+        Reporte seleccionado = tablaReportes.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            Alertas.error("Seleccione un reporte de la tabla.");
+            return;
+        }
+
+        if (!Alertas.confirmar("¿Desea cerrar el reporte " + seleccionado.getId() + "?")) {
+            return;
+        }
+
+        try {
+            int puntos = servicio.cerrar(seleccionado);
+
+            Alertas.informar("Reporte cerrado correctamente.\n"
+                    + seleccionado.getAutorNombre() + " ganó " + puntos + " eco-puntos.");
+            actualizarTabla();
+
+        } catch (EcoCampusException e) {
+            Alertas.error(e.getMessage());
+        }
+    }
 
     @FXML
     private void actualizarTabla() {
