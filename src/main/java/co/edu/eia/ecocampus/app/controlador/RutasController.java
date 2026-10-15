@@ -157,11 +157,12 @@ public class RutasController {
         }
     }
 
-    // ================= AUXILIARES =================
+
     @FXML
     private void actualizarTabla() {
         tablaRutas.setItems(FXCollections.observableArrayList(servicio.listar()));
         tablaParadasRuta.getItems().clear();
+        tablaParadasRuta.refresh();
     }
 
     private void refrescarParadasNuevas() {

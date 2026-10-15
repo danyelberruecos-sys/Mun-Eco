@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Historial {
 
 	private Persona persona;
- 	private ArrayList <Movimiento> movimientos = new ArrayList();
+ 	private ArrayList <Movimiento> movimientos = new ArrayList<>();
  	
  	public Historial (Persona persona) {
  		this.persona = persona;
@@ -20,8 +20,13 @@ public class Historial {
  	public int getEcopuntosTotales() {
  		int total = 0;
  		for (int i = 0; i < movimientos.size(); i++) {
- 			total += movimientos.get(i).getCantidad();
+ 			total += movimientos.get(i).getPuntos();
  		}
  		return total;
  	}
+ 	
+ 	public Persona getPersona() {return persona;}
+ 	
+ 	public ArrayList<Movimiento> getMovimientos() {return movimientos;}
+ 	
 }

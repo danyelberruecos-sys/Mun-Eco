@@ -103,6 +103,7 @@ public class PuntosEcologicosController {
     @FXML
     private void actualizarTabla() {
         tablaPuntos.setItems(FXCollections.observableArrayList(servicio.listar()));
+        tablaPuntos.refresh();
     }
 
     private void limpiarFormulario() {

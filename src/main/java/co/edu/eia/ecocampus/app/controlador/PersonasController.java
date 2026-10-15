@@ -65,6 +65,7 @@ public class PersonasController {
     private void actualizarTabla() {
     	
         tablaPersonas.setItems(FXCollections.observableArrayList(servicio.listar()));
+        tablaPersonas.refresh();
     }
 
 

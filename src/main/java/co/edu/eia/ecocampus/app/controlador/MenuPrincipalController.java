@@ -77,7 +77,7 @@ public class MenuPrincipalController {
             }
 
             mostrarPantalla(pantalla);
-        } catch (Exception e) { // Cambiado de IOException a Exception para ver todo
+        } catch (Exception e) { 
             e.printStackTrace();
             Alertas.error("Error al abrir personas: " + e.getMessage());
         }
@@ -165,13 +165,41 @@ public class MenuPrincipalController {
     @FXML
     private void abrirCampanias(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Campañas ambientales");
+        tituloSeccion.setText("Campañas ambientales");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/campanias.fxml"));
+            Parent pantalla = loader.load();
+
+            CampaniasController controlador = loader.getController();
+            controlador.setServicio(servicios.getCampanias());
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de campañas.\n" + e.getMessage());
+        }
     }
 
     @FXML
     private void abrirConsultas(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Eco-puntos y consultas");
+        tituloSeccion.setText("Eco-puntos y consultas");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/eco-puntos.fxml"));
+            Parent pantalla = loader.load();
+
+            EcoPuntosController controlador = loader.getController();
+            controlador.setServicio(servicios.getEcoPuntos());
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de eco-puntos.\n" + e.getMessage());
+        }
     }
 
     @FXML

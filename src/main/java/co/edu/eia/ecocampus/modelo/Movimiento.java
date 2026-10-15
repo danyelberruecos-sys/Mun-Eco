@@ -4,17 +4,21 @@ public class Movimiento {
 	
 	private String concepto;
 	private String fecha;
-	private int cantidad;
+	private int puntos;
 	
-	public Movimiento(String concepto, String fecha, int cantidad) {
+	public Movimiento(String concepto, String fecha, int puntos) {
 		this.concepto = concepto;
 		this.fecha = fecha;
-		this.cantidad = cantidad;
+		this.puntos = puntos;
 	}
 	
 
 	
-	public int getCantidad() {return cantidad;}
+	public int getPuntos() {return puntos;}
+	
+	public String getFecha() {return fecha;}
+	
+	public String getConcepto() {return concepto;}
 	
 	
 	

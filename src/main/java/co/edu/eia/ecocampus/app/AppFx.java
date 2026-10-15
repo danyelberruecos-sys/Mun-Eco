@@ -12,6 +12,8 @@ import co.edu.eia.ecocampus.modelo.RutaRecoleccion;
 import co.edu.eia.ecocampus.patron.NotificadorProvisional;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
+import co.edu.eia.ecocampus.servicio.ServicioCampania;
+import co.edu.eia.ecocampus.servicio.ServicioEcoPuntos;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
 import co.edu.eia.ecocampus.servicio.ServicioRecoleccion;
@@ -19,6 +21,7 @@ import co.edu.eia.ecocampus.servicio.ServicioReporte;
 import co.edu.eia.ecocampus.servicio.ServicioRuta;
 import co.edu.eia.ecocampus.servicio.Servicios;
 import co.edu.eia.ecocampus.servicio.Verificador;
+import co.edu.eia.ecocampus.servicio.VerificadorCampania;
 import co.edu.eia.ecocampus.servicio.VerificadorParada;
 import co.edu.eia.ecocampus.servicio.VerificadorPunto;
 import co.edu.eia.ecocampus.servicio.VerificadorRecoleccion;
@@ -34,7 +37,7 @@ public class AppFx extends Application {
     @Override
     public void start(Stage ventana) throws Exception {
 
-        // 1. Repositorios: se crean UNA sola vez y se comparten con todo el programa
+
     	RepositorioMemoria<Persona> personas = new RepositorioMemoria<>();
     	RepositorioMemoria<PuntoEcologico> puntos = new RepositorioMemoria<>();
     	RepositorioMemoria<RutaRecoleccion> rutas = new RepositorioMemoria<>();
@@ -43,7 +46,7 @@ public class AppFx extends Application {
     	RepositorioMemoria<Campania> campanias = new RepositorioMemoria<>();
     	RepositorioMemoria<Actividad> actividades = new RepositorioMemoria<>();
 
-        // 2. Cargador de datos de prueba
+
     	Notificador notificador = new NotificadorProvisional();
         
         
@@ -52,6 +55,7 @@ public class AppFx extends Application {
         VerificadorParada verificadorParada = new VerificadorParada();
         VerificadorReporte verificadorReporte = new VerificadorReporte();
         VerificadorRecoleccion verificadorRecoleccion = new VerificadorRecoleccion();
+        VerificadorCampania verificadorCampania = new VerificadorCampania();
         
         CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, notificador);
         ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
@@ -59,21 +63,24 @@ public class AppFx extends Application {
         ServicioRuta servicioRuta = new ServicioRuta(rutas, puntos, verificador,verificadorParada, notificador);
         ServicioReporte servicioReporte = new ServicioReporte(reportes, personas, puntos, rutas, recolecciones, verificador, verificadorReporte, notificador);
         ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion);
+        ServicioCampania servicioCampania = new ServicioCampania(campanias, actividades, personas,verificador, verificadorCampania, notificador);
+        ServicioEcoPuntos servicioEcoPuntos = new ServicioEcoPuntos(personas, recolecciones, verificador);
+
+
         
+    
+        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion, servicioCampania, servicioEcoPuntos);
         
-        //Contenedor completo
-        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion);
-        
-        // 3. Cargar la pantalla del menu principal
+    
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/co/edu/eia/ecocampus/app/vista/menu-principal.fxml"));
         Parent raiz = loader.load();
 
-        // 4. Entregarle al controlador lo que necesita
+   
         MenuPrincipalController controlador = loader.getController();
         controlador.setServicios(servicios);
         
-        // 5. Mostrar la ventana
+     
         ventana.setTitle("MunEco");
         ventana.setScene(new Scene(raiz, 1100, 700));
         ventana.setMinWidth(900);

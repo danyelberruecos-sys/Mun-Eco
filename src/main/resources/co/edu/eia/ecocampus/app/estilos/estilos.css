@@ -45,6 +45,15 @@
 	/* ---- Barras de desplazamiento ---- */
 	-c-scroll: #c3d3e2;
 	-c-scroll-hover: #9fb6cc;
+	
+	/* ---- Peligro ---- */
+	-c-peligro: #dc2626;
+	-c-peligro-oscuro: #b91c1c;
+	-c-peligro-suave: #fee2e2;
+
+	/* ---- Indicador de datos de prueba: pendiente ---- */
+	-c-pendiente-fondo: #fef3c7;
+	-c-pendiente-texto: #92400e;
 	}
 
 .raiz {
@@ -243,14 +252,7 @@
     -fx-background-color: -c-primario-suave;
 }
 
-.boton-peligro {
-    -fx-background-color: -c-peligro;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 9 20 9 20;
-    -fx-cursor: hand;
-}
+
 
 .boton-peligro:hover {
     -fx-background-color: -c-peligro-oscuro;
@@ -574,4 +576,90 @@
     -fx-text-fill: -c-primario;
     -fx-border-color: -c-primario;
     -fx-border-radius: 8;
+}
+
+/* ================= BOTON DE PELIGRO ================= */
+.boton-peligro {
+    -fx-background-color: linear-gradient(to bottom, #ef4444, #b91c1c);
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+    -fx-border-color: #7f1d1d;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 9 20 9 20;
+    -fx-cursor: hand;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(185, 28, 28, 0.40), 8, 0, 0, 2);
+}
+
+.boton-peligro:hover {
+    -fx-background-color: linear-gradient(to bottom, #dc2626, #991b1b);
+    -fx-effect: dropshadow(gaussian, rgba(185, 28, 28, 0.60), 12, 0, 0, 3);
+}
+
+.boton-peligro:pressed {
+    -fx-background-color: #7f1d1d;
+    -fx-effect: none;
+    -fx-padding: 10 20 8 20;
+}
+
+.boton-peligro:disabled {
+    -fx-opacity: 0.45;
+    -fx-effect: none;
+}
+
+/* ================= TARJETAS DE MATERIALES (solo CSS) ================= */
+.tarjeta {
+    /* capa 1: franja superior, capa 2: fondo blanco desplazado 5px hacia abajo */
+    -fx-background-color: #334155, white;
+    -fx-background-insets: 0, 5 0 0 0;
+    -fx-background-radius: 14, 10 10 14 14;
+    -fx-padding: 26 22 20 22;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.12), 14, 0, 0, 4);
+}
+
+.tarjeta:hover {
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.22), 20, 0, 0, 7);
+}
+
+/* El titulo de cada tarjeta (solo dentro de las tarjetas, no afecta a los formularios) */
+.tarjeta .etiqueta-campo {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #64748b;
+}
+
+/* El numero, dentro de una pastilla */
+.tarjeta .cifra {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 10;
+    -fx-padding: 6 16 6 16;
+}
+
+/* Color por material, usando el fx:id de cada etiqueta */
+#etiquetaReciclable {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+}
+
+#etiquetaOrganico {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+}
+
+#etiquetaEspecial {
+    -fx-background-color: #fef3c7;
+    -fx-text-fill: #b45309;
+}
+
+#etiquetaTotal {
+    -fx-background-color: #0f172a;
+    -fx-text-fill: white;
 }

@@ -8,8 +8,8 @@ public class Campania implements Identificable {
 	private String fecha;
 	private int cupo;
 	private String estado;
-	private ArrayList <Actividad> actividades = new ArrayList();
-	private ArrayList <Participacion> participaciones = new ArrayList();
+	private ArrayList <Actividad> actividades = new ArrayList<>();
+	private ArrayList <Participacion> participaciones = new ArrayList<>();
 	private int puntosPorParticipacion;
 	
 	public Campania(long id, String fecha, int cupo, int puntosPorParticipacion) {
@@ -58,6 +58,25 @@ public class Campania implements Identificable {
 	public int getCupo() {return cupo;}
 	
 	public ArrayList<Participacion> getParticipaciones() {return participaciones;}
+	
+	public int getInscritos() {
+	    return participaciones.size();
+	}
+
+	public int getCantidadActividades() {
+	    return actividades.size();
+	}
+	
+	public String getFecha() {return fecha;}
+	
+	public int getEcoPuntos() {return puntosPorParticipacion;}
+	
+	public ArrayList <Actividad> getActividades() {return actividades;}
+
+	@Override
+	public String toString() {
+	    return "Campaña " + id + " (" + fecha + ")";
+	}
 		
 
 }

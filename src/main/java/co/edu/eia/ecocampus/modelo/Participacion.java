@@ -14,4 +14,18 @@ public class Participacion {
 	
 
 	public Usuario getUsuario() {return usuario;}
+	
+	public String getNombreUsuario() {
+	    return getUsuario().getNombre();
+	}
+
+	public String getFechaInscripcion() {
+	    return getFecha();
+	}
+	
+	public String getFecha() {
+		return fechaInscripcion;
+	}
+	
+	public Campania getCampania() {return campania;}
 }

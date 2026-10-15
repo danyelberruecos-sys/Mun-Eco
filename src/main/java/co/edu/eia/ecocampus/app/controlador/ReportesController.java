@@ -160,6 +160,7 @@ public class ReportesController {
     private void actualizarTabla() {
         tablaReportes.setItems(FXCollections.observableArrayList(
                 servicio.listar(checkSoloPendientes.isSelected())));
+        tablaReportes.refresh();
     }
 
     private void limpiarFormulario() {

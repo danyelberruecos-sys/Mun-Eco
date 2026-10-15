@@ -133,6 +133,7 @@ public class RecoleccionesController {
     @FXML
     private void actualizarTabla() {
         tablaRecolecciones.setItems(FXCollections.observableArrayList(servicio.listar()));
+        tablaRecolecciones.refresh();
     }
 
     private void cargarCombos() {
