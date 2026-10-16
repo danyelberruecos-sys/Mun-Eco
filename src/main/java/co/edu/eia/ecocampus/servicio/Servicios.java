@@ -10,6 +10,7 @@ public class Servicios {
     private ServicioRecoleccion recolecciones;
     private ServicioCampania campanias;
     private ServicioEcoPuntos ecoPuntos;
+    private ServicioIndicadores indicadores;
     
 
     public Servicios(CargadorDatos cargador,
@@ -19,7 +20,8 @@ public class Servicios {
                      ServicioReporte reportes,
                      ServicioRecoleccion recolecciones,
                      ServicioCampania campanias,
-                     ServicioEcoPuntos ecoPuntos) {
+                     ServicioEcoPuntos ecoPuntos,
+                     ServicioIndicadores indicadores) {
         this.cargador = cargador;
         this.personas = personas;
         this.puntos = puntos;
@@ -28,6 +30,7 @@ public class Servicios {
         this.recolecciones = recolecciones;
         this.campanias = campanias;
         this.ecoPuntos = ecoPuntos;
+        this.indicadores = indicadores;
     }
 
     public CargadorDatos getCargador() {
@@ -53,4 +56,6 @@ public class Servicios {
     public ServicioCampania getCampanias() {return campanias;}
     
     public ServicioEcoPuntos getEcoPuntos() {return ecoPuntos;}
+    
+    public ServicioIndicadores getIndicadores() {return indicadores;}
 }

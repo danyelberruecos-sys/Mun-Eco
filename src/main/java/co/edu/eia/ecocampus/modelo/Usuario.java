@@ -1,9 +1,5 @@
 package co.edu.eia.ecocampus.modelo;
 
-import java.util.ArrayList;
-
-import java.util.Scanner;
-
 public class Usuario extends Persona {
 	
 	private String tipo;

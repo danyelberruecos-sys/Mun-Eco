@@ -205,7 +205,21 @@ public class MenuPrincipalController {
     @FXML
     private void abrirIndicadores(ActionEvent evento) {
         activar(evento);
-        mostrarEnConstruccion("Indicadores generales");
+        tituloSeccion.setText("Indicadores generales");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/eia/ecocampus/app/vista/indicadores.fxml"));
+            Parent pantalla = loader.load();
+
+            IndicadoresController controlador = loader.getController();
+            controlador.setServicio(servicios.getIndicadores());
+
+            mostrarPantalla(pantalla);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alertas.error("No se pudo abrir la pantalla de indicadores.\n" + e.getMessage());
+        }
     }
 
   
@@ -251,12 +265,7 @@ public class MenuPrincipalController {
     }
 
 
-    private void mostrarEnConstruccion(String titulo) {
-        tituloSeccion.setText(titulo);
-        Label aviso = new Label("Esta pantalla se está construyendo...");
-        aviso.getStyleClass().add("texto-secundario");
-        contenido.getChildren().setAll(aviso);
-    }
+
 
     private boolean confirmar(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, mensaje,

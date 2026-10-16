@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="600.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="co.edu.eia.ecocampus.app.controlador.IndicadoresController">
+   <content>
+      <VBox prefHeight="441.0" prefWidth="603.0" spacing="10.0">
+         <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+         </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#actualizar" styleClass="boton-secundario" text="Actualizar" />
+            <Label styleClass="titulo-seccion" text="Personas">
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+            </Label>
+            <FlowPane fx:id="panelPersonas" hgap="16.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+            <Label layoutX="34.0" layoutY="92.0" styleClass="titulo-seccion" text="Puntos ecológicos" />
+            <FlowPane fx:id="panelPuntos" hgap="16.0" layoutX="34.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+            <Label layoutX="34.0" layoutY="245.0" styleClass="titulo-seccion" text="Reportes" />
+            <FlowPane fx:id="panelReportes" hgap="16.0" layoutX="34.0" layoutY="263.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+            <Label layoutX="34.0" layoutY="296.0" styleClass="titulo-seccion" text="Rutas y recolección" />
+            <FlowPane fx:id="panelRutas" hgap="16.0" layoutX="34.0" layoutY="308.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+            <Label layoutX="34.0" layoutY="277.0" styleClass="titulo-seccion" text="Campañas ambientales" />
+            <FlowPane fx:id="panelCampanias" hgap="16.0" layoutX="34.0" layoutY="287.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+            <Label layoutX="34.0" layoutY="309.0" styleClass="titulo-seccion" text="Eco-puntos" />
+            <FlowPane fx:id="panelEcoPuntos" hgap="16.0" layoutX="34.0" layoutY="376.0" prefHeight="200.0" prefWidth="200.0" vgap="16.0" />
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

@@ -633,14 +633,34 @@
     -fx-text-fill: #64748b;
 }
 
-/* El numero, dentro de una pastilla */
+/* El numero: sin fondo, sobre el blanco de la tarjeta */
 .tarjeta .cifra {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-text-fill: #0f172a;
-    -fx-background-color: #f1f5f9;
-    -fx-background-radius: 10;
-    -fx-padding: 6 16 6 16;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Color del texto por material (sin fondo) */
+#etiquetaReciclable {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1d4ed8;
+}
+
+#etiquetaOrganico {
+    -fx-background-color: transparent;
+    -fx-text-fill: #15803d;
+}
+
+#etiquetaEspecial {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b45309;
+}
+
+#etiquetaTotal {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0f172a;
 }
 
 /* Color por material, usando el fx:id de cada etiqueta */
@@ -662,4 +682,20 @@
 #etiquetaTotal {
     -fx-background-color: #0f172a;
     -fx-text-fill: white;
+}
+
+
+.tarjeta .cifra-pequena {
+    -fx-font-size: 16px;
+}
+
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }

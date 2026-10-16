@@ -14,6 +14,7 @@ import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioCampania;
 import co.edu.eia.ecocampus.servicio.ServicioEcoPuntos;
+import co.edu.eia.ecocampus.servicio.ServicioIndicadores;
 import co.edu.eia.ecocampus.servicio.ServicioPersona;
 import co.edu.eia.ecocampus.servicio.ServicioPuntoEcologico;
 import co.edu.eia.ecocampus.servicio.ServicioRecoleccion;
@@ -65,11 +66,13 @@ public class AppFx extends Application {
         ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion);
         ServicioCampania servicioCampania = new ServicioCampania(campanias, actividades, personas,verificador, verificadorCampania, notificador);
         ServicioEcoPuntos servicioEcoPuntos = new ServicioEcoPuntos(personas, recolecciones, verificador);
+        ServicioIndicadores servicioIndicadores = new ServicioIndicadores(personas, puntos, rutas,reportes, recolecciones, campanias, actividades, servicioEcoPuntos);
 
+        // y se suma al constructor de Servicios
 
         
     
-        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion, servicioCampania, servicioEcoPuntos);
+        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion, servicioCampania, servicioEcoPuntos, servicioIndicadores);
         
     
         FXMLLoader loader = new FXMLLoader(

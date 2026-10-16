@@ -103,6 +103,8 @@ public class Reporte implements Identificable{
         return "Sin asignar";
     }
     
+    public String getDescripcion() {return descripcion;}
+    
     @Override
     public String toString() {
         return "Reporte " + id + " - " + tipo + " (" + puntoEcologico.getUbicacion() + ")";
