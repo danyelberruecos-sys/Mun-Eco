@@ -114,6 +114,7 @@
                      </font>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="botonNotificaciones" mnemonicParsing="false" onAction="#abrirNotificaciones" styleClass="boton-notificaciones" text="Notificaciones: 0" />
                   <Label fx:id="estadoDatos" styleClass="estado-datos, estado-pendiente" text="Datos de prueba: Sin cargar     ">
                      <font>
                         <Font name="Times New Roman Bold Italic" size="12.0" />

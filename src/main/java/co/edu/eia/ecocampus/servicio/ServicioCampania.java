@@ -44,6 +44,7 @@ public class ServicioCampania {
 
         Campania campania = new Campania(id, fecha, cupo, ecoPuntos);
         campanias.guardar(campania);
+        notificador.notificar("Se registró la campaña " + id + ".");
         return campania;
     }
 
@@ -61,6 +62,8 @@ public class ServicioCampania {
         Actividad actividad = new Actividad(id, nombre, tipo, fecha);
         actividades.guardar(actividad);
         campania.agregarActividad(actividad);
+        notificador.notificar("Se agregó la actividad " + nombre + " a la campaña " + campania.getId() + ".");
+
         return actividad;
     }
 
@@ -76,6 +79,7 @@ public class ServicioCampania {
         verificador.verificarTextoObligatorio(fecha, "La fecha de inscripción");
 
         campania.inscribirParticipante(usuario, fecha, notificador);
+        notificador.notificar(usuario.getNombre() + " se inscribió en la campaña " + campania.getId() + ".");
     }
 
 

@@ -9,6 +9,7 @@ import co.edu.eia.ecocampus.modelo.Material;
 import co.edu.eia.ecocampus.modelo.MaterialEspecial;
 import co.edu.eia.ecocampus.modelo.MaterialOrganico;
 import co.edu.eia.ecocampus.modelo.MaterialReciclable;
+import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.Recoleccion;
@@ -22,17 +23,20 @@ public class ServicioRecoleccion {
     private RepositorioMemoria<Persona> personas;
     private Verificador verificador;
     private VerificadorRecoleccion verificadorRecoleccion;
+    private Notificador notificador;
 
     public ServicioRecoleccion(RepositorioMemoria<Recoleccion> recolecciones,
                                RepositorioMemoria<Reporte> reportes,
                                RepositorioMemoria<Persona> personas,
                                Verificador verificador,
-                               VerificadorRecoleccion verificadorRecoleccion) {
+                               VerificadorRecoleccion verificadorRecoleccion,
+                               Notificador notificador) {
         this.recolecciones = recolecciones;
         this.reportes = reportes;
         this.personas = personas;
         this.verificador = verificador;
         this.verificadorRecoleccion = verificadorRecoleccion;
+        this.notificador = notificador;
     }
 
  
@@ -70,6 +74,7 @@ public class ServicioRecoleccion {
         }
 
         recolecciones.guardar(recoleccion);
+        notificador.notificar("Se registró la recolección " + id + " del reporte " + reporte.getId() + ".");
         return recoleccion;
     }
 

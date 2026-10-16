@@ -1,7 +1,9 @@
 package co.edu.eia.ecocampus.servicio;
 
 import java.util.List;
+
 import co.edu.eia.ecocampus.excepcion.EcoCampusException;
+import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.Responsable;
@@ -12,11 +14,13 @@ public class ServicioPersona {
 
 	private RepositorioMemoria<Persona> personas;
     private Verificador verificador;
+    private Notificador notificador;
 	
     
-    public ServicioPersona(RepositorioMemoria<Persona> personas, Verificador verificador) {
+    public ServicioPersona(RepositorioMemoria<Persona> personas, Verificador verificador, Notificador notificador) {
         this.personas = personas;
         this.verificador = verificador;
+        this.notificador = notificador;
     }
     
     
@@ -34,6 +38,8 @@ public class ServicioPersona {
 
         Usuario usuario = new Usuario(id, correo, nombre, tipo);
         personas.guardar(usuario);
+        notificador.notificar("Se registró el usuario " + nombre + ".");      
+
         return usuario;
     }
 
@@ -44,6 +50,8 @@ public class ServicioPersona {
 
         Operador operador = new Operador(id, correo, nombre, disponible, acciones);
         personas.guardar(operador);
+        notificador.notificar("Se registró el operador " + nombre + ".");       
+
         return operador;
     }
 
@@ -55,6 +63,7 @@ public class ServicioPersona {
 
         Responsable responsable = new Responsable(id, correo, nombre, disponible, acciones, area);
         personas.guardar(responsable);
+        notificador.notificar("Se registró el responsable " + nombre + ".");    
         return responsable;
     }
 

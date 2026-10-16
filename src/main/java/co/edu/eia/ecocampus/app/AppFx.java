@@ -3,13 +3,13 @@ package co.edu.eia.ecocampus.app;
 import co.edu.eia.ecocampus.app.controlador.MenuPrincipalController;
 import co.edu.eia.ecocampus.modelo.Actividad;
 import co.edu.eia.ecocampus.modelo.Campania;
-import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.PuntoEcologico;
 import co.edu.eia.ecocampus.modelo.Recoleccion;
 import co.edu.eia.ecocampus.modelo.Reporte;
 import co.edu.eia.ecocampus.modelo.RutaRecoleccion;
-import co.edu.eia.ecocampus.patron.NotificadorProvisional;
+import co.edu.eia.ecocampus.patron.HistorialNotificaciones;
+import co.edu.eia.ecocampus.patron.NotificadorObservable;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 import co.edu.eia.ecocampus.servicio.CargadorDatos;
 import co.edu.eia.ecocampus.servicio.ServicioCampania;
@@ -48,8 +48,9 @@ public class AppFx extends Application {
     	RepositorioMemoria<Actividad> actividades = new RepositorioMemoria<>();
 
 
-    	Notificador notificador = new NotificadorProvisional();
-        
+    	NotificadorObservable notificador = new NotificadorObservable();
+    	HistorialNotificaciones historial = new HistorialNotificaciones();
+    	notificador.agregarObservador(historial); 
         
         Verificador verificador = new Verificador();
         VerificadorPunto verificadorPunto = new VerificadorPunto();
@@ -59,20 +60,18 @@ public class AppFx extends Application {
         VerificadorCampania verificadorCampania = new VerificadorCampania();
         
         CargadorDatos cargador = new CargadorDatos(personas, puntos, rutas, reportes,recolecciones, campanias, actividades, notificador);
-        ServicioPersona servicioPersona = new ServicioPersona(personas, verificador);
+        ServicioPersona servicioPersona = new ServicioPersona(personas, verificador, notificador);
         ServicioPuntoEcologico servicioPunto = new ServicioPuntoEcologico(puntos, reportes, verificador, verificadorPunto, notificador);
         ServicioRuta servicioRuta = new ServicioRuta(rutas, puntos, verificador,verificadorParada, notificador);
         ServicioReporte servicioReporte = new ServicioReporte(reportes, personas, puntos, rutas, recolecciones, verificador, verificadorReporte, notificador);
-        ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion);
+        ServicioRecoleccion servicioRecoleccion = new ServicioRecoleccion(recolecciones, reportes,personas, verificador, verificadorRecoleccion, notificador);
         ServicioCampania servicioCampania = new ServicioCampania(campanias, actividades, personas,verificador, verificadorCampania, notificador);
         ServicioEcoPuntos servicioEcoPuntos = new ServicioEcoPuntos(personas, recolecciones, verificador);
         ServicioIndicadores servicioIndicadores = new ServicioIndicadores(personas, puntos, rutas,reportes, recolecciones, campanias, actividades, servicioEcoPuntos);
 
-        // y se suma al constructor de Servicios
-
         
     
-        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion, servicioCampania, servicioEcoPuntos, servicioIndicadores);
+        Servicios servicios = new Servicios(cargador, servicioPersona, servicioPunto, servicioRuta, servicioReporte, servicioRecoleccion, servicioCampania, servicioEcoPuntos, servicioIndicadores, historial);
         
     
         FXMLLoader loader = new FXMLLoader(
@@ -82,6 +81,7 @@ public class AppFx extends Application {
    
         MenuPrincipalController controlador = loader.getController();
         controlador.setServicios(servicios);
+        notificador.agregarObservador(controlador);
         
      
         ventana.setTitle("MunEco");

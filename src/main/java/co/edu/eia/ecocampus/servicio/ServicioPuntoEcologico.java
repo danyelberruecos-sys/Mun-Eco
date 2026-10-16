@@ -52,12 +52,15 @@ public class ServicioPuntoEcologico {
         }
 
         puntos.guardar(punto);
+        notificador.notificar("Se registró el punto ecológico " + punto.getUbicacion() + ".");
+
         return punto;
     }
 
     public void inactivar(PuntoEcologico punto) throws EcoCampusException {
         verificadorPunto.verificarPuedeInactivar(punto, reportes.listar());
         punto.inactivar(notificador);
+        notificador.notificar("Se inactivó el punto ecológico " + punto.getUbicacion());
     }
 
     public ArrayList<PuntoEcologico> listar() {

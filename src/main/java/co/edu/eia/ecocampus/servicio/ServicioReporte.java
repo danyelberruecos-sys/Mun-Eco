@@ -58,6 +58,8 @@ public class ServicioReporte {
         Reporte reporte = new Reporte(id, autor, punto, fecha, descripcion,
                 tipoAValor(tipo), nivel);
         reportes.guardar(reporte);
+        notificador.notificar("Se registró el reporte " + id + " sobre " + punto.getUbicacion() + ".");
+
         return reporte;
     }
 
@@ -70,6 +72,8 @@ public class ServicioReporte {
         verificadorReporte.verificarOperadorHabilitadoParaEspecial(operador, reporte.getTipo());
 
         reporte.asignarOperador(operador, notificador);
+        notificador.notificar("El reporte " + reporte.getId() + " fue asignado al operador "
+                + operador.getNombre() + ".");
     }
 
     public void asignarARuta(Reporte reporte, RutaRecoleccion ruta) throws EcoCampusException {
@@ -79,6 +83,8 @@ public class ServicioReporte {
         verificadorReporte.verificarRutaActivaParaAsignar(ruta);
 
         reporte.asignarRuta(ruta, notificador);
+        notificador.notificar("El reporte " + reporte.getId() + " fue asignado a la ruta "
+                + ruta.getId() + ".");
     }
 
     // ================= CONSULTAS =================

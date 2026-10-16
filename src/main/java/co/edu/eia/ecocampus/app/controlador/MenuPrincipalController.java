@@ -3,6 +3,8 @@ package co.edu.eia.ecocampus.app.controlador;
 import java.io.IOException;
 import java.util.Optional;
 
+import co.edu.eia.ecocampus.modelo.Notificacion;
+import co.edu.eia.ecocampus.patron.ObservadorNotificacion;
 import co.edu.eia.ecocampus.servicio.Servicios;
 import co.edu.eia.ecocampus.util.Alertas;
 import javafx.application.Platform;
@@ -18,7 +20,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class MenuPrincipalController {
+public class MenuPrincipalController implements ObservadorNotificacion{
 
    
     @FXML private Label tituloSeccion;
@@ -30,7 +32,9 @@ public class MenuPrincipalController {
     @FXML private Button botonPersonas;
     @FXML private Button botonRutas;
     @FXML private Button botonRecolecciones;
+    @FXML private Button botonNotificaciones;
     
+    private int sinLeer = 0;
     private Button botonActivo;
     
   
@@ -291,4 +295,48 @@ public class MenuPrincipalController {
         }
         contenido.getChildren().setAll(pantalla);
     }
+    
+
+ @Override
+ public void recibir(Notificacion notificacion) {
+     sinLeer++;
+     actualizarContador();
+ }
+
+ private void actualizarContador() {
+     botonNotificaciones.setText("Notificaciones: " + sinLeer);
+     botonNotificaciones.getStyleClass().remove("con-avisos");
+
+     if (sinLeer > 0) {
+         botonNotificaciones.getStyleClass().add("con-avisos");
+     }
+ }
+
+
+ @FXML
+ private void abrirNotificaciones() {
+  
+     if (botonActivo != null) {
+         botonActivo.getStyleClass().remove("activo");
+         botonActivo = null;
+     }
+
+     tituloSeccion.setText("Notificaciones");
+     sinLeer = 0;
+     actualizarContador();
+
+     try {
+         FXMLLoader loader = new FXMLLoader(
+                 getClass().getResource("/co/edu/eia/ecocampus/app/vista/notificaciones.fxml"));
+         Parent pantalla = loader.load();
+
+         NotificacionesController controlador = loader.getController();
+         controlador.setHistorial(servicios.getHistorial());
+
+         mostrarPantalla(pantalla);
+     } catch (IOException e) {
+         e.printStackTrace();
+         Alertas.error("No se pudo abrir la pantalla de notificaciones.\n" + e.getMessage());
+     }
+ }
 }

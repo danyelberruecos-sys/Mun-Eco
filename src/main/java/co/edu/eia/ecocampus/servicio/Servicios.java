@@ -1,5 +1,7 @@
 package co.edu.eia.ecocampus.servicio;
 
+import co.edu.eia.ecocampus.patron.HistorialNotificaciones;
+
 public class Servicios {
 
     private CargadorDatos cargador;
@@ -11,6 +13,8 @@ public class Servicios {
     private ServicioCampania campanias;
     private ServicioEcoPuntos ecoPuntos;
     private ServicioIndicadores indicadores;
+    private HistorialNotificaciones historial;
+
     
 
     public Servicios(CargadorDatos cargador,
@@ -21,7 +25,8 @@ public class Servicios {
                      ServicioRecoleccion recolecciones,
                      ServicioCampania campanias,
                      ServicioEcoPuntos ecoPuntos,
-                     ServicioIndicadores indicadores) {
+                     ServicioIndicadores indicadores,
+                     HistorialNotificaciones historial) {
         this.cargador = cargador;
         this.personas = personas;
         this.puntos = puntos;
@@ -31,6 +36,7 @@ public class Servicios {
         this.campanias = campanias;
         this.ecoPuntos = ecoPuntos;
         this.indicadores = indicadores;
+        this.historial = historial;
     }
 
     public CargadorDatos getCargador() {
@@ -58,4 +64,6 @@ public class Servicios {
     public ServicioEcoPuntos getEcoPuntos() {return ecoPuntos;}
     
     public ServicioIndicadores getIndicadores() {return indicadores;}
+    
+    public HistorialNotificaciones getHistorial() { return historial; }
 }

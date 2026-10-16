@@ -642,6 +642,31 @@
     -fx-padding: 0;
 }
 
+/* ================= BOTON DE NOTIFICACIONES ================= */
+.boton-notificaciones {
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 14;
+    -fx-text-fill: #475569;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+
+.boton-notificaciones:hover {
+    -fx-background-color: #e2e8f0;
+}
+
+/* Cuando hay avisos sin leer */
+.boton-notificaciones.con-avisos {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+}
+
+.boton-notificaciones.con-avisos:hover {
+    -fx-background-color: #bfdbfe;
+}
+
 /* Color del texto por material (sin fondo) */
 #etiquetaReciclable {
     -fx-background-color: transparent;

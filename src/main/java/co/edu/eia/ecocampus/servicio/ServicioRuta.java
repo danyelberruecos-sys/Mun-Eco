@@ -41,6 +41,7 @@ public class ServicioRuta {
 
         Parada parada = new Parada(orden, accion);
         parada.setPuntoEcologico(punto);
+        notificador.notificar("Se creó la parada relacionada a " + punto.getUbicacion());
         return parada;
     }
 
@@ -56,6 +57,7 @@ public class ServicioRuta {
         }
 
         rutas.guardar(ruta);
+        notificador.notificar("Se registró la ruta " + id + " con " + paradas.size() + " paradas.");
         return ruta;
     }
 
@@ -64,6 +66,7 @@ public class ServicioRuta {
             throw new OperacionNoPermitidaException("La ruta ya está cerrada.");
         }
         ruta.cerrar(notificador);
+        notificador.notificar("Se cerro la ruta " + ruta.getId());
     }
 
   
