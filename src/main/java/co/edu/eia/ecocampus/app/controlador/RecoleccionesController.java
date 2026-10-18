@@ -7,6 +7,7 @@ import co.edu.eia.ecocampus.modelo.DetalleRecoleccion;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Recoleccion;
 import co.edu.eia.ecocampus.modelo.Reporte;
+import co.edu.eia.ecocampus.patron.FabricaMaterial;
 import co.edu.eia.ecocampus.servicio.ServicioRecoleccion;
 import co.edu.eia.ecocampus.util.Alertas;
 import co.edu.eia.ecocampus.util.Conversor;
@@ -51,7 +52,7 @@ public class RecoleccionesController {
 
     @FXML
     private void initialize() {
-        comboMaterial.getItems().addAll("Reciclable", "Orgánico", "Especial");
+    	comboMaterial.getItems().addAll(FabricaMaterial.RECICLABLE,FabricaMaterial.ORGANICO, FabricaMaterial.ESPECIAL);
 
         colTipoNuevo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         colPesoNuevo.setCellValueFactory(new PropertyValueFactory<>("peso"));

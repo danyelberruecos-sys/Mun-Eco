@@ -2,18 +2,15 @@ package co.edu.eia.ecocampus.servicio;
 
 import java.util.ArrayList;
 
-import co.edu.eia.ecocampus.excepcion.DatoInvalidoException;
 import co.edu.eia.ecocampus.excepcion.EcoCampusException;
 import co.edu.eia.ecocampus.modelo.DetalleRecoleccion;
 import co.edu.eia.ecocampus.modelo.Material;
-import co.edu.eia.ecocampus.modelo.MaterialEspecial;
-import co.edu.eia.ecocampus.modelo.MaterialOrganico;
-import co.edu.eia.ecocampus.modelo.MaterialReciclable;
 import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Persona;
 import co.edu.eia.ecocampus.modelo.Recoleccion;
 import co.edu.eia.ecocampus.modelo.Reporte;
+import co.edu.eia.ecocampus.patron.FabricaMaterial;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 
 public class ServicioRecoleccion {
@@ -46,7 +43,7 @@ public class ServicioRecoleccion {
         verificador.verificarSeleccionado(tipoMaterial, "el material");
         verificador.verificarPositivo(peso, "El peso");
 
-        Material material = crearMaterial(tipoMaterial);
+        Material material = FabricaMaterial.crear(tipoMaterial);
         verificadorRecoleccion.verificarOperadorHabilitado(operador, material);
 
         return new DetalleRecoleccion(material, peso);
@@ -117,18 +114,6 @@ public class ServicioRecoleccion {
         }
         return false;
     }
+}
 
    
-    private Material crearMaterial(String tipo) throws DatoInvalidoException {
-        if (tipo.equals("Reciclable")) {
-            return new MaterialReciclable("Reciclable", 0);
-        }
-        if (tipo.equals("Orgánico")) {
-            return new MaterialOrganico("Organico", 0);
-        }
-        if (tipo.equals("Especial")) {
-            return new MaterialEspecial("Especial", 0);
-        }
-        throw new DatoInvalidoException("Material no reconocido.");
-    }
-}

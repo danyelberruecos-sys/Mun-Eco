@@ -47,8 +47,7 @@ public class AppFx extends Application {
     	RepositorioMemoria<Campania> campanias = new RepositorioMemoria<>();
     	RepositorioMemoria<Actividad> actividades = new RepositorioMemoria<>();
 
-
-    	NotificadorObservable notificador = new NotificadorObservable();
+    	NotificadorObservable notificador = NotificadorObservable.getInstancia();
     	HistorialNotificaciones historial = new HistorialNotificaciones();
     	notificador.agregarObservador(historial); 
         

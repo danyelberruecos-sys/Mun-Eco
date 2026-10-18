@@ -1,6 +1,7 @@
 package co.edu.eia.ecocampus.servicio;
 
 import co.edu.eia.ecocampus.modelo.*;
+import co.edu.eia.ecocampus.patron.FabricaMaterial;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 
 public class CargadorDatos {
@@ -69,17 +70,17 @@ public class CargadorDatos {
 
         // ---- Puntos ecologicos ----
         PuntoEcologico punto1 = new PuntoEcologico(1122334455L, "Bloque 5 - Cafeteria", 100, false, true);
-        punto1.agregarMaterial(new MaterialReciclable("Reciclable", 0));
-        punto1.agregarMaterial(new MaterialOrganico("Organico", 0));
+        punto1.agregarMaterial(FabricaMaterial.crearReciclable());
+        punto1.agregarMaterial(FabricaMaterial.crearOrganico());
         puntos.guardar(punto1);
 
         PuntoEcologico punto2 = new PuntoEcologico(2233445566L, "Zona deportiva", 150, false, true);
-        punto2.agregarMaterial(new MaterialReciclable("Reciclable", 0));
-        punto2.agregarMaterial(new MaterialEspecial("Especial", 0));
+        punto2.agregarMaterial(FabricaMaterial.crearReciclable());
+        punto2.agregarMaterial(FabricaMaterial.crearEspecial());
         puntos.guardar(punto2);
 
         PuntoEcologico punto3 = new PuntoEcologico(3344556677L, "Parqueadero Norte", 80, true, false);
-        punto3.agregarMaterial(new MaterialOrganico("Organico", 0));
+        punto3.agregarMaterial(FabricaMaterial.crearOrganico());
         puntos.guardar(punto3);
 
         // ---- Paradas y rutas ----
@@ -126,16 +127,16 @@ public class CargadorDatos {
 
         // ---- Recolecciones ----
         Recoleccion recoleccion1 = new Recoleccion(1112223334L, "Recoleccion sin novedades", juan, reporte1);
-        recoleccion1.agregarMaterial(new MaterialReciclable("Reciclable", 0), 12.5);
-        recoleccion1.agregarMaterial(new MaterialOrganico("Organico", 0), 5.0);
+        recoleccion1.agregarMaterial(FabricaMaterial.crearReciclable(), 12.5);
+        recoleccion1.agregarMaterial(FabricaMaterial.crearOrganico(), 5.0);
         recolecciones.guardar(recoleccion1);
 
         Recoleccion recoleccion2 = new Recoleccion(2223334445L, "Se encontro material adicional", daniel, reporte3);
-        recoleccion2.agregarMaterial(new MaterialOrganico("Organico", 0), 3.2);
+        recoleccion2.agregarMaterial(FabricaMaterial.crearOrganico(), 3.2);
         recolecciones.guardar(recoleccion2);
 
         Recoleccion recoleccion3 = new Recoleccion(3334445556L, "Recoleccion rutinaria de la ruta", estephanie, reporte2);
-        recoleccion3.agregarMaterial(new MaterialEspecial("Especial", 0), 8.0);
+        recoleccion3.agregarMaterial(FabricaMaterial.crearEspecial(), 8.0);
         recolecciones.guardar(recoleccion3);
 
         // ---- Campañas ----

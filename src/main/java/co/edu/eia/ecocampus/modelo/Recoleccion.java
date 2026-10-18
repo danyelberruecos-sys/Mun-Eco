@@ -42,7 +42,7 @@ public class Recoleccion implements Identificable{
     public int calcularEcoPuntos() {
         int puntos = 0;
         for (int i = 0; i < materiales.size(); i++) {
-            puntos += (int) Math.round(pesos.get(i) * materiales.get(i).calcularValorPuntos());
+            puntos += materiales.get(i).calcularPuntos(pesos.get(i));
         }
         return puntos;
     }

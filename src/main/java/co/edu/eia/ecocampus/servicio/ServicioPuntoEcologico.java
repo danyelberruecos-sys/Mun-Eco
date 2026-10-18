@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import co.edu.eia.ecocampus.excepcion.EcoCampusException;
 import co.edu.eia.ecocampus.modelo.MaterialEspecial;
 import co.edu.eia.ecocampus.modelo.MaterialOrganico;
-import co.edu.eia.ecocampus.modelo.MaterialReciclable;
 import co.edu.eia.ecocampus.modelo.Notificador;
 import co.edu.eia.ecocampus.modelo.PuntoEcologico;
 import co.edu.eia.ecocampus.modelo.Reporte;
+import co.edu.eia.ecocampus.patron.FabricaMaterial;
 import co.edu.eia.ecocampus.repositorio.RepositorioMemoria;
 
 public class ServicioPuntoEcologico {
@@ -42,13 +42,13 @@ public class ServicioPuntoEcologico {
         PuntoEcologico punto = new PuntoEcologico(id, ubicacion, capacidad, lleno, activo);
 
         if (admiteReciclable) {
-            punto.agregarMaterial(new MaterialReciclable("Reciclable", 0));
+            punto.agregarMaterial(FabricaMaterial.crearReciclable());
         }
         if (admiteOrganico) {
-            punto.agregarMaterial(new MaterialOrganico("Organico", 0));
+            punto.agregarMaterial(FabricaMaterial.crearOrganico());
         }
         if (admiteEspecial) {
-            punto.agregarMaterial(new MaterialEspecial("Especial", 0));
+            punto.agregarMaterial(FabricaMaterial.crearEspecial());
         }
 
         puntos.guardar(punto);
