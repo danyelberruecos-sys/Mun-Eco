@@ -1,10 +1,7 @@
-/* =====================================================================
-   MUNECO - HOJA DE ESTILOS
-   Para cambiar los colores de toda la app, edita SOLO el bloque .root
-   ===================================================================== */
+
 
 .root {
-	/* ---- Barra lateral ---- */
+	/*  Barra lateral */
 	-c-lateral-1: #0b2239;
 	-c-lateral-2: #12395c;
 	-c-lateral-texto: #c9dbec;
@@ -12,46 +9,46 @@
 	-c-lateral-activo: rgba(56, 189, 248, 0.16);
 	-c-acento: #38bdf8;
 
-	/* ---- Color principal ---- */
+	/* Color principal  */
 	-c-primario: #0284c7;
 	-c-primario-oscuro: #0369a1;
 	-c-primario-suave: #f0f9ff;
 	-c-seleccion: #e0f2fe;
 	-c-foco: #bae6fd;
 
-	/* ---- Fondos y bordes ---- */
+	/* Fondos y bordes  */
 	-c-fondo: #f3f7fb;
 	-c-superficie: #ffffff;
 	-c-borde: #dde7f0;
 	-c-borde-fuerte: #c3d3e2;
 
-	/* ---- Texto ---- */
+	/* Texto  */
 	-c-titulo: #0b2239;
 	-c-texto: #1e2b3a;
 	-c-texto-suave: #5b7088;
 	-c-texto-tenue: #8fa3b8;
 
-	/* ---- Tablas ---- */
+	/* Tablas  */
 	-c-tabla-encabezado: #eef5fb;
 	-c-tabla-borde: #d6e4f0;
 	-c-fila-alterna: #f7fafd;
 	-c-fila-hover: #eaf4fc;
 	-c-fila-borde: #edf2f7;
 
-	/* ---- Indicador de datos de prueba ---- */
+	/* Indicador de datos de prueba */
 	-c-ok-fondo: #dcfce7;
 	-c-ok-texto: #166534;
 
-	/* ---- Barras de desplazamiento ---- */
+	/*  Barras de desplazamiento  */
 	-c-scroll: #c3d3e2;
 	-c-scroll-hover: #9fb6cc;
 	
-	/* ---- Peligro ---- */
+	/* Peligro -*/
 	-c-peligro: #dc2626;
 	-c-peligro-oscuro: #b91c1c;
 	-c-peligro-suave: #fee2e2;
 
-	/* ---- Indicador de datos de prueba: pendiente ---- */
+	/*  Indicador de datos de prueba: pendiente  */
 	-c-pendiente-fondo: #fef3c7;
 	-c-pendiente-texto: #92400e;
 	}
@@ -60,7 +57,7 @@
     -fx-background-color: -c-fondo;
 }
 
-/* ================= BARRA LATERAL ================= */
+
 .barra-lateral {
     -fx-background-color: linear-gradient(to bottom, -c-lateral-1, -c-lateral-2);
     -fx-padding: 24 0 16 0;
@@ -136,7 +133,6 @@
     -fx-text-fill: white;
 }
 
-/* ================= BARRA SUPERIOR ================= */
 .barra-superior {
     -fx-background-color: -c-superficie;
     -fx-padding: 16 28 16 28;
@@ -166,7 +162,6 @@
     -fx-text-fill: -c-ok-texto;
 }
 
-/* ================= CONTENIDO ================= */
 .contenido {
     -fx-padding: 24;
 }
@@ -223,7 +218,6 @@
     -fx-spacing: 12;
 }
 
-/* ================= BOTONES DE ACCION ================= */
 .boton-primario {
     -fx-background-color: -c-primario;
     -fx-text-fill: white;
@@ -258,7 +252,6 @@
     -fx-background-color: -c-peligro-oscuro;
 }
 
-/* ================= CAMPOS DE FORMULARIO ================= */
 .text-field,
 .text-area,
 .combo-box-base {
@@ -293,7 +286,6 @@
     -fx-effect: dropshadow(gaussian, -c-foco, 6, 0.4, 0, 0);
 }
 
-/* El DatePicker lleva un campo de texto adentro: sin doble borde */
 .combo-box-base .text-field {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -316,7 +308,6 @@
     -fx-padding: 6 10 6 10;
 }
 
-/* Lista desplegable */
 .combo-box-popup > .list-view {
     -fx-background-color: -c-superficie;
     -fx-background-radius: 8;
@@ -340,7 +331,6 @@
     -fx-text-fill: -c-titulo;
 }
 
-/* ================= CASILLAS ================= */
 .check-box {
     -fx-text-fill: -c-texto;
 }
@@ -362,7 +352,6 @@
     -fx-background-color: white;
 }
 
-/* ================= PESTAÑAS ================= */
 .tab-pane {
     -fx-background-color: transparent;
 }
@@ -406,7 +395,6 @@
     -fx-border-color: transparent;
 }
 
-/* ================= TABLAS ================= */
 .table-view {
     -fx-background-color: -c-superficie;
     -fx-background-radius: 10;
@@ -427,7 +415,6 @@
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.06), 10, 0, 0, 2);
 }
 
-/* Encabezado */
 .table-view .column-header-background {
     -fx-background-color: -c-tabla-encabezado;
     -fx-background-radius: 10 10 0 0;
@@ -451,7 +438,6 @@
     -fx-padding: 0 4 0 8;
 }
 
-/* Filas */
 .table-row-cell {
     -fx-background-color: -c-superficie;
     -fx-background-insets: 0;
@@ -476,13 +462,11 @@
     -fx-border-width: 0 0 1 3;
 }
 
-/* Filas vacias: sin rayas ni lineas */
 .table-row-cell:empty {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-/* Celdas */
 .table-cell {
     -fx-text-fill: -c-texto;
     -fx-alignment: center-left;
@@ -495,13 +479,11 @@
     -fx-text-fill: -c-titulo;
 }
 
-/* Mensaje de tabla vacia */
 .table-view .placeholder .label {
     -fx-text-fill: -c-texto-tenue;
     -fx-font-size: 14px;
 }
 
-/* ================= BARRAS DE DESPLAZAMIENTO ================= */
 .scroll-bar {
     -fx-background-color: transparent;
 }
@@ -533,7 +515,6 @@
     -fx-padding: 0;
 }
 
-/* ================= ALERTAS ================= */
 .dialog-pane {
     -fx-background-color: -c-superficie;
     -fx-font-size: 14px;
@@ -578,7 +559,6 @@
     -fx-border-radius: 8;
 }
 
-/* ================= BOTON DE PELIGRO ================= */
 .boton-peligro {
     -fx-background-color: linear-gradient(to bottom, #ef4444, #b91c1c);
     -fx-background-insets: 0;
@@ -611,9 +591,9 @@
     -fx-effect: none;
 }
 
-/* ================= TARJETAS DE MATERIALES (solo CSS) ================= */
+
 .tarjeta {
-    /* capa 1: franja superior, capa 2: fondo blanco desplazado 5px hacia abajo */
+   
     -fx-background-color: #334155, white;
     -fx-background-insets: 0, 5 0 0 0;
     -fx-background-radius: 14, 10 10 14 14;
@@ -626,14 +606,12 @@
     -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.22), 20, 0, 0, 7);
 }
 
-/* El titulo de cada tarjeta (solo dentro de las tarjetas, no afecta a los formularios) */
 .tarjeta .etiqueta-campo {
     -fx-font-size: 11px;
     -fx-font-weight: bold;
     -fx-text-fill: #64748b;
 }
 
-/* El numero: sin fondo, sobre el blanco de la tarjeta */
 .tarjeta .cifra {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
@@ -642,7 +620,6 @@
     -fx-padding: 0;
 }
 
-/* ================= BOTON DE NOTIFICACIONES ================= */
 .boton-notificaciones {
     -fx-background-color: #f1f5f9;
     -fx-background-radius: 14;
@@ -657,7 +634,6 @@
     -fx-background-color: #e2e8f0;
 }
 
-/* Cuando hay avisos sin leer */
 .boton-notificaciones.con-avisos {
     -fx-background-color: #dbeafe;
     -fx-text-fill: #1d4ed8;
@@ -667,7 +643,6 @@
     -fx-background-color: #bfdbfe;
 }
 
-/* Color del texto por material (sin fondo) */
 #etiquetaReciclable {
     -fx-background-color: transparent;
     -fx-text-fill: #1d4ed8;
@@ -688,7 +663,6 @@
     -fx-text-fill: #0f172a;
 }
 
-/* Color por material, usando el fx:id de cada etiqueta */
 #etiquetaReciclable {
     -fx-background-color: #dbeafe;
     -fx-text-fill: #1d4ed8;
