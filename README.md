@@ -1,3 +1,4 @@
+![](src/main/resources/co/edu/eia/ecocampus/app/imagenes/Logo.png)
 # MunEco
 
 > Sistema de gestión de residuos, campañas ambientales y eco-puntos para la Universidad EIA (proyecto **EcoCampus Circular**).
@@ -5,7 +6,7 @@
 ![Java](https://img.shields.io/badge/Java-26-orange)
 ![JavaFX](https://img.shields.io/badge/JavaFX-21-blue)
 ![Maven](https://img.shields.io/badge/Maven-3.x-red)
-![JUnit](https://img.shields.io/badge/JUnit-5-green)
+
 
 ## Descripción
 
@@ -34,7 +35,7 @@ Los eco-puntos se ganan de dos formas: al **cerrar un reporte** que tiene una re
 - **Java 26**
 - **JavaFX 21** con pantallas en **FXML** (diseñadas con Scene Builder) y estilos en **CSS**
 - **Maven** para las dependencias y la ejecución
-- **JUnit 5** para las pruebas unitarias
+
 
 ## Requisitos
 
@@ -44,7 +45,7 @@ Los eco-puntos se ganan de dos formas: al **cerrar un reporte** que tiene una re
 | **Eclipse IDE** | Versión *for Java Developers*, que ya incluye Maven (m2e) |
 | **Git** | Opcional: solo para clonar el repositorio |
 | **Conexión a Internet** | La primera vez, para que Maven descargue las dependencias (JavaFX, JUnit) |
-| **Scene Builder** | Opcional: solo si se van a editar las pantallas `.fxml` |
+
 
 Para ejecutar desde la terminal también se necesita **Maven** instalado y disponible en el `PATH`.
 
@@ -53,7 +54,7 @@ Para ejecutar desde la terminal también se necesita **Maven** instalado y dispo
 **Opción A: clonar con Git**
 
 ```bash
-git clone <URL-DEL-REPOSITORIO>
+git clone <https://github.com/danyelberruecos-sys/Mun-Eco.git>
 ```
 
 **Opción B: descargar el ZIP**
@@ -81,6 +82,9 @@ La aplicación se ejecuta con Maven, a través del plugin de JavaFX.
 1. Clic derecho sobre el proyecto → **Run As → Maven build...**
 2. En el campo **Goals** escribe: `javafx:run`
 3. Pulsa **Run**.
+4. Al correr exitósamente el proyecto, se verá la siguiente interfaz
+
+![](src/main/resources/co/edu/eia/ecocampus/app/imagenes/ProyectoCorriendo.png)
 
 Las siguientes veces basta con elegir esa configuración en el menú del botón verde de ejecución (**Run**) de Eclipse.
 
@@ -111,18 +115,7 @@ La clase principal es `co.edu.eia.ecocampus.app.AppFx`.
 5. En **Reportes**, cierra el reporte: el usuario recibe sus eco-puntos.
 6. En **Eco-puntos y consultas**, revisa el historial del usuario y el ranking.
 
-## Pruebas
 
-El proyecto incluye pruebas unitarias con **JUnit 5** sobre las capas de lógica (modelo, servicios, repositorio y patrones). Las pantallas no se prueban automáticamente.
-
-- **Desde Eclipse:** clic derecho sobre `src/test/java` → **Run As → JUnit Test**.
-- **Con Maven:** clic derecho sobre el proyecto → **Run As → Maven test**, o en la terminal:
-
-```bash
-mvn test
-```
-
-Los informes quedan en `target/surefire-reports`.
 
 ## Estructura del proyecto
 
@@ -175,27 +168,4 @@ El proyecto usa colecciones (`ArrayList`, `HashMap`) en lugar de arreglos, por l
 ## Estado del proyecto
 
 - Los datos se guardan **en memoria**: se pierden al cerrar la aplicación.
-- La persistencia en **base de datos** mediante **JDBC** está en desarrollo; el diseño en capas permite reemplazar los repositorios en memoria sin modificar los servicios ni las pantallas.
 
-## Solución de problemas
-
-| Problema | Solución |
-|---|---|
-| *JavaFX runtime components are missing* | Ejecuta con `javafx:run` (Maven), no como *Java Application* |
-| Eclipse marca errores en todo el proyecto | Clic derecho → **Maven → Update Project** |
-| *release version 26 not supported* o similar | El proyecto no está usando el JDK 26: revisa **Window → Preferences → Java → Installed JREs** |
-| Maven no encuentra las dependencias | Revisa la conexión a Internet y repite **Maven → Update Project** |
-| Un cambio en un `.fxml` o en el CSS no se ve | Selecciona el archivo, pulsa `F5`, haz **Maven → Update Project** y vuelve a ejecutar |
-
-Al ejecutar aparecen en la consola algunos avisos (`WARNING`) sobre acceso nativo y sobre la versión del documento FXML. Son normales y no afectan el funcionamiento.
-
-## Equipo
-
-Proyecto integrador de *Programación Orientada a Objetos en Java*, Universidad EIA.
-
-| Integrante | Rol |
-|---|---|
-| _Nombre del integrante 1_ | |
-| _Nombre del integrante 2_ | |
-| _Nombre del integrante 3_ | |
-| _Nombre del integrante 4_ | |
